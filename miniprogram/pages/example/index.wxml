@@ -21,3 +21,9 @@
 <view class="padding-box nav-none-bg">
   有点击效果
 </view>
+
+<view class="padding-box">
+  <mp-icon icon="add2" type="field" size="20" color="gold"></mp-icon>
+  <mp-icon icon="star" type="field" size="20" color="green"></mp-icon>
+  <mp-icon icon="share" type="field" size="20" color="gray"></mp-icon>
+</view>
