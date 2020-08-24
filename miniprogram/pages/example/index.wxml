@@ -1,0 +1,23 @@
+<view class="padding-box">示例padding-box</view>
+
+<view class="flex-between padding-box">
+  <view>flex-left</view>
+  <view>flex-right</view>
+</view>
+
+<view class="abs-center padding-box" style="height:200px">
+  <view class="abs-center-content">我在中间</view>
+</view>
+
+<view class="padding-box flex-between">
+  <view>
+    <text class="not-importent">我不重要</text>
+  </view>
+  <view>
+    <text class="ref-content">我看起来是超链接</text>
+  </view>
+</view>
+
+<view class="padding-box nav-none-bg">
+  有点击效果
+</view>
