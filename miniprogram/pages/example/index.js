@@ -1,4 +1,5 @@
 const wxApiUtils = require('./../../utils/wxApiUtils.js')
+const utils = require('./../../utils/utils.js')
 
 // miniprogram/pages/index/index.js
 Page({
@@ -55,7 +56,7 @@ Page({
       success: function(res){
         wx.cloud.uploadFile({
           filePath: res.tempFilePaths[0],
-          cloudPath: 'temp/test' + res.tempFilePaths[0].substr(res.tempFilePaths[0].lastIndexOf('.'))
+          cloudPath: 'temp/' + utils.getRandomFileName(res.tempFilePaths[0])
         }).then(res=>{
           wxApiUtils.checkImageSafe(res.fileID).then(res=>{
             wx.showToast({
