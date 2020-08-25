@@ -24,7 +24,21 @@ module.exports = {
     return wx.cloud.callFunction({
       name: 'testContentSec',
       data: {
-        content: content
+        content
+      }
+    }).then(res=>{
+      console.log(res)
+      if(res.result.errCode == 87014){
+        return Promise.reject()
+      }
+    })
+  },
+
+  checkImageSafe(imageFileId){
+    return wx.cloud.callFunction({
+      name: 'checkImageSafe',
+      data: {
+        imageFileId
       }
     }).then(res=>{
       console.log(res)

@@ -49,6 +49,29 @@ Page({
     })
   },
 
+  checkSafeImage(){
+    wx.chooseImage({
+      count: 1,
+      success: function(res){
+        wx.cloud.uploadFile({
+          filePath: res.tempFilePaths[0],
+          cloudPath: 'temp/test' + res.tempFilePaths[0].substr(res.tempFilePaths[0].lastIndexOf('.'))
+        }).then(res=>{
+          wxApiUtils.checkImageSafe(res.fileID).then(res=>{
+            wx.showToast({
+              title: '检测通过',
+            })
+          },  res=>{
+            wx.showToast({
+              title: '检测不通过',
+              icon: 'none'
+            })
+          })
+        })
+      }.bind(this)
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

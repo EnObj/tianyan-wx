@@ -39,3 +39,7 @@
   <view class="ref-content" bindtap="checkSafeContent">安全的内容</view>
   <view class="ref-content" bindtap="checkUnsafeContent">不安全的内容</view>
 </view>
+
+<view class="padding-box">
+  <view class="ref-content" bindtap="checkSafeImage">检测图片是否安全</view>
+</view>
