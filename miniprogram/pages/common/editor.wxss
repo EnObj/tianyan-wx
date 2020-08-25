@@ -1,0 +1,4 @@
+/* miniprogram/pages/common/editor.wxss */
+.menu{
+  padding: 20px;
+}

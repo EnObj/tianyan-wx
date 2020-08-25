@@ -1,31 +1,38 @@
-// miniprogram/pages/index/index.js
+// miniprogram/pages/common/editor.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    content: ''
+    init: ''
   },
 
-  callEditor() {
-    wx.navigateTo({
-      url: '/pages/common/editor?init=' + this.data.content,
-      events: {
-        finishedEdit: function(val){
-          this.setData({
-            content: val
-          })
-        }.bind(this)
-      }
-    })
+  finished(event){ 
+    this.save(event.detail.value) 
+  }, 
+ 
+  contentChange(event){ 
+    this.contentVal = event.detail.value 
+  }, 
+ 
+  confirm(){ 
+    this.save(this.contentVal) 
+  }, 
+ 
+  save(val){ 
+    const channel = this.getOpenerEventChannel() 
+    channel.emit('finishedEdit', val) 
+    wx.navigateBack() 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      init: options.init || this.data.init
+    })
   },
 
   /**
@@ -73,7 +80,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })
