@@ -34,3 +34,8 @@
     <text space="nbsp">{{content||'啥也没有'}}</text>
   </view>
 </view>
+
+<view class="padding-box flex-between">
+  <view class="ref-content" bindtap="checkSafeContent">安全的内容</view>
+  <view class="ref-content" bindtap="checkUnsafeContent">不安全的内容</view>
+</view>

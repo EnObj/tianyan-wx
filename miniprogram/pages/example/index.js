@@ -1,3 +1,5 @@
+const wxApiUtils = require('./../../utils/wxApiUtils.js')
+
 // miniprogram/pages/index/index.js
 Page({
 
@@ -18,6 +20,32 @@ Page({
           })
         }.bind(this)
       }
+    })
+  },
+
+  checkSafeContent(){
+    wxApiUtils.checkContentSafe('你好').then(res=>{
+      wx.showToast({
+        title: '检测通过',
+      })
+    },  res=>{
+      wx.showToast({
+        title: '检测不通过',
+        icon: 'none'
+      })
+    })
+  },
+
+  checkUnsafeContent(){
+    wxApiUtils.checkContentSafe('特3456书yuuo莞6543李zxcz蒜7782法fgnv级').then(res=>{
+      wx.showToast({
+        title: '检测通过',
+      })
+    },  res=>{
+      wx.showToast({
+        title: '检测不通过',
+        icon: 'none'
+      })
     })
   },
 

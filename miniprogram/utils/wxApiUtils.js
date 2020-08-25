@@ -19,4 +19,18 @@ module.exports = {
       }
     })
   },
+
+  checkContentSafe(content){
+    return wx.cloud.callFunction({
+      name: 'testContentSec',
+      data: {
+        content: content
+      }
+    }).then(res=>{
+      console.log(res)
+      if(res.result.errCode == 87014){
+        return Promise.reject()
+      }
+    })
+  }
 }
