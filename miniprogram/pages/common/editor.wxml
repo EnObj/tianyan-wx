@@ -1,5 +1,9 @@
 <view class="padding-box"> 
-  <textarea style="width:100%;" show-confirm-bar bindconfirm="finished" placeholder="请输入内容" bindinput="contentChange" value="{{init}}" focus maxlength="{{limit}}"></textarea> 
+  <textarea style="width:100%;" show-confirm-bar bindconfirm="finished" placeholder="请输入内容" bindinput="contentChange" value="{{content}}" focus maxlength="{{limit}}"></textarea> 
+  <view class="flex-between">
+    <view></view>
+    <view class="not-importent">{{content.length}}<text wx:if="{{limit!=-1}}">/{{limit}}</text></view>
+  </view>
 </view> 
  
 <view class="menu"> 

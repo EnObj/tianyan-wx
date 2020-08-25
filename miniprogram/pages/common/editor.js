@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    init: '',
+    content: '',
     limit: -1
   },
 
@@ -14,11 +14,13 @@ Page({
   }, 
  
   contentChange(event){ 
-    this.contentVal = event.detail.value 
+    this.setData({
+      content: event.detail.value 
+    })
   }, 
  
   confirm(){ 
-    this.save(this.contentVal) 
+    this.save(this.data.content) 
   }, 
  
   save(val){ 
@@ -32,8 +34,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      init: options.init || this.data.init,
-      limit: options.limit || this.data.limit,
+      content: options.init || this.data.content,
+      limit: options.limit || 120,
     })
   },
 
