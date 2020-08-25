@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    init: ''
+    init: '',
+    limit: -1
   },
 
   finished(event){ 
@@ -31,7 +32,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      init: options.init || this.data.init
+      init: options.init || this.data.init,
+      limit: options.limit || this.data.limit,
     })
   },
 
