@@ -24,6 +24,13 @@ Page({
   }, 
  
   save(val){ 
+    if(!val){
+      wx.showToast({
+        title: '内容不能为空',
+        icon: 'none'
+      })
+      return
+    }
     const channel = this.getOpenerEventChannel() 
     channel.emit('finishedEdit', val) 
     wx.navigateBack() 
@@ -35,7 +42,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       content: options.init || this.data.content,
-      limit: options.limit || 120,
+      limit: options.limit || 140,
     })
   },
 

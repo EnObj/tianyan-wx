@@ -7,5 +7,5 @@
 </view> 
  
 <view class="menu"> 
-  <button bindtap="confirm" type="primary">完成</button> 
+  <button bindtap="confirm" type="primary" disabled="{{!content}}">完成</button> 
 </view>
