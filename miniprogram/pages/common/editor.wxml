@@ -3,5 +3,5 @@
 </view> 
  
 <view class="menu"> 
-  <button bindtap="confirm" type="primary">确认</button> 
+  <button bindtap="confirm" type="primary">完成</button> 
 </view>
