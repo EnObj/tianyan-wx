@@ -1,5 +1,5 @@
 <view class="padding-box"> 
-  <textarea show-confirm-bar bindconfirm="finished" placeholder="请输入内容" bindinput="contentChange" value="{{init}}"></textarea> 
+  <textarea show-confirm-bar bindconfirm="finished" placeholder="请输入内容" bindinput="contentChange" value="{{init}}" focus></textarea> 
 </view> 
  
 <view class="menu"> 
