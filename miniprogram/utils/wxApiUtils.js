@@ -22,7 +22,7 @@ module.exports = {
 
   checkContentSafe(content){
     return wx.cloud.callFunction({
-      name: 'testContentSec',
+      name: 'checkContentSafe',
       data: {
         content
       }
