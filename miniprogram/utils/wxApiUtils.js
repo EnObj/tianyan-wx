@@ -46,5 +46,37 @@ module.exports = {
         return Promise.reject()
       }
     })
-  }
+  },
+
+  askSaveImage(){
+    return new Promise((resolve, reject)=>{
+      // 验证授权
+      wx.authorize({
+        scope: 'scope.writePhotosAlbum',
+        success(res){
+          // 通过
+          resolve()
+        },
+        fail(){
+          wx.showModal({
+            content: '此操作需要您打开相册访问权限',
+            success(res){
+              // 重新申请权限
+              if(res.confirm){
+                wx.openSetting({
+                  success (res) {
+                    // 申请成功，下载
+                    console.log(res.authSetting)
+                    if(res.authSetting['scope.writePhotosAlbum']){
+                      resolve()
+                    }
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+    })
+  },
 }

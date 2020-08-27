@@ -43,3 +43,10 @@
 <view class="padding-box">
   <view class="ref-content" bindtap="checkSafeImage">检测图片是否安全</view>
 </view>
+
+<view class="padding-box flex-between">
+  <view class="ref-content" bindtap="saveImage">保存图片</view>
+  <view>
+    <image src="/images/thanks_code.jpg" style="width:100px" mode="widthFix" show-menu-by-longpress></image>
+  </view>
+</view>

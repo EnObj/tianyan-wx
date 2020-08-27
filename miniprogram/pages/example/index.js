@@ -73,6 +73,19 @@ Page({
     })
   },
 
+  saveImage(){
+    wxApiUtils.askSaveImage().then(res=>{
+      return wx.saveImageToPhotosAlbum({
+        filePath: 'images/thanks_code.jpg',
+        success(){
+          wx.showToast({
+            title: '保存成功',
+          })
+        }
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
