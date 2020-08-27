@@ -76,7 +76,7 @@ Page({
   saveImage(){
     wxApiUtils.askSaveImage().then(res=>{
       return wx.saveImageToPhotosAlbum({
-        filePath: 'images/thanks_code.jpg',
+        filePath: 'image/thanks_code.jpg',
         success(){
           wx.showToast({
             title: '保存成功',
