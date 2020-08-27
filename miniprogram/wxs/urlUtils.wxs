@@ -1,0 +1,8 @@
+module.exports = {
+  encode: function(url){
+    return encodeURIComponent(url)
+  },
+  decode: function(url){
+    return decodeURIComponent(url)
+  }
+}
