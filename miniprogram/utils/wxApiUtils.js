@@ -79,4 +79,15 @@ module.exports = {
       })
     })
   },
+
+  genQrcode(content){
+    return wx.cloud.callFunction({
+      name: 'genQrcode',
+      data: {
+        content
+      }
+    }).then(res=>{
+      return res.result
+    })
+  },
 }

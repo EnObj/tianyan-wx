@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    content: ''
+    content: '初始内容',
+    qrcodeResult: ''
   },
 
   callEditor() {
@@ -82,6 +83,14 @@ Page({
             title: '保存成功',
           })
         }
+      })
+    })
+  },
+
+  genQrcode(){
+    wxApiUtils.genQrcode(this.data.content).then(url=>{
+      this.setData({
+        qrcodeResult: url
       })
     })
   },
