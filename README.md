@@ -15,7 +15,7 @@
 git clone https://github.com/EnObj/quick-start-wx
 ```
 
-第二步：打开配置文件[./product.config.json](./product.config.json)修改appid（请提前在[微信公众平台](https://mp.weixin.qq.com/wxopen/waregister?action=step1&token=&lang=zh_CN)申请好）:
+第二步：打开配置文件[./project.config.json](./project.config.json)修改appid（请提前在[微信公众平台](https://mp.weixin.qq.com/wxopen/waregister?action=step1&token=&lang=zh_CN)申请好）:
 ```
 {
   "setting": {
