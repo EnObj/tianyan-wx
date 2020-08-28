@@ -1,3 +1,5 @@
+const SETTING_STORAGE_KEY = "setting"
+
 module.exports = {
   showActions: function(actions) {
     var itemList = actions.filter(action => {
@@ -90,4 +92,38 @@ module.exports = {
       return res.result
     })
   },
+
+  getSetting: function () {
+    // 先从缓存加载
+    const setting = wx.getStorageSync(SETTING_STORAGE_KEY)
+    if (setting) {
+      // 十五分钟内的直接使用
+      if (Date.now() - setting.time > 15 * 60 * 1000) {
+        // 异步进行一次查库缓存
+        loadSettingFromCloudToLocalStorage()
+      }
+      return Promise.resolve(setting.setting)
+    }
+    return loadSettingFromCloudToLocalStorage()
+  }
+}
+
+function loadSettingFromCloudToLocalStorage(){
+  return wx.cloud.callFunction({
+    name: 'loadSetting'
+  }).then(res => {
+    // 异步放入缓存
+    saveToLocalStorage(res.result)
+    return res.result
+  })
+}
+
+function saveToLocalStorage (setting){
+  wx.setStorage({
+    data: {
+      setting: setting,
+      time: Date.now()
+    },
+    key: SETTING_STORAGE_KEY,
+  })
 }

@@ -57,3 +57,7 @@
     <image src="/image/thanks_code.jpg" style="width:100px" mode="widthFix" show-menu-by-longpress></image>
   </view>
 </view>
+
+<view class="padding-box">
+  <view class="ref-content" bindtap="showMyOpenid">通过setting云函数查询我的openid</view>
+</view>

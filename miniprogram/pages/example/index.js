@@ -95,6 +95,16 @@ Page({
     })
   },
 
+  showMyOpenid(){
+    wxApiUtils.getSetting().then(setting=>{
+      wx.showModal({
+        title: '我的openid',
+        content: setting.openid,
+        showCancel: false
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
