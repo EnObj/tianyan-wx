@@ -61,3 +61,7 @@
 <view class="padding-box">
   <view class="ref-content" bindtap="showMyOpenid">通过setting云函数查询我的openid</view>
 </view>
+
+<view class="bg">
+	<image src="./../../image/background.jpg" class="bg-img" mode="aspectFill" style="opacity:1"></image>
+</view>
