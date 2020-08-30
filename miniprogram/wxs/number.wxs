@@ -2,15 +2,16 @@ module.exports = {
   toThousands: function (num) {
     var result = [],
       counter = 0;
-    var bigAndSmall = (num || 0).toString().split('.')
-    num = bigAndSmall[0].split('');
-    for (var i = num.length - 1; i >= 0; i--) {
+    num = num || 0
+    var bigAndSmall = Math.abs(num).toString().split('.')
+    var splitedNum = bigAndSmall[0].split('');
+    for (var i = splitedNum.length - 1; i >= 0; i--) {
       counter++;
-      result.unshift(num[i]);
+      result.unshift(splitedNum[i]);
       if (!(counter % 3) && i != 0) {
         result.unshift(',');
       }
     }
-    return result.join('') + (bigAndSmall[1] ? ('.' + bigAndSmall[1]) : '');
+    return (num < 0 ? '-' : '') + result.join('') + (bigAndSmall[1] ? ('.' + bigAndSmall[1]) : '');
   }
 }

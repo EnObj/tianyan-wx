@@ -64,7 +64,7 @@
 </view>
 
 <view class="padding-box">
-  <view>格式化数字12345.6789 = {{numberUtils.toThousands(12345.6789)}}</view>
+  <view>格式化数字-123456.7899 = {{numberUtils.toThousands(-123456.7899)}}</view>
 </view>
 
 <view class="bg">
