@@ -1,8 +1,9 @@
 module.exports = {
-  toThousands: function(num) {
+  toThousands: function (num) {
     var result = [],
       counter = 0;
-    num = (num || 0).toString().split('');
+    var bigAndSmall = (num || 0).toString().split('.')
+    num = bigAndSmall[0].split('');
     for (var i = num.length - 1; i >= 0; i--) {
       counter++;
       result.unshift(num[i]);
@@ -10,6 +11,6 @@ module.exports = {
         result.unshift(',');
       }
     }
-    return result.join('');
+    return result.join('') + (bigAndSmall[1] ? ('.' + bigAndSmall[1]) : '');
   }
 }

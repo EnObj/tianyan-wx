@@ -1,3 +1,4 @@
+<wxs src="./../../wxs/number.wxs" module="numberUtils"></wxs>
 <view class="padding-box">示例padding-box</view>
 
 <view class="flex-between padding-box">
@@ -60,6 +61,10 @@
 
 <view class="padding-box">
   <view class="ref-content" bindtap="showMyOpenid">通过setting云函数查询我的openid</view>
+</view>
+
+<view class="padding-box">
+  <view>格式化数字12345.6789 = {{numberUtils.toThousands(12345.6789)}}</view>
 </view>
 
 <view class="bg">
