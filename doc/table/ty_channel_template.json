@@ -10,6 +10,6 @@
       "name": "投稿视频数",
       "path": "data.page.count"
     }],
-    "args": ["up主名字"]
+    "key": "up主名字"
   }
 }
