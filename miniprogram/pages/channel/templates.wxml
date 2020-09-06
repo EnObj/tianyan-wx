@@ -1,0 +1,5 @@
+<view class="templates" wx:for="{{templates}}" wx:key="_id">
+  <navigator class="template" url="/pages/channel/template?templateId={{item._id}}">
+    <view class="template-name">{{item.name}}</view>
+  </navigator>
+</view>

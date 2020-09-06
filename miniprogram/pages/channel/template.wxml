@@ -1,0 +1,10 @@
+<view class="template">
+  <view class="template-name">{{template.name}}</view>
+  <view class="key">
+    <input placeholder="请输入{{template.key}}" bindinput="keyChange"/>
+  </view>
+</view>
+
+<view>
+  <button bindtap="submit">确认</button>
+</view>
