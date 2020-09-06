@@ -15,7 +15,7 @@
     "channelTemplate": {
       "注意": "此处是某个channelTemplate对象，结构见ty_channel_template.json表"
     },
-    "kValue": "用青春去旅行",
+    "key": "用青春去旅行",
     "resolvedUrl": "https://api.bilibili.com/x/space/arc/search?mid=208557615&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp",
     "createTime": 123456789
   }
