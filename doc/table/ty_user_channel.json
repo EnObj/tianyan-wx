@@ -1,0 +1,18 @@
+{
+  "name": "用户关注属性表",
+  "auth": "仅创建者可读写",
+  "example": {
+    "_id": "ty_user_channel_1",
+    "_openid": "user_1",
+    "channel": {
+      "注意": "此处是某个channel对象，结构见ty_channel.json表"
+    },
+    "channelData": {
+      "结构": "此处是channelData对象，结构见ty_channel.json表",
+      "更新机制": "每次用户请求查询，此对象会被更新为最新版本的channelData"
+    },
+    "notify": true
+  },
+  "createTime": 123456789,
+  "updateTime": 123456789
+}

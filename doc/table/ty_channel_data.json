@@ -1,0 +1,14 @@
+{
+  "name": "属性值表",
+  "auth": "所有用户可读",
+  "example": {
+    "_id":"ty_channel_data_1",
+    "channel": {
+      "注意": "此处是某个channel对象，结构见ty_channel.json表"
+    },
+    "data": {
+      "投稿视频数": 221
+    },
+    "createTime": 123456789
+  }
+}

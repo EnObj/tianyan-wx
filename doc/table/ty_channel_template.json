@@ -1,0 +1,15 @@
+{
+  "name": "渠道模版表",
+  "auth": "所有用户可读",
+  "example": {
+    "_id": "ty_channel_template_1",
+    "name": "b站up主有更新",
+    "resourceType": "json",
+    "timeSpaceUnit": 5,
+    "attrs": [{
+      "name": "投稿视频数",
+      "path": "data.page.count"
+    }],
+    "args": ["up主名字"]
+  }
+}
