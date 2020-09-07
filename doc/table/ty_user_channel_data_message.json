@@ -1,0 +1,16 @@
+{
+  "name": "用户关注渠道数据消息表",
+  "auth": "仅创建者可读写",
+  "desc": "每次渠道数据有更新，将根据用户关注渠道表将数据分发到此表。",
+  "example": {
+    "_id": "ty_user_channel_data_message_1",
+    "_openid": "user_1",
+    "channelData": {
+      "结构": "此处是channelData对象，结构见ty_channel.json表"
+    },
+    "readed": true,
+    "notify": "wait/finished/skip"
+  },
+  "createTime": 123456789,
+  "updateTime": 123456789
+}
