@@ -2,6 +2,7 @@
 const cloud = require('wx-server-sdk')
 const http = require('http')
 const https = require('https')
+const cheerio = require('cheerio')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -19,30 +20,34 @@ exports.main = async (event, context) => {
     lastCheckTime: db.command.neq(lastCheckTime),
     disabled: db.command.exists(false)
   })
-  while((await query.count()).total){
+  while ((await query.count()).total) {
     const {
       data: channels
     } = await query.get()
-  
-    // 一个一个channel处理
-    channels.forEach(async channel => {
-      try{
+
+    // 一个一个channel处理（此处不能使用forEach）
+    for (let i = 0; i < channels.length; i++) {
+      const channel = channels[i]
+      console.log(`正在处理：${channel.channelTemplate.name}-${channel.key}`)
+      try {
         // 请求资源
         const resource = await request(channel.resourceUrl)
         // 属性值解析器
         valueResolver = valueResolvers[channel.channelTemplate.resourceType]
-  
+
         // 将channelData落库
         const data = channel.channelTemplate.attrs.reduce((data, attr) => {
           data[attr.name] = valueResolver(resource, attr.path)
           return data
         }, {})
         // 获得库里上次的数据（用于比对是否有更新）
-        const {data: [lastChannelData]} = await db.collection('ty_channel_data').where({
+        const {
+          data: [lastChannelData]
+        } = await db.collection('ty_channel_data').where({
           'channel._id': channel._id
-        }).orderBy('createTime', desc).limit(1).get()
+        }).orderBy('createTime', 'desc').limit(1).get()
         const dataChanged = !!lastChannelData && isObjectValueEqual(lastChannelData.data, data)
-        
+
         // 生成channelData
         const {
           _id: channelDataId
@@ -54,13 +59,13 @@ exports.main = async (event, context) => {
             "createTime": lastCheckTime
           }
         })
-  
+
         // 生成消息
-        if(dataChanged){
-          genMessage(channelDataId)
+        if (dataChanged) {
+          await genMessage(channelDataId)
         }
-        
-      } catch(err){
+
+      } catch (err) {
         console.error(err)
         // 除名
         await db.collection('ty_channel').doc(channel._id).update({
@@ -68,7 +73,7 @@ exports.main = async (event, context) => {
             disabled: true
           }
         })
-      } finally{
+      } finally {
         // 更新检查标记
         await db.collection('ty_channel').doc(channel._id).update({
           data: {
@@ -76,8 +81,9 @@ exports.main = async (event, context) => {
           }
         })
       }
-  
-    })
+
+    }
+
   }
 }
 
@@ -91,11 +97,12 @@ const valueResolvers = {
     return resource
   },
   html(htmlResource, path) {
-
+    const $ = cheerio.load(htmlResource)
+    return $(path).text().trim()
   }
 }
 
-async function genMessage(channelDataId){
+async function genMessage(channelDataId) {
   const {
     data: channelData
   } = await db.collection('ty_channel_data').doc(channelDataId).get()
@@ -148,19 +155,19 @@ function request(url, encoding, options = {}, pipe) {
 }
 
 // 对比两个对象的值是否完全相等 返回值 true/false
-function isObjectValueEqual (a, b) {   
+function isObjectValueEqual(a, b) {
   //取对象a和b的属性名
   var aProps = Object.getOwnPropertyNames(a);
   var bProps = Object.getOwnPropertyNames(b);
   //判断属性名的length是否一致
   if (aProps.length != bProps.length) {
-      return false;
+    return false;
   }
   //循环取出属性名，再判断属性值是否一致
   for (var i = 0; i < aProps.length; i++) {
     var propName = aProps[i];
     if (a[propName] !== b[propName]) {
-        return false;
+      return false;
     }
   }
   return true;
