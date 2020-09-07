@@ -82,6 +82,52 @@ module.exports = {
     })
   },
 
+  askNotify(tmplId) {
+    return new Promise((resolve, reject) => {
+      wx.requestSubscribeMessage({
+        tmplIds: [tmplId],
+        success: function (res) {
+          switch (res[tmplId]) {
+            case 'accept':
+              resolve()
+              break
+            case 'reject':
+              wx.showModal({
+                title: '温馨提示',
+                content: '此操作需要您打开订阅消息开关',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      withSubscriptions: true,
+                      success: function (res) {
+                        if (res.subscriptionsSetting.mainSwitch && res.subscriptionsSetting.itemSettings[tmplId] == 'accept') {
+                          resolve()
+                        } else {
+                          reject()
+                        }
+                      }
+                    })
+                  } else {
+                    reject()
+                  }
+                }
+              })
+              break
+            case 'ban':
+              wx.showToast({
+                title: '订阅失败，请稍后重试',
+              })
+              reject()
+              break
+          }
+        },
+        fail(res) {
+          reject()
+        }
+      })
+    })
+  },
+
   genQrcode(content){
     return wx.cloud.callFunction({
       name: 'genQrcode',
