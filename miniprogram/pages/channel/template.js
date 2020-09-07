@@ -37,16 +37,8 @@ Page({
       }
     }).then(res => {
       if (!res.result.errCode) {
-        db.collection('ty_user_channel').add({
-          data: {
-            "channel": res.result.channel,
-            "channelData": {},
-            "notify": false
-          }
-        }).then(res => {
-          wx.reLaunch({
-            url: '/pages/index/index',
-          })
+        wx.navigateTo({
+          url: '/pages/channel/channel?channelId=' + res.result.channel._id,
         })
       } else {
         wx.showToast({

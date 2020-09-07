@@ -1,0 +1,15 @@
+<view class="channel">
+  <view class="channel-name">{{channel.channelTemplate.name}}</view>
+  <view class="channel-key">
+    {{channel.channelTemplate.keyName}}：{{channel.key}}
+  </view>
+</view>
+
+<view>
+  <button bindtap="removeUserChannel" wx:if="{{userChannel}}">已订阅</button>
+  <button bindtap="addUserChannel" type="primary" wx:else>订阅</button>
+</view>
+
+<view wx:if="{{userChannel}}">
+  <switch checked="{{userChannel.notify}}" bindchange="switchNotify"/>
+</view>

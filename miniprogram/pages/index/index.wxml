@@ -1,9 +1,12 @@
 <view class="user-channels">
   <view class="user-channel" wx:for="{{userChannels}}" wx:key="_id">
-    <view>{{item.channel.channelTemplate.name}}</view>
-    <view>{{item.channel.channelTemplate.keyName}}：{{item.channel.key}}</view>
+    <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}">
+      {{item.channel.channelTemplate.name}}</navigator>
+    <navigator url="/pages/channel/channel?channelId={{item.channel._id}}">
+      {{item.channel.channelTemplate.keyName}}：{{item.channel.key}}</navigator>
     <view class="attrs">
-      <view class="attr" wx:for="{{item.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">{{attr.name}}：{{item.channelData.data[attr.name]}}</view>
+      <view class="attr" wx:for="{{item.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">
+        {{attr.name}}：{{item.channelData.data[attr.name]}}</view>
     </view>
     <view wx:if="{{item.newData}}" bindtap="notNew" data-item-index="{{index}}">新</view>
   </view>
