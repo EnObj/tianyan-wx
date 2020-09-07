@@ -53,8 +53,16 @@ Page({
     // 异步更新数据库
     db.collection('ty_user_channel_data_message').doc(userChannel.channelDataMessage._id).update({
       data: {
-        readed: true,
-        notify: userChannel.channelDataMessage.notify == 'wait' ? 'skip' : userChannel.channelDataMessage.notify
+        readed: true
+      }
+    })
+    // 当前渠道下的所有等待通知的消息标记为skip
+    db.collection('ty_user_channel_data_message').where({
+      'channelData.channel._id': userChannel.channel._id,
+      notify: 'wait'
+    }).update({
+      data:{
+        notify: 'skip'
       }
     })
   },
