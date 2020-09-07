@@ -12,54 +12,73 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
+  const lastCheckTime = Date.now()
 
-  // 查询所有channel
-  const {
-    data: channels
-  } = await db.collection('ty_channel').where({}).get()
-
-  // 一个一个channel处理
-  channels.forEach(async channel => {
-    const resource = await request(channel.resourceUrl)
-    valueResolver = valueResolvers[channel.channelTemplate.resourceType]
-    // 将channelData落库
+  // 循环分批处理所有channel
+  const query = db.collection('ty_channel').where({
+    lastCheckTime: db.command.neq(lastCheckTime),
+    disabled: db.command.exists(false)
+  })
+  while((await query.count()).total){
     const {
-      _id: channelDataId
-    } = await db.collection('ty_channel_data').add({
-      data: {
-        "channel": channel,
-        "data": channel.channelTemplate.attrs.reduce((data, attr) => {
+      data: channels
+    } = await query.get()
+  
+    // 一个一个channel处理
+    channels.forEach(async channel => {
+      try{
+        // 请求资源
+        const resource = await request(channel.resourceUrl)
+        // 属性值解析器
+        valueResolver = valueResolvers[channel.channelTemplate.resourceType]
+  
+        // 将channelData落库
+        const data = channel.channelTemplate.attrs.reduce((data, attr) => {
           data[attr.name] = valueResolver(resource, attr.path)
           return data
-        }, {}),
-        "createTime": Date.now()
-      }
-    })
-
-    const {
-      data: channelData
-    } = await db.collection('ty_channel_data').doc(channelDataId).get()
-
-    // 获得关注列表
-    const {
-      data: userChannels
-    } = await db.collection('ty_user_channel').where({
-      'channel._id': channel._id
-    }).get()
-    // 生成消息
-    userChannels.forEach(async userChannel => {
-      await db.collection('ty_user_channel_data_message').add({
-        data: {
-          _openid: userChannel._openid,
-          channelData,
-          readed: false,
-          notify: userChannel.notify ? 'wait' : 'skip',
-          createTime: Date.now(),
-          updateTime: Date.now()
+        }, {})
+        // 获得库里上次的数据（用于比对是否有更新）
+        const {data: [lastChannelData]} = await db.collection('ty_channel_data').where({
+          'channel._id': channel._id
+        }).orderBy('createTime', desc).limit(1).get()
+        const dataChanged = !!lastChannelData && isObjectValueEqual(lastChannelData.data, data)
+        
+        // 生成channelData
+        const {
+          _id: channelDataId
+        } = await db.collection('ty_channel_data').add({
+          data: {
+            "channel": channel,
+            data,
+            dataChanged,
+            "createTime": lastCheckTime
+          }
+        })
+  
+        // 生成消息
+        if(dataChanged){
+          genMessage(channelDataId)
         }
-      })
+        
+      } catch(err){
+        console.error(err)
+        // 除名
+        await db.collection('ty_channel').doc(channel._id).update({
+          data: {
+            disabled: true
+          }
+        })
+      } finally{
+        // 更新检查标记
+        await db.collection('ty_channel').doc(channel._id).update({
+          data: {
+            lastCheckTime
+          }
+        })
+      }
+  
     })
-  })
+  }
 }
 
 const valueResolvers = {
@@ -74,6 +93,33 @@ const valueResolvers = {
   html(htmlResource, path) {
 
   }
+}
+
+async function genMessage(channelDataId){
+  const {
+    data: channelData
+  } = await db.collection('ty_channel_data').doc(channelDataId).get()
+
+  // 获得关注列表
+  const {
+    data: userChannels
+  } = await db.collection('ty_user_channel').where({
+    'channel._id': channelData.channel._id
+  }).get()
+
+  // 生成消息（此处进行比对数据是否有更新）
+  userChannels.forEach(async userChannel => {
+    await db.collection('ty_user_channel_data_message').add({
+      data: {
+        _openid: userChannel._openid,
+        channelData,
+        readed: false,
+        notify: userChannel.notify ? 'wait' : 'skip',
+        createTime: Date.now(),
+        updateTime: Date.now()
+      }
+    })
+  })
 }
 
 function request(url, encoding, options = {}, pipe) {
@@ -99,4 +145,23 @@ function request(url, encoding, options = {}, pipe) {
       })
     })
   })
+}
+
+// 对比两个对象的值是否完全相等 返回值 true/false
+function isObjectValueEqual (a, b) {   
+  //取对象a和b的属性名
+  var aProps = Object.getOwnPropertyNames(a);
+  var bProps = Object.getOwnPropertyNames(b);
+  //判断属性名的length是否一致
+  if (aProps.length != bProps.length) {
+      return false;
+  }
+  //循环取出属性名，再判断属性值是否一致
+  for (var i = 0; i < aProps.length; i++) {
+    var propName = aProps[i];
+    if (a[propName] !== b[propName]) {
+        return false;
+    }
+  }
+  return true;
 }
