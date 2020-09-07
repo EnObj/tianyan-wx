@@ -22,6 +22,8 @@ Page({
       this.setData({
         userChannels: res.data
       })
+      // 马上进行一次检查
+      this.check()
     })
   },
 
