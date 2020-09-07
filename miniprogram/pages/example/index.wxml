@@ -67,6 +67,11 @@
   <view>格式化数字-123456.7899 = {{numberUtils.toThousands(-123456.7899)}}</view>
 </view>
 
+<view class="padding-box">
+  <view class="ref-content" wx:if="{{!messageSubed}}" bindtap="subMessage">订阅消息</view>
+  <view class="ref-content" wx:else bindtap="sendMessage">发送订阅消息</view>
+</view>
+
 <view class="bg">
 	<image src="./../../image/background.jpg" class="bg-img" mode="aspectFill" style="opacity:1"></image>
 </view>
