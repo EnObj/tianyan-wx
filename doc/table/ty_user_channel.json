@@ -7,10 +7,6 @@
     "channel": {
       "注意": "此处是某个channel对象，结构见ty_channel.json表"
     },
-    "channelData": {
-      "结构": "此处是channelData对象，结构见ty_channel.json表",
-      "更新机制": "每次用户请求查询，此对象会被更新为最新版本的channelData"
-    },
     "notify": true
   },
   "createTime": 123456789,
