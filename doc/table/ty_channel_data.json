@@ -1,5 +1,5 @@
 {
-  "name": "属性值表",
+  "name": "渠道数据表",
   "auth": "所有用户可读",
   "example": {
     "_id":"ty_channel_data_1",

@@ -1,5 +1,5 @@
 {
-  "name": "用户关注属性表",
+  "name": "用户关注渠道表",
   "auth": "仅创建者可读写",
   "example": {
     "_id": "ty_user_channel_1",
