@@ -42,41 +42,52 @@ exports.main = async (event, context) => {
     data: template
   } = await db.collection('ty_channel_template').doc(templateId).get()
 
-  return request(`https://search.bilibili.com/upuser?keyword=${key}`, 'binary', {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'zh-cn',
-      'Connection': 'keep-alive',
-      'Accept-Encoding': 'gzip, deflate, br'
+  const resourceUrlResolver = resourceUrlResolverMap[templateId]
+
+  const resourceUrl = await resourceUrlResolver(key)
+
+  return db.collection('ty_channel').add({
+    data: {
+      "channelTemplate": template,
+      key,
+      resourceUrl,
+      "createBy": OPENID,
+      "createTime": Date.now()
     }
-  }, unGzip).then(html => {
+  }).then(res => {
+    return db.collection('ty_channel').doc(res._id).get().then(res => {
+      return {
+        channel: res.data
+      }
+    })
+  })
+}
+
+const resourceUrlResolverMap = {
+  'bili_uper': async function (key) {
+    const html = request(`https://search.bilibili.com/upuser?keyword=${key}`, 'binary', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'zh-cn',
+        'Connection': 'keep-alive',
+        'Accept-Encoding': 'gzip, deflate, br'
+      }
+    }, unGzip)
     // console.log(html)
     const $ = cheerio.load(html)
     const uperUrl = $('#user-list > div.flow-loader.user-wrap > ul > li:nth-child(1) > div.up-face > a').attr('href')
     if (uperUrl) {
-      const userId = uperUrl.match(/bilibili\.com\/(\d+)\?from/)[1]
-      return db.collection('ty_channel').add({
-        data: {
-          "channelTemplate": template,
-          key,
-          "resourceUrl": `https://api.bilibili.com/x/space/arc/search?mid=${userId}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`,
-          "createBy": OPENID,
-          "createTime": Date.now()
-        }
-      }).then(res => {
-        return db.collection('ty_channel').doc(res._id).get().then(res => {
-          return {
-            channel: res.data
-          }
-        })
-      })
+      return `https://api.bilibili.com/x/space/arc/search?mid=${userId}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`
     }
-    return {
+    return Promise.reject({
       errCode: 404,
       errMeg: '未能发现up主'
-    }
-  })
+    })
+  },
+  'v2ex_post': async function (key) {
+    return `https://v2ex.com/t/${key}`
+  }
 }
 
 function request(url, encoding, options = {}, pipe) {
