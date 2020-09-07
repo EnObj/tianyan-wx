@@ -46,7 +46,7 @@ exports.main = async (event, context) => {
         } = await db.collection('ty_channel_data').where({
           'channel._id': channel._id
         }).orderBy('createTime', 'desc').limit(1).get()
-        const dataChanged = !!lastChannelData && isObjectValueEqual(lastChannelData.data, data)
+        const dataChanged = !lastChannelData || !isObjectValueEqual(lastChannelData.data, data)
 
         // 生成channelData
         const {
