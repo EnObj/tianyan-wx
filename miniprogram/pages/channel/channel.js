@@ -1,3 +1,5 @@
+const wxApiUtils = require("../../utils/wxApiUtils")
+
 const db = wx.cloud.database()
 
 // miniprogram/pages/channel/channel.js
@@ -59,44 +61,8 @@ Page({
     const value = event.detail.value
     // 请求订阅
     if (value) {
-      var tmplId = 'PeNNc-AQ5M2ZLE6BniC5YJwCcVAd1UVlsq7dZEz1n0w'
-      wx.requestSubscribeMessage({
-        tmplIds: [tmplId],
-        success: function (res) {
-          console.log(res)
-          switch (res[tmplId]) {
-            case 'accept':
-              this.updateNotify(true)
-              break
-            case 'reject': // 'reject' or 'ban'
-              wx.showModal({
-                title: '温馨提示',
-                content: '此操作需要您的授权',
-                success: function(res){
-                  if(res.confirm){
-                    wx.openSetting({
-                      withSubscriptions: true,
-                      success: function(res){
-                        if(res.subscriptionsSetting.mainSwitch && res.subscriptionsSetting.itemSettings[tmplId] == 'accept'){
-                          this.updateNotify(true)
-                        }else{}
-                      }
-                    })
-                  }else{
-                    this.setData({
-                      notify: false
-                    })
-                  }
-                }
-              })
-          }
-        }.bind(this),
-        fail(res) {
-          console.log(res)
-          resolve({
-            needNotify: false
-          })
-        }
+      wxApiUtils.askNotify('-uC7MFgpZqLROkVO_QILbH23d85gg-ErEM0KavcKP6A').then(res=>{
+        this.updateNotify(true)
       })
     } else {
       this.updateNotify(false)
