@@ -18,11 +18,14 @@ exports.main = async (event, context) => {
     data: channels
   } = await db.collection('ty_channel').where({}).get()
 
-  // 一个一个处理
+  // 一个一个channel处理
   channels.forEach(async channel => {
     const resource = await request(channel.resourceUrl)
     valueResolver = valueResolvers[channel.channelTemplate.resourceType]
-    await db.collection('ty_channel_data').add({
+    // 将channelData落库
+    const {
+      _id: channelDataId
+    } = await db.collection('ty_channel_data').add({
       data: {
         "channel": channel,
         "data": channel.channelTemplate.attrs.reduce((data, attr) => {
@@ -32,8 +35,30 @@ exports.main = async (event, context) => {
         "createTime": Date.now()
       }
     })
-    // 通知 TODO
 
+    const {
+      data: channelData
+    } = await db.collection('ty_channel_data').doc(channelDataId).get()
+
+    // 获得关注列表
+    const {
+      data: userChannels
+    } = await db.collection('ty_user_channel').where({
+      'channel._id': channel._id
+    }).get()
+    // 生成消息
+    userChannels.forEach(async userChannel => {
+      await db.collection('ty_user_channel_data_message').add({
+        data: {
+          _openid: userChannel._openid,
+          channelData,
+          readed: false,
+          notify: userChannel.notify ? 'wait' : 'skip',
+          createTime: Date.now(),
+          updateTime: Date.now()
+        }
+      })
+    })
   })
 }
 
@@ -41,7 +66,7 @@ const valueResolvers = {
   json(jsonResource, path) {
     var resource = JSON.parse(jsonResource)
     const attrs = path.split('.')
-    attrs.forEach(attr=>{
+    attrs.forEach(attr => {
       resource = resource[attr]
     })
     return resource
