@@ -6,9 +6,9 @@
       {{item.channel.channelTemplate.keyName}}：{{item.channel.key}}</navigator>
     <view class="attrs">
       <view class="attr" wx:for="{{item.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">
-        {{attr.name}}：{{item.channelData.data[attr.name]}}</view>
+        {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
     </view>
-    <view wx:if="{{item.newData}}" bindtap="notNew" data-item-index="{{index}}">新</view>
+    <view wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" bindtap="readed" data-item-index="{{index}}">新</view>
   </view>
 </view>
 

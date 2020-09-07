@@ -14,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    db.collection('ty_user_channel').where({}).get().then(res=>{
+    db.collection('ty_user_channel').where({}).get().then(res => {
       this.setData({
         userChannels: res.data
       })
@@ -22,41 +22,34 @@ Page({
     })
   },
 
-  check(){
-    this.data.userChannels.forEach((userChannel,index)=>{
-      db.collection('ty_channel_data').where({
-        'channel._id': userChannel.channel._id
-      }).orderBy('createTime', 'desc').limit(1).get().then(res=>{
-        const channelData = res.data[0]
-        if(channelData && channelData._id != userChannel.channelData._id){
+  check() {
+    this.data.userChannels.forEach((userChannel, index) => {
+      db.collection('ty_user_channel_data_message').where({
+        'channelData.channel._id': userChannel.channel._id
+      }).orderBy('createTime', 'desc').limit(1).get().then(res => {
+        const channelDataMessage = res.data[0]
+        if (channelDataMessage && channelDataMessage._id != (userChannel.channelDataMessage || {})._id) {
           // 更新模型
           const updater = {}
-          updater[`userChannels[${index}].channelData`] = channelData
-          updater[`userChannels[${index}].newData`] = true
+          updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
           this.setData(updater)
-          // 异步更新数据库
-          db.collection('ty_user_channel').doc(userChannel._id).update({
-            data: {
-              channelData: db.command.set(channelData),
-              newData: true
-            }
-          })
         }
       })
     })
   },
 
-  notNew(event){
+  readed(event) {
     const itemIndex = +event.currentTarget.dataset.itemIndex
     const userChannel = this.data.userChannels[itemIndex]
     // 更新模型
     const updater = {}
-    updater[`userChannels[${itemIndex}].newData`] = false
+    updater[`userChannels[${itemIndex}].channelDataMessage.readed`] = true
     this.setData(updater)
     // 异步更新数据库
-    db.collection('ty_user_channel').doc(userChannel._id).update({
+    db.collection('ty_user_channel_data_message').doc(userChannel.channelDataMessage._id).update({
       data: {
-        newData: false
+        readed: true,
+        notify: userChannel.channelDataMessage.notify == 'wait' ? 'skip' : userChannel.channelDataMessage.notify
       }
     })
   },
@@ -72,7 +65,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
