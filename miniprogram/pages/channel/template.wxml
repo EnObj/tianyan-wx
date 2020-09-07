@@ -1,7 +1,7 @@
 <view class="template">
   <view class="template-name">{{template.name}}</view>
   <view class="key">
-    <input placeholder="请输入{{template.key}}" bindinput="keyChange"/>
+    <input placeholder="请输入{{template.keyName}}" bindinput="keyChange"/>
   </view>
 </view>
 
