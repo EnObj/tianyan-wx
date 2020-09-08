@@ -5,19 +5,22 @@
         <navigator url="/pages/channel/channel?channelId={{item.channel._id}}">
           {{item.channel.name}}
         </navigator>
-        <view class="unreaded" wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" bindtap="readed" data-item-index="{{index}}">新</view>
+        <view class="unreaded" wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" bindtap="readed"
+          data-item-index="{{index}}">新</view>
       </view>
       <view bindtap="switchNotify" data-item-index="{{index}}">
         <mp-icon icon="bellring-on" size="20" color="#07c160" wx:if="{{item.notify}}" type="field"></mp-icon>
         <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
       </view>
     </view>
-      <view class="attrs">
-      <view class="attr not-importent" wx:for="{{item.channel.attrs || item.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">
+    <view class="attrs">
+      <view class="attr not-importent" wx:for="{{item.channel.attrs || item.channel.channelTemplate.attrs}}"
+        wx:key="name" wx:for-item="attr">
         {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
     </view>
     <view class="flex-start">
-      <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}" class="not-importent ref-content">@{{item.channel.channelTemplate.name}}</navigator>
+      <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}"
+        class="not-importent ref-content">@{{item.channel.channelTemplate.name}}</navigator>
     </view>
   </view>
 </view>

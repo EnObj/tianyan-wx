@@ -8,5 +8,5 @@
   border-radius: 10px;
   margin-left: 5px;
   color: white;
-  font-size: 12px;
+  font-size: 10px;
 }
