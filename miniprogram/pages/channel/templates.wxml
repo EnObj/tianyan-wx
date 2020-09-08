@@ -1,5 +1,6 @@
 <view class="templates" wx:for="{{templates}}" wx:key="_id">
-  <navigator class="template" url="/pages/channel/template?templateId={{item._id}}">
+  <navigator class="template padding-box" url="/pages/channel/template?templateId={{item._id}}">
     <view class="template-name">{{item.name}}</view>
+    <view class="template-desc not-importent">{{item.desc}}</view>
   </navigator>
 </view>

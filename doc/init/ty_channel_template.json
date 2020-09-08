@@ -5,6 +5,7 @@
     "name": "投稿视频数"
   }],
   "name": "b站up主",
+  "desc": "用于监测b站up主视频动态更新，通过此项目关注你喜欢的up主并开启通知，一旦up主上传新的视频动态，你将第一时间获得通知。",
   "resourceType": "json",
   "keyName": "up主名字"
 } 
@@ -19,7 +20,8 @@
       "name": "评论数"
     }
   ],
-  "name": "v2ex话题阅读量",
+  "name": "v2ex话题",
+  "desc": "用于监测v2ex话题有新的评论，通过此项目关注你发布或喜欢的帖子，一旦此话题有新的评论，你将第一时间获得通知。",
   "resourceType": "html",
   "keyName": "话题ID"
 } 
@@ -27,5 +29,6 @@
   "_id": "other",
   "attrs": [],
   "name": "其他",
+  "desc": "此项目下收录其他未被项目化的独立活动。",
   "resourceType": "html"
 }

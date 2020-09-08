@@ -21,7 +21,7 @@ Page({
         template: res.data
       })
     })
-    // 加载模版下的流行频道
+    // 加载模版下的频道
     db.collection('ty_channel').where({
       'channelTemplate._id': options.templateId
     }).get().then(res=>{
