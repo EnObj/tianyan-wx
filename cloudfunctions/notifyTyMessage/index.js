@@ -43,7 +43,7 @@ exports.main = async (event, context) => {
           page: '/pages/index/index',
           data: {
             thing1: {
-              value: channel.channelTemplate.name + '：' + channel.key + (userMessage.channelDatas.length > 1 ? ("等" + userMessage.channelDatas.length + "个活动") : "")
+              value: channel.name + (userMessage.channelDatas.length > 1 ? ("等" + userMessage.channelDatas.length + "个活动") : "")
             },
             phrase2: {
               value: '有更新'
