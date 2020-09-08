@@ -1,4 +1,5 @@
 const wxApiUtils = require("../../utils/wxApiUtils")
+const tyUtils = require('./../../utils/tyUtils.js')
 
 const db = wx.cloud.database()
 
@@ -46,6 +47,8 @@ Page({
           userChannel: res.data
         })
       })
+      // 标记用户关注渠道有变动
+      tyUtils.signUserChannelsChange()
     })
   },
 
@@ -54,6 +57,8 @@ Page({
       this.setData({
         userChannel: null
       })
+      // 标记用户关注渠道有变动
+      tyUtils.signUserChannelsChange()
     })
   },
 
@@ -80,6 +85,8 @@ Page({
       this.setData({
         'userChannel.notify': value
       })
+      // 标记用户关注渠道有变动
+      tyUtils.signUserChannelsChange()
     })
   },
 

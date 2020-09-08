@@ -1,4 +1,5 @@
 const db = wx.cloud.database()
+const tyUtils = require('./../../utils/tyUtils.js')
 
 // miniprogram/pages/index/index.js
 Page({
@@ -21,9 +22,9 @@ Page({
     // 关闭监听
     this.closeWatchers()
     // 加载频道
-    return db.collection('ty_user_channel').where({}).get().then(res => {
+    return tyUtils.getAll(db.collection('ty_user_channel').where({})).then(list => {
       this.setData({
-        userChannels: res.data
+        userChannels: list
       })
       // 监听消息
       this.watchMessage()
@@ -96,7 +97,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(getApp().globalData.needReloadUserChannels){
+      this.loadUserChannels().then(()=>{
+        delete getApp().globalData.needReloadUserChannels
+      })
+    }
   },
 
   /**
