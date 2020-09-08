@@ -43,7 +43,7 @@ exports.main = async (event, context) => {
   } = await db.collection('ty_channel_template').doc(templateId).get()
 
   try {
-    
+
     const resourceUrlResult = await resourceUrlResolverMap[templateId](key)
     // 无法获得资源地址
     if (resourceUrlResult.errCode) {
@@ -78,7 +78,7 @@ exports.main = async (event, context) => {
 
 const resourceUrlResolverMap = {
   'bili_uper': async function (key) {
-    const html = await request(`https://search.bilibili.com/upuser?keyword=${key}`, 'binary', {
+    const html = await request(`https://search.bilibili.com/upuser?keyword=${encodeURIComponent(key)}`, 'binary', {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
