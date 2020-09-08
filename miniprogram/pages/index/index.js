@@ -46,8 +46,8 @@ Page({
           }
         }.bind(this),
         onError: function(err) {
-          wx.showToast({
-            title: `链接[${userChannel.channel.key}]断开，请下拉刷新重新建立链接`,
+          wx.showModal({
+            content: `链接[${userChannel.channel.key}]断开，请下拉刷新重新建立链接`,
           })
           console.error('the watch closed because of error', err)
         }
