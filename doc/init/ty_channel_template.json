@@ -18,3 +18,9 @@
   "resourceType": "html",
   "keyName": "话题ID"
 }
+{
+  "_id": "other",
+  "attrs": [],
+  "name": "其他",
+  "resourceType": "html"
+}

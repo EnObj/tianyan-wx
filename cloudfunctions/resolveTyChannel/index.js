@@ -55,6 +55,7 @@ exports.main = async (event, context) => {
       data: {
         "channelTemplate": template,
         key,
+        name: resourceUrlResult.channelName,
         resourceUrl: resourceUrlResult.resourceUrl,
         "createBy": OPENID,
         "createTime": Date.now()
@@ -94,7 +95,8 @@ const resourceUrlResolverMap = {
       const uperName = uperNameEle.text().trim()
       if (uperName == key) {
         return {
-          resourceUrl: `https://api.bilibili.com/x/space/arc/search?mid=${uperNameEle.attr('href').match(/bilibili\.com\/(\d+)\?from/)[1]}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`
+          resourceUrl: `https://api.bilibili.com/x/space/arc/search?mid=${uperNameEle.attr('href').match(/bilibili\.com\/(\d+)\?from/)[1]}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`,
+          channelName: key
         }
       }
       return {
@@ -110,6 +112,7 @@ const resourceUrlResolverMap = {
   },
   'v2ex_post': async function (key) {
     return {
+      channelName: '话题' + key,
       resourceUrl: `https://v2ex.com/t/${key}`
     }
   }

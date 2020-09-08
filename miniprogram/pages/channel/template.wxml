@@ -2,7 +2,7 @@
   <view class="template-name">{{template.name}}</view>
 </view>
 
-<view class="new-channel padding-box">
+<view class="new-channel padding-box" wx:if="{{template.keyName}}">
   <view class="key">
     <input placeholder="请输入{{template.keyName}}" bindinput="keyChange"/>
   </view>
@@ -13,6 +13,6 @@
 
 <view class="channels">
   <navigator class="channel padding-box" wx:for="{{channels}}" wx:key="_id" url="/pages/channel/channel?channelId={{item._id}}">
-    <view class="key">{{item.key}}</view>
+    <view class="name">{{item.name}}</view>
   </navigator>
 </view>

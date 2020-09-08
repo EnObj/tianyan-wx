@@ -8,7 +8,7 @@ Page({
    */
   data: {
     template: null,
-    channel: {},
+    key: '',
     channels: []
   },
 
@@ -33,7 +33,7 @@ Page({
 
   keyChange(event) {
     this.setData({
-      'channel.key': event.detail.value
+      'key': event.detail.value
     })
   },
 
@@ -42,7 +42,7 @@ Page({
       name: 'resolveTyChannel',
       data: {
         templateId: this.data.template._id,
-        key: this.data.channel.key
+        key: this.data.key
       }
     }).then(res => {
       if (!res.result.errCode) {

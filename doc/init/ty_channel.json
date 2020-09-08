@@ -1,0 +1,18 @@
+{
+  "_id": "c_v2ex_AU",
+  "channelTemplate": {
+    "_id": "other",
+    "attrs": [],
+    "name": "其他",
+    "resourceType": "html"
+  },
+  "attrs": [{
+    "path": "#Bottom > div > div > strong",
+    "name": "在线人数"
+  }],
+  "resourceType": "html",
+  "name": "v2ex同时在线人数",
+  "resourceUrl": "https://v2ex.com",
+  "createBy": "enobj",
+  "createTime": 1599545025738
+}

@@ -1,8 +1,6 @@
 <view class="channel">
   <view class="channel-name">{{channel.channelTemplate.name}}</view>
-  <view class="channel-key">
-    {{channel.channelTemplate.keyName}}：{{channel.key}}
-  </view>
+  <view class="channel-name">{{channel.name}}</view>
 </view>
 
 <view>

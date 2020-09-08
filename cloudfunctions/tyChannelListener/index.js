@@ -28,15 +28,15 @@ exports.main = async (event, context) => {
     // 一个一个channel处理（此处不能使用forEach）
     for (let i = 0; i < channels.length; i++) {
       const channel = channels[i]
-      console.log(`正在处理：${channel.channelTemplate.name}-${channel.key}`)
+      console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
       try {
         // 请求资源
         const resource = await request(channel.resourceUrl)
         // 属性值解析器
-        valueResolver = valueResolvers[channel.channelTemplate.resourceType]
+        valueResolver = valueResolvers[channel.resourceType || channel.channelTemplate.resourceType]
 
         // 将channelData落库
-        const data = channel.channelTemplate.attrs.reduce((data, attr) => {
+        const data = (channel.attrs || channel.channelTemplate.attrs).reduce((data, attr) => {
           data[attr.name] = valueResolver(resource, attr.path)
           return data
         }, {})
