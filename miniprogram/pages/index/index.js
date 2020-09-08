@@ -18,26 +18,37 @@ Page({
   },
 
   loadUserChannels(){
+    // 关闭监听
+    this.closeWatchers()
+    // 加载频道
     return db.collection('ty_user_channel').where({}).get().then(res => {
       this.setData({
         userChannels: res.data
       })
-      // 马上进行一次检查
-      this.check()
+      // 监听消息
+      this.watchMessage()
     })
   },
 
-  check() {
-    this.data.userChannels.forEach((userChannel, index) => {
-      db.collection('ty_user_channel_data_message').where({
+  watchMessage() {
+    this.watchers = this.data.userChannels.map((userChannel, index) => {
+      return db.collection('ty_user_channel_data_message').where({
         'channelData.channel._id': userChannel.channel._id
-      }).orderBy('createTime', 'desc').limit(1).get().then(res => {
-        const channelDataMessage = res.data[0]
-        if (channelDataMessage && channelDataMessage._id != (userChannel.channelDataMessage || {})._id) {
-          // 更新模型
-          const updater = {}
-          updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
-          this.setData(updater)
+      }).orderBy('createTime', 'desc').limit(1).watch({
+        onChange: function(snapshot) {
+          const channelDataMessage = snapshot.docs[0]
+          if (channelDataMessage && channelDataMessage._id != (userChannel.channelDataMessage || {})._id) {
+            // 更新模型
+            const updater = {}
+            updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
+            this.setData(updater)
+          }
+        }.bind(this),
+        onError: function(err) {
+          wx.showToast({
+            title: `链接[${userChannel.channel.key}]断开，请下拉刷新重新建立链接`,
+          })
+          console.error('the watch closed because of error', err)
         }
       })
     })
@@ -67,6 +78,13 @@ Page({
     })
   },
 
+  closeWatchers(){
+    // 关闭监听
+    (this.watchers || []).forEach(watcher=>{
+      watcher.close()
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -78,21 +96,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.checkIntervalId = setInterval(this.check, 1000 * 10)
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    clearInterval(this.checkIntervalId)
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    clearInterval(this.checkIntervalId)
+    // 关闭监听
+    this.closeWatchers()
   },
 
   /**
