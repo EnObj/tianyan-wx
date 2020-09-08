@@ -8,6 +8,7 @@
       <view class="attr" wx:for="{{item.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">
         {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
     </view>
+    <view>通知：{{item.notify}}</view>
     <view wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" bindtap="readed" data-item-index="{{index}}">新</view>
   </view>
 </view>
