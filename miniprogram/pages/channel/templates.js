@@ -1,4 +1,5 @@
 const db = wx.cloud.database()
+const tyUtils = require('./../../utils/tyUtils.js')
 
 // miniprogram/pages/channel/templates.js
 Page({
@@ -14,9 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    db.collection('ty_channel_template').where({}).get().then(res=>{
+    tyUtils.getAll(db.collection('ty_channel_template').where({})).then(list=>{
       this.setData({
-        templates: res.data
+        templates: list
       })
     })
   },
