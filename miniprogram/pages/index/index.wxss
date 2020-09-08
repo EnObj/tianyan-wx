@@ -1,1 +1,12 @@
 /* miniprogram/pages/index/index.wxss */
+.explore{
+  height: 100px;
+}
+.unreaded{
+  padding: 2px 10px;
+  background: red;
+  border-radius: 10px;
+  margin-left: 5px;
+  color: white;
+  font-size: 12px;
+}

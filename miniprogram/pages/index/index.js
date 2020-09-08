@@ -1,5 +1,6 @@
 const db = wx.cloud.database()
 const tyUtils = require('./../../utils/tyUtils.js')
+const wxApiUtils = require("../../utils/wxApiUtils")
 
 // miniprogram/pages/index/index.js
 Page({
@@ -8,14 +9,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userChannels: []
+    userChannels: [],
+    showExplore: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadUserChannels()
+    this.loadUserChannels().then(()=>{
+      this.setData({
+        showExplore: true
+      })
+    })
   },
 
   loadUserChannels(){
@@ -83,6 +89,39 @@ Page({
     // 关闭监听
     (this.watchers || []).forEach(watcher=>{
       watcher.close()
+    })
+  },
+
+  switchNotify(event) {
+    const itemIndex = +event.currentTarget.dataset.itemIndex
+    const userChannel = this.data.userChannels[itemIndex]
+    const value = !userChannel.notify
+    // 更新模型
+    const updater = {}
+    updater[`userChannels[${itemIndex}].notify`] = value
+    this.setData(updater)
+    // 请求订阅
+    if (value) {
+      wxApiUtils.askNotify('-uC7MFgpZqLROkVO_QILbH23d85gg-ErEM0KavcKP6A').then(()=>{
+        this.updateNotify(true, itemIndex)
+      },()=>{
+        this.updateNotify(false, itemIndex)
+      })
+    } else {
+      this.updateNotify(false, itemIndex)
+    }
+  },
+
+  updateNotify(value, itemIndex) {
+    const userChannel = this.data.userChannels[itemIndex]
+    db.collection('ty_user_channel').doc(userChannel._id).update({
+      data: {
+        notify: value
+      }
+    }).then(res => {
+      const updater = {}
+      updater[`userChannels[${itemIndex}].notify`] = value
+      this.setData(updater)
     })
   },
 
