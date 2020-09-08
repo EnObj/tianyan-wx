@@ -7,17 +7,22 @@
   "name": "b站up主",
   "resourceType": "json",
   "keyName": "up主名字"
-}
+} 
 {
   "_id": "v2ex_post",
   "attrs": [{
-    "path": "#Main > div:nth-child(2) > div.header > small",
-    "name": "点击量"
-  }],
+      "path": "#Main > div:nth-child(2) > div.header > small",
+      "name": "点击量"
+    },
+    {
+      "path": "#Main > div:nth-child(4) > div:nth-child(1) > span",
+      "name": "评论数"
+    }
+  ],
   "name": "v2ex话题阅读量",
   "resourceType": "html",
   "keyName": "话题ID"
-}
+} 
 {
   "_id": "other",
   "attrs": [],
