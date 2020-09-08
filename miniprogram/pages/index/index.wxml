@@ -1,5 +1,5 @@
 <view class="user-channels">
-  <view class="user-channel" wx:for="{{userChannels}}" wx:key="_id">
+  <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id">
     <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}">
       {{item.channel.channelTemplate.name}}</navigator>
     <navigator url="/pages/channel/channel?channelId={{item.channel._id}}">

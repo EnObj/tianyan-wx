@@ -1,10 +1,18 @@
 <view class="template">
   <view class="template-name">{{template.name}}</view>
+</view>
+
+<view class="new-channel padding-box">
   <view class="key">
     <input placeholder="请输入{{template.keyName}}" bindinput="keyChange"/>
   </view>
+  <view>
+    <button bindtap="submit" type="primary">确认</button>
+  </view>
 </view>
 
-<view>
-  <button bindtap="submit">确认</button>
+<view class="channels">
+  <navigator class="channel padding-box" wx:for="{{channels}}" wx:key="_id" url="/pages/channel/channel?channelId={{item._id}}">
+    <view class="key">{{item.key}}</view>
+  </navigator>
 </view>

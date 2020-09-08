@@ -8,7 +8,8 @@ Page({
    */
   data: {
     template: null,
-    channel: {}
+    channel: {},
+    channels: []
   },
 
   /**
@@ -18,6 +19,14 @@ Page({
     db.collection('ty_channel_template').doc(options.templateId).get().then(res => {
       this.setData({
         template: res.data
+      })
+    })
+    // 加载模版下的流行频道
+    db.collection('ty_channel').where({
+      'channelTemplate._id': options.templateId
+    }).get().then(res=>{
+      this.setData({
+        channels: res.data
       })
     })
   },
