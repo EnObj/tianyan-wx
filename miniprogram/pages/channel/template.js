@@ -41,8 +41,9 @@ Page({
           url: '/pages/channel/channel?channelId=' + res.result.channel._id,
         })
       } else {
-        wx.showToast({
-          title: res.result.errMsg,
+        wx.showModal({
+          title: '操作失败',
+          content: res.result.errMsg,
         })
       }
     })
