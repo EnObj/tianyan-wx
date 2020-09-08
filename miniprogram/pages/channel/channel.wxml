@@ -1,6 +1,9 @@
 <view class="channel">
   <view class="channel-name">{{channel.channelTemplate.name}}</view>
   <view class="channel-name">{{channel.name}}</view>
+  <view class="channel-attrs">
+    <view class="channel-attr" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name">{{item.name}}</view>
+  </view>
 </view>
 
 <view>
