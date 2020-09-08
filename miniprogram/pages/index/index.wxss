@@ -10,3 +10,13 @@
   color: white;
   font-size: 10px;
 }
+.channel-name{
+  font-size: 18px;
+  font-weight: 500;
+}
+.notify{
+  padding: 5px;
+}
+.channel-template{
+  margin-top: 5px;
+}

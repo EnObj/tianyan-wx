@@ -61,8 +61,12 @@ Page({
     })
   },
 
-  readed(event) {
+  tapUnreaded(event){
     const itemIndex = +event.currentTarget.dataset.itemIndex
+    this.readed(itemIndex)
+  },
+
+  readed(itemIndex) {
     const userChannel = this.data.userChannels[itemIndex]
     // 更新模型
     const updater = {}
@@ -122,6 +126,18 @@ Page({
       const updater = {}
       updater[`userChannels[${itemIndex}].notify`] = value
       this.setData(updater)
+    })
+  },
+
+  openChannel(event){
+    const itemIndex = +event.currentTarget.dataset.itemIndex
+    const userChannel = this.data.userChannels[itemIndex]
+    // 如果未读，标记为已读
+    if(userChannel.channelDataMessage && !userChannel.channelDataMessage.readed){
+      this.readed(itemIndex)
+    }
+    wx.navigateTo({
+      url: '/pages/channel/channel?channelId=' + userChannel.channel._id,
     })
   },
 

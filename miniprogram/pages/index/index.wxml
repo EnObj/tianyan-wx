@@ -1,14 +1,14 @@
 <view class="user-channels">
-  <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id">
+  <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
     <view class="flex-between">
       <view class="flex-start">
-        <navigator url="/pages/channel/channel?channelId={{item.channel._id}}">
+        <view class="channel-name">
           {{item.channel.name}}
-        </navigator>
-        <view class="unreaded" wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" bindtap="readed"
+        </view>
+        <view class="unreaded" wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" catchtap="tapUnreaded"
           data-item-index="{{index}}">新</view>
       </view>
-      <view bindtap="switchNotify" data-item-index="{{index}}">
+      <view catchtap="switchNotify" data-item-index="{{index}}" class="notify">
         <mp-icon icon="bellring-on" size="20" color="#07c160" wx:if="{{item.notify}}" type="field"></mp-icon>
         <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
       </view>
@@ -18,7 +18,7 @@
         wx:key="name" wx:for-item="attr">
         {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
     </view>
-    <view class="flex-start">
+    <view class="flex-start channel-template">
       <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}"
         class="not-importent ref-content">@{{item.channel.channelTemplate.name}}</navigator>
     </view>
