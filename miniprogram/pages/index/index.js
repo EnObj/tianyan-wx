@@ -48,16 +48,16 @@ Page({
       }).orderBy('createTime', 'desc').limit(1).watch({
         onChange: function(snapshot) {
           const channelDataMessage = snapshot.docs[0]
+          // 更新模型
+          const updater = {}
+          updater[`userChannels[${index}].watcherOn`] = true
+          // 加入动画
+          // this.channelDataRefreshAnimate.translateX(100).step().translateX(0).step()
+          // updater[`userChannels[${index}].refreshAnimate`] = this.channelDataRefreshAnimate.export()
           if (channelDataMessage && channelDataMessage._id != (userChannel.channelDataMessage || {})._id) {
-            // 更新模型
-            const updater = {}
             updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
-            updater[`userChannels[${index}].watcherOn`] = true
-            // 加入动画
-            // this.channelDataRefreshAnimate.translateX(100).step().translateX(0).step()
-            // updater[`userChannels[${index}].refreshAnimate`] = this.channelDataRefreshAnimate.export()
-            this.setData(updater)
           }
+          this.setData(updater)
         }.bind(this),
         onError: function(err) {
           const updater = {}
