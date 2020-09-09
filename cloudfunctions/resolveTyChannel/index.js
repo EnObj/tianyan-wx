@@ -20,41 +20,50 @@ exports.main = async (event, context) => {
 
   const {
     templateId,
-    key
+    key, // 传key，则说明来自“具体项目”，否则来自“其他”
+    resource,
+    attrs
   } = event
 
-  // 如果已经存在，直接返回即可
-  let {
-    data: [channel]
-  } = await db.collection('ty_channel').where({
-    'channelTemplate._id': templateId,
-    key
-  }).get()
+  // 来自项目的先查库，有则直接返回
+  if (key) {
+    // 如果已经存在，直接返回即可
+    let {
+      data: [channel]
+    } = await db.collection('ty_channel').where({
+      'channelTemplate._id': templateId,
+      key
+    }).get()
 
-  if (channel) {
-    return {
-      channel
+    if (channel) {
+      return {
+        channel
+      }
     }
   }
 
-  // 否则需要根据规则动态获取
-  const {
-    data: template
-  } = await db.collection('ty_channel_template').doc(templateId).get()
-
   try {
-
-    const resourceUrlResult = await resourceUrlResolverMap[templateId](key)
-    // 无法获得资源地址
-    if (resourceUrlResult.errCode) {
-      return resourceUrlResult
+    let resourceUrlResult = resource
+    // 动态获取
+    if (key) {
+      resourceUrlResult = await resourceUrlResolverMap[templateId](key)
+      // 无法获得资源地址
+      if (resourceUrlResult.errCode) {
+        return resourceUrlResult
+      }
     }
+
+    // 模版
+    const {
+      data: template
+    } = await db.collection('ty_channel_template').doc(templateId).get()
 
     // 创建channel
     return db.collection('ty_channel').add({
       data: {
         "channelTemplate": template,
         key,
+        attrs,
         name: resourceUrlResult.channelName,
         resourceUrl: resourceUrlResult.resourceUrl,
         "createBy": OPENID,
