@@ -31,6 +31,8 @@ Page({
   loadUserChannels(){
     // 关闭监听
     this.closeWatchers()
+    // 取消全局标记
+    delete getApp().globalData.needReloadUserChannels
     // 加载频道
     return tyUtils.getAll(db.collection('ty_user_channel').where({})).then(list => {
       this.setData({
@@ -63,6 +65,8 @@ Page({
           const updater = {}
           // watcher失败，更新模型
           updater[`userChannels[${index}].watcherOn`] = false
+          // 标记需要重新加载
+          tyUtils.signUserChannelsChange()
           // 取消动画
           // updater[`userChannels[${index}].refreshAnimate`] = null
           this.setData(updater)
@@ -164,9 +168,7 @@ Page({
    */
   onShow: function () {
     if(getApp().globalData.needReloadUserChannels){
-      this.loadUserChannels().then(()=>{
-        delete getApp().globalData.needReloadUserChannels
-      })
+      this.loadUserChannels()
     }
   },
 
