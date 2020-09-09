@@ -147,6 +147,30 @@ Page({
     })
   },
 
+  loadWebDocument(event){
+    wx.showLoading({
+      title: '正在加载',
+    })
+    wx.cloud.callFunction({
+      name: 'loadWebDocument',
+      data: {
+        url: event.detail.value
+      }
+    }).then(res=>{
+      wx.hideLoading()
+      if(res.result.errCode){
+        wx.showModal({
+          title: '加载失败',
+          content: res.result.errMsg,
+        })
+      }else{
+        this.setData({
+          webDocument: res.result.document
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
