@@ -15,8 +15,13 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const lastCheckTime = Date.now()
 
+  const {
+    channelQueryWhere={}
+  } = event
+
   // 循环分批处理所有channel
   const query = db.collection('ty_channel').where({
+    ...channelQueryWhere,
     lastCheckTime: db.command.neq(lastCheckTime),
     disabled: db.command.exists(false)
   })
