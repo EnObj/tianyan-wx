@@ -11,11 +11,13 @@
 
 <view class="new-channel">
   <view class="new-channel-title not-importent">搜索</view>
-  <view class="key padding-box" wx:if="{{template.keyName}}">
-    <input placeholder="请输入{{template.keyName}}" bindinput="keyChange" bindconfirm="submit" confirm-type="search"/>
-  </view>
-  <view class="resource-url padding-box" wx:else>
-    <input placeholder="请输入资源地址" bindinput="keyChange" bindconfirm="submitResourceUrl" confirm-type="go"/>
+  <view class="padding-box" style="margin-top:0px;">
+    <view class="key" wx:if="{{template.keyName}}">
+      <input placeholder="请输入{{template.keyName}}" bindconfirm="submit" confirm-type="search"/>
+    </view>
+    <view class="resource-url" wx:else>
+      <input placeholder="请输入资源地址" bindconfirm="submitResourceUrl" confirm-type="go"/>
+    </view>
   </view>
   <!-- <view class="btn">
     <button bindtap="submit" type="primary">搜索</button>

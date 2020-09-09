@@ -8,7 +8,6 @@ Page({
    */
   data: {
     template: null,
-    key: '',
     channels: []
   },
 
@@ -31,12 +30,6 @@ Page({
       this.setData({
         channels: res.data
       })
-    })
-  },
-
-  keyChange(event) {
-    this.setData({
-      'key': event.detail.value
     })
   },
 
