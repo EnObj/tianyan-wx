@@ -1,0 +1,50 @@
+.document{
+  color: #353535;
+  flex:auto;
+  height: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+  word-break:break-all;
+}
+.title{
+  font-size: 18px;
+  font-weight: 450;
+}
+.list-item{
+  margin: 10px 0;
+}
+.text-content{
+  line-height: 160%;
+}
+.confirm-btm{
+  margin: 20px 0;
+}
+.checkbox-item{
+  margin-right: 5px;
+}
+.item-content{
+  flex:auto;
+  overflow: hidden;
+}
+.url-reg-inp{
+  height: 80px;
+  width: 100%;
+}
+.flex-box{
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.bottom-ctrl{
+  flex:none;
+}
+.err-tip{
+  margin-left: 10px;
+  color: #e64340;
+}
+.video{
+  width: 100%;
+}
+.about-reg{
+  margin: 0 10px;
+}

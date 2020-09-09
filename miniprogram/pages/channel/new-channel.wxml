@@ -1,0 +1,28 @@
+<wxs src="./../../wxs/urlUtils.wxs" module="urlUtils"/>
+<view class="flex-box">
+	<view class="document padding-box">
+		<scroll-view scroll-y style="height:100%;">
+			<checkbox-group bindchange="checkboxChange" style="padding: 0 10px">
+				<label wx:for="{{document.list}}" wx:key="insideId" data-selector="{{item.selector}}">
+					<view class="flex-start list-item">
+						<view class="checkbox-item">
+							<checkbox value="{{item.selector}}" checked="{{item.checked}}" />
+						</view>
+						<view class="item-content">
+							<view wx:if="{{item.type=='text'}}" class="text-content flex-start">
+								<view class="no-wrap">
+									<text>{{item.content}}</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</label>
+			</checkbox-group>
+		</scroll-view>
+	</view>
+	<view class="bottom-ctrl">
+		<view class="confirm-btm">
+			<button type="primary" disabled="{{haveBlank || badUrlReg}}" bindtap="submit">确认</button>
+		</view>
+	</view>
+</view>

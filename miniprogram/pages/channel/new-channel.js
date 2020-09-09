@@ -1,15 +1,11 @@
-const db = wx.cloud.database()
-
-// miniprogram/pages/channel/template.js
+// miniprogram/pages/channel/new-channel.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    template: null,
-    key: '',
-    channels: []
+    document: null,
   },
 
   /**
@@ -17,39 +13,62 @@ Page({
    */
   onLoad: function (options) {
     // options = {
-    //   templateId: 'other'
+    //   url: 'https://mp.weixin.qq.com/s/Wc2c9e12ZXUM7763-By6ag'
     // }
-    db.collection('ty_channel_template').doc(options.templateId).get().then(res => {
-      this.setData({
-        template: res.data
-      })
+    const url = decodeURIComponent(options.url)
+    this.loadDocumentByUrl(url)
+  },
+
+  loadDocumentByUrl(url){
+    wx.showLoading({
+      title: '正在加载',
     })
-    // 加载模版下的频道
-    db.collection('ty_channel').where({
-      'channelTemplate._id': options.templateId
-    }).get().then(res=>{
-      this.setData({
-        channels: res.data
-      })
+    wx.cloud.callFunction({
+      name: 'loadWebDocument',
+      data: {
+        url
+      }
+    }).then(res=>{
+      wx.hideLoading()
+      if(res.result.errCode){
+        wx.showModal({
+          title: '加载失败',
+          content: res.result.errMsg,
+        })
+      }else{
+        this.setData({
+          document: res.result.document
+        })
+      }
     })
   },
 
-  keyChange(event) {
-    this.setData({
-      'key': event.detail.value
-    })
+  checkboxChange(event){
+    this.selectedSelectors = event.detail.value
   },
 
   submit() {
+    wx.showLoading({
+      title: '正在处理',
+    })
     wx.cloud.callFunction({
       name: 'resolveTyChannel',
       data: {
-        templateId: this.data.template._id,
-        key: this.data.key
+        templateId: 'other',
+        resource: {
+          resourceUrl: this.data.document.url,
+          channelName: this.data.document.title
+        },
+        attrs: this.selectedSelectors.map((selector, index)=>{
+          return {
+            path: selector,
+            name: `暗中观察${index+1}`
+          }
+        })
       }
-    }).then(res => {
+    }).then(res=>{
       if (!res.result.errCode) {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '/pages/channel/channel?channelId=' + res.result.channel._id,
         })
       } else {
@@ -58,12 +77,6 @@ Page({
           content: res.result.errMsg,
         })
       }
-    })
-  },
-
-  submitResourceUrl(event){
-    wx.navigateTo({
-      url: '/pages/channel/new-channel?url=' + encodeURIComponent(event.detail.value),
     })
   },
 
