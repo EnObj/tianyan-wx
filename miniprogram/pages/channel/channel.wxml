@@ -9,7 +9,7 @@
     <navigator class="channel-template-name not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
   </view>
   <view class="follow-btn">
-    <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini">已订阅</button>
+    <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini" type="default">已订阅</button>
     <button bindtap="addUserChannel" type="primary" size="mini" wx:else>订阅</button>
   </view>
 </view>

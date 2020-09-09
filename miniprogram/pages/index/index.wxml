@@ -26,5 +26,5 @@
 </view>
 
 <view class="explore abs-center" wx:if="{{showExplore}}">
-  <navigator url="/pages/channel/templates" class="abs-center-content"><button type="primary">探索</button></navigator>
+  <navigator url="/pages/channel/templates" class="abs-center-content"><button type="default">探索</button></navigator>
 </view>
