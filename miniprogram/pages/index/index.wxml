@@ -13,7 +13,7 @@
         <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
       </view>
     </view>
-    <view class="attrs">
+    <view class="attrs" wx:if="{{item.channelDataMessage}}">
       <view class="attr not-importent" wx:for="{{item.channel.attrs || item.channel.channelTemplate.attrs}}"
         wx:key="name" wx:for-item="attr">
         {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
