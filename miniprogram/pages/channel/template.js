@@ -33,12 +33,12 @@ Page({
     })
   },
 
-  submit() {
+  submit(event) {
     wx.cloud.callFunction({
       name: 'resolveTyChannel',
       data: {
         templateId: this.data.template._id,
-        key: this.data.key
+        key: event.detail.value
       }
     }).then(res => {
       if (!res.result.errCode) {
