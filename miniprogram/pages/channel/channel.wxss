@@ -13,7 +13,9 @@
 }
 .channel-attr{
   flex: none;
-  border: 1px gray solid;
+  /* border: 1px gray solid; */
+  background: gray;
+  color: #fff;
   border-radius: 5px;
   padding: 2px 5px;
   margin-left: 5px;
