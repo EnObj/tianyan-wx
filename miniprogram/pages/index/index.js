@@ -62,12 +62,12 @@ Page({
         onError: function(err) {
           const updater = {}
           // watcher失败，更新模型
-          updater[`userChannels[${index}].watcherOn`] = true
+          updater[`userChannels[${index}].watcherOn`] = false
           // 取消动画
           // updater[`userChannels[${index}].refreshAnimate`] = null
           this.setData(updater)
           console.error('the watch closed because of error', err)
-        }
+        }.bind(this)
       })
     })
   },
