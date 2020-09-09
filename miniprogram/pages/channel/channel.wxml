@@ -3,7 +3,6 @@
   <view class="channel-info">
     <view class="channel-name">{{channel.name}}</view>
     <view class="channel-attrs flex-start not-importent">
-      <view>监测</view>
       <view class="channel-attr" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name">{{item.name}}
       </view>
     </view>
