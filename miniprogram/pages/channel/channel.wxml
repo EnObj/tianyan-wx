@@ -14,3 +14,10 @@
 <view wx:if="{{userChannel}}">
   <switch checked="{{userChannel.notify}}" bindchange="switchNotify"/>
 </view>
+
+<view class="channel-datas">
+  <view class="channel-data padding-box" wx:for="{{channelDatas}}" wx:key="_id">
+    <view class="channel-data-time">{{item.createTime}}</view>
+    <view class="channel-attr" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">{{attr.name}}：{{item.data[attr.name]}}</view>
+  </view>
+</view>

@@ -11,7 +11,8 @@ Page({
    */
   data: {
     channel: null,
-    userChannel: null
+    userChannel: null,
+    channelDatas: []
   },
 
   /**
@@ -30,6 +31,15 @@ Page({
     }).get().then(res => {
       this.setData({
         userChannel: res.data[0] || null
+      })
+    })
+    // 加载channelData
+    db.collection('ty_channel_data').where({
+      'channel._id': options.channelId,
+      dataChanged: true
+    }).orderBy('createTime', 'desc').get().then(res=>{
+      this.setData({
+        channelDatas: res.data
       })
     })
   },
