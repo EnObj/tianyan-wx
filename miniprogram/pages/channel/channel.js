@@ -19,6 +19,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // options = {
+    //   channelId: '7498b5fe5f548b2d011246381b43e773'
+    // }
     // 加载channel
     db.collection('ty_channel').doc(options.channelId).get().then(res => {
       this.setData({

@@ -1,1 +1,27 @@
 /* miniprogram/pages/channel/channel.wxss */
+.channel{
+  padding: 15px;
+  background: #fff;
+}
+.channel-name{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.channel-attrs{
+  margin-bottom: 5px;
+}
+.channel-attr{
+  flex: none;
+  border: 1px gray solid;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+
+.channel-datas{
+  margin-top: 20px;
+}
+.channel-datas-title{
+  margin: 5px 10px;
+}
