@@ -21,6 +21,10 @@ Page({
       this.setData({
         showExplore: true
       })
+      this.channelDataRefreshAnimate = wx.createAnimation({
+        timingFunction: 'ease-out',
+        duration: 300
+      })
     })
   },
 
@@ -49,13 +53,18 @@ Page({
             const updater = {}
             updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
             updater[`userChannels[${index}].watcherOn`] = true
+            // 加入动画
+            // this.channelDataRefreshAnimate.translateX(100).step().translateX(0).step()
+            // updater[`userChannels[${index}].refreshAnimate`] = this.channelDataRefreshAnimate.export()
             this.setData(updater)
           }
         }.bind(this),
         onError: function(err) {
-          // watcher失败，更新模型
           const updater = {}
-          updater[`userChannels[${index}].watcherOn`] = false
+          // watcher失败，更新模型
+          updater[`userChannels[${index}].watcherOn`] = true
+          // 取消动画
+          // updater[`userChannels[${index}].refreshAnimate`] = null
           this.setData(updater)
           console.error('the watch closed because of error', err)
         }

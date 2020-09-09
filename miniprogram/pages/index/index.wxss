@@ -20,3 +20,14 @@
 .channel-template{
   margin-top: 5px;
 }
+
+@keyframes bianselong
+{
+	0%  {background:white;}
+	50%  {background:#f6f6f6;}
+	100% {background:white;}
+}
+
+.channel-data-refreshing{
+  animation:bianselong 3s linear 0s infinite alternate;
+}

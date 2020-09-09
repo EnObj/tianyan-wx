@@ -1,5 +1,5 @@
 <view class="user-channels">
-  <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
+  <view class="user-channel padding-box {{item.watcherOn?'channel-data-refreshing':''}}" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
     <view class="flex-between">
       <view class="flex-start">
         <view class="channel-name">
