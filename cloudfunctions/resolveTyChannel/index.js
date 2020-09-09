@@ -59,7 +59,9 @@ exports.main = async (event, context) => {
     } = await db.collection('ty_channel_template').doc(templateId).get()
 
     // 创建channel
-    return db.collection('ty_channel').add({
+    const {
+      _id: channelId
+    } = await db.collection('ty_channel').add({
       data: {
         "channelTemplate": template,
         key,
@@ -69,13 +71,25 @@ exports.main = async (event, context) => {
         "createBy": OPENID,
         "createTime": Date.now()
       }
-    }).then(res => {
-      // 返回channel对象
-      return db.collection('ty_channel').doc(res._id).get().then(res => {
-        return {
-          channel: res.data
+    })
+    try {
+      // 立马进行一次采集
+      await cloud.callFunction({
+        name: 'tyChannelListener',
+        data: {
+          channelQueryWhere: {
+            _id: channelId
+          }
         }
       })
+    } catch (err) {
+      console.error(err)
+    }
+    // 返回channel对象
+    return db.collection('ty_channel').doc(channelId).get().then(res => {
+      return {
+        channel: res.data
+      }
     })
   } catch (err) {
     console.log(err)
