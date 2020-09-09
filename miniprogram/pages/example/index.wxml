@@ -72,6 +72,21 @@
   <view class="ref-content" wx:else bindtap="sendMessage">发送订阅消息</view>
 </view>
 
+<view class="padding-box flex-start">
+  <view>web文档</view>
+  <view style="flex:auto;margin-left:10px">
+    <input placeholder="请输入url" bindconfirm="loadWebDocument"/>
+  </view>
+</view>
+
+<view class="web-document padding-box" wx:if="{{webDocument}}">
+  <view class="web-document-title">{{webDocument.title}}</view>
+  <view class="web-document-url">{{webDocument.url}}</view>
+  <view class="web-document-item" wx:for="{{webDocument.list}}" wx:key="_id">
+    {{item.content}}
+  </view>
+</view>
+
 <view class="bg">
 	<image src="./../../image/background.jpg" class="bg-img" mode="aspectFill" style="opacity:1"></image>
 </view>
