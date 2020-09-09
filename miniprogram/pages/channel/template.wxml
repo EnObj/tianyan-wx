@@ -1,18 +1,20 @@
 <view class="template">
   <view class="template-name">{{template.name}}</view>
+  <view class="template-name-desc not-importent">{{template.desc}}</view>
 </view>
 
-<view class="new-channel padding-box" wx:if="{{template.keyName}}">
-  <view class="key">
-    <input placeholder="请输入{{template.keyName}}" bindinput="keyChange"/>
-  </view>
-  <view>
-    <button bindtap="submit" type="primary">确认</button>
-  </view>
-</view>
-
-<view class="channels">
-  <navigator class="channel padding-box" wx:for="{{channels}}" wx:key="_id" url="/pages/channel/channel?channelId={{item._id}}">
+<view class="channels flex-start">
+  <navigator class="channel" wx:for="{{channels}}" wx:key="_id" url="/pages/channel/channel?channelId={{item._id}}">
     <view class="name">{{item.name}}</view>
   </navigator>
+</view>
+
+<view class="new-channel" wx:if="{{template.keyName}}">
+  <view class="new-channel-title not-importent">搜索</view>
+  <view class="key padding-box">
+    <input placeholder="请输入{{template.keyName}}" bindinput="keyChange" bindconfirm="submit" confirm-type="search"/>
+  </view>
+  <!-- <view class="btn">
+    <button bindtap="submit" type="primary">搜索</button>
+  </view> -->
 </view>

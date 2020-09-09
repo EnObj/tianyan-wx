@@ -1,1 +1,39 @@
 /* miniprogram/pages/channel/template.wxss */
+.template{
+  padding: 15px 20px;
+}
+.template-desc{
+  color: #666;
+  font-size: 15px;
+}
+.template-name{
+  font-weight: 500;
+  font-size: 26px;
+  padding-bottom: 10px;
+}
+
+.channels{
+  flex-wrap: wrap;
+  margin-left: 20px;
+}
+.channel{
+  background: gray;
+  color: #fff;
+  padding: 2px 5px;
+  font-size: 14px;
+  margin: 10px 10px 0 0;
+  border-radius: 5px;
+}
+
+.new-channel-title{
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.new-channel{
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.btn{
+  margin-top: 15px;
+}

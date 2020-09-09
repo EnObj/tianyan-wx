@@ -16,6 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // options = {
+    //   templateId: 'bili_uper'
+    // }
     db.collection('ty_channel_template').doc(options.templateId).get().then(res => {
       this.setData({
         template: res.data
