@@ -48,13 +48,15 @@ Page({
             // 更新模型
             const updater = {}
             updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
+            updater[`userChannels[${index}].watcherOn`] = true
             this.setData(updater)
           }
         }.bind(this),
         onError: function(err) {
-          wx.showModal({
-            content: `链接[${userChannel.channel.key}]断开，请下拉刷新重新建立链接`,
-          })
+          // watcher失败，更新模型
+          const updater = {}
+          updater[`userChannels[${index}].watcherOn`] = false
+          this.setData(updater)
           console.error('the watch closed because of error', err)
         }
       })
