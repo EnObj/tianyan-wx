@@ -13,7 +13,7 @@ Page({
    */
   onLoad: function (options) {
     // options = {
-    //   url: 'https://mp.weixin.qq.com/s/Wc2c9e12ZXUM7763-By6ag'
+    //   url: encodeURIComponent('https://www.zxzj.me/detail/2968.html')
     // }
     const url = decodeURIComponent(options.url)
     this.loadDocumentByUrl(url)
@@ -36,6 +36,15 @@ Page({
           content: res.result.errMsg,
         })
       }else{
+        let depth = 0
+        res.result.document.list.forEach((item, index)=>{
+          item.depth = depth
+          if(item.type == 'div'){
+            depth++
+          }else if(item.type == '/div'){
+            depth--
+          }
+        })
         this.setData({
           document: res.result.document
         })

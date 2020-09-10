@@ -3,8 +3,8 @@
 	<view class="document padding-box">
 		<scroll-view scroll-y style="height:100%;">
 			<checkbox-group bindchange="checkboxChange" style="padding: 0 10px">
-				<label wx:for="{{document.list}}" wx:key="insideId" data-selector="{{item.selector}}">
-					<view class="flex-start list-item">
+				<label wx:for="{{document.list}}" wx:key="insideId" data-selector="{{item.selector}}" wx:if="{{item.type=='text' || item.type=='div'}}">
+					<view class="flex-start list-item" style="padding-left:{{item.depth*20}}px;">
 						<view class="checkbox-item">
 							<checkbox value="{{item.selector}}" checked="{{item.checked}}" />
 						</view>
@@ -16,14 +16,14 @@
 							</view>
 							<view wx:if="{{item.type=='div'}}" class="text-content flex-start">
 								<view class="no-wrap">
-									<text>开始</text>
+									<text>{{'>>'}}</text>
 								</view>
 							</view>
-							<view wx:if="{{item.type=='/div'}}" class="text-content flex-start">
+							<!-- <view wx:if="{{item.type=='/div'}}" class="text-content flex-start">
 								<view class="no-wrap">
 									<text>结束</text>
 								</view>
-							</view>
+							</view> -->
 						</view>
 					</view>
 				</label>
