@@ -1,0 +1,9 @@
+{
+  "name": "用户信息表",
+  "auth": "仅创建者可读写",
+  "example": {
+    "_id": "ty_user_profile_1",
+    "_openid": "user_1",
+    "createTime": 123456789
+  }
+}
