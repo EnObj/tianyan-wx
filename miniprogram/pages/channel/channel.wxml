@@ -6,7 +6,9 @@
       <view class="channel-attr" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name">{{item.name}}
       </view>
     </view>
-    <navigator class="channel-template-name not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
+    <view class="channel-template-name flex-start">
+      <navigator class="not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
+    </view>
   </view>
   <view class="follow-btn">
     <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini" type="default">已订阅</button>

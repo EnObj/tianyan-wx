@@ -1,8 +1,8 @@
 <view class="user-channels">
   <view class="user-channel padding-box {{item.watcherOn?'channel-data-refreshing':''}}" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
     <view class="flex-between">
-      <view class="flex-start">
-        <view class="channel-name">
+      <view class="flex-start" style="flex:auto;overflow:hidden;">
+        <view class="channel-name no-wrap">
           {{item.channel.name}}
         </view>
         <view class="unreaded" wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" catchtap="tapUnreaded"
@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="attrs" wx:if="{{item.channelDataMessage}}">
-      <view class="attr not-importent" wx:for="{{item.channel.attrs || item.channel.channelTemplate.attrs}}"
+      <view class="attr not-importent no-wrap" wx:for="{{item.channel.attrs || item.channel.channelTemplate.attrs}}"
         wx:key="name" wx:for-item="attr">
         {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
     </view>

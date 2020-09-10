@@ -27,3 +27,7 @@
 .channel-datas-title{
   margin: 5px 10px;
 }
+.follow-btn{
+  flex:none;
+  margin-left: 10px;
+}

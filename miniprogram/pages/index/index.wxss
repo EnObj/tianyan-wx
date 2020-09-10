@@ -16,6 +16,7 @@
 }
 .notify{
   padding: 5px;
+  margin-left: 10px;
 }
 .channel-template{
   margin-top: 5px;
