@@ -102,7 +102,7 @@ const workOnEle = function ($, ele, list, seletor, ref) {
         // 判断多层嵌套
         if (list[list.length - 1] == startDiv) {
           list.splice(list.length - 1, 1)
-        } else if (list[startDivIndex + 1].type == 'div' && list[startDivIndex + 1].selector == list[list.length - 1].selector) {
+        } else if (list[startDivIndex + 1] == list[list.length - 1] || list[startDivIndex + 1].type == 'div' && list[startDivIndex + 1].selector == list[list.length - 1].selector) {
           list.splice(startDivIndex, 1)
         } else {
           list.push({
