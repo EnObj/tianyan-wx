@@ -1,4 +1,5 @@
 const db = wx.cloud.database()
+const tyUtils = require('./../../utils/tyUtils.js')
 
 // miniprogram/pages/channel/template.js
 Page({
@@ -28,11 +29,12 @@ Page({
 
   loadTemplateChannles(templateId){
     // 加载模版下的频道
-    db.collection('ty_channel').where({
-      'channelTemplate._id': templateId
-    }).get().then(res=>{
+    tyUtils.getAll(db.collection('ty_channel').where({
+      'channelTemplate._id': templateId,
+      show: true
+    })).then(list=>{
       this.setData({
-        channels: res.data
+        channels: list
       })
     })
   },
