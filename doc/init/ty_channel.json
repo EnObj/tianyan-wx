@@ -12,6 +12,7 @@
   }],
   "resourceType": "html",
   "name": "v2ex同时在线人数",
+  "show": true,
   "resourceUrl": "https://v2ex.com",
   "createBy": "enobj",
   "createTime": 1599545025738
