@@ -36,6 +36,8 @@ exports.main = async (event, context) => {
 
     // TODO 缓存list中的图片
     const document = {
+      contentType: 'html',
+      list: [],
       ...docSnap,
       url: url,
       createTime: Date.now()
@@ -82,11 +84,13 @@ const workOnEle = function ($, ele, list, seletor, ref) {
     // console.log(current)
     ref = current.attr('href')
   }
+  let tagIndex = 0
   current.contents().each((index, child) => {
     // console.log(child)
     switch (child.nodeType) {
       case 1:
-        const childSeletor = seletor + '>' + child.tagName + ':nth-child(' + (index + 1) + ')'
+        tagIndex++
+        const childSeletor = seletor + '>' + child.tagName + ':nth-child(' + tagIndex + ')'
         workOnEle($, child, list, childSeletor, ref)
         break;
       case 3:
@@ -142,8 +146,7 @@ const request = function (url) {
             type: 'video',
             content: url
           }],
-          title: '',
-          disableViews: true
+          title: '视频'
         })
       }
       if(contentType.startsWith('image')){
@@ -152,12 +155,11 @@ const request = function (url) {
             type: 'img',
             content: url
           }],
-          title: '',
-          disableViews: true
+          title: '图片'
         })
       }
       // 非文本类型的直接拒绝处理
-      if(!contentType.startsWith('text')){
+      if(!contentType.startsWith('text') && !contentType.startsWith('application/json')){
         return reject('sorry, it is not support content-type')
       }
       res.setEncoding('binary')
@@ -172,14 +174,19 @@ const request = function (url) {
           const content = iconv.decode(Buffer.from(result, 'binary'), charset)
           if(contentType.startsWith('text/html')){
             resolveFromHtml(content, charset, result,  resolve, url)
+          }else if(contentType.startsWith('application/json')){
+            resolve({
+              json: JSON.parse(content),
+              contentType: 'json',
+              title: url.substr(url.lastIndexOf('/') + 1)
+            })
           }else{
             resolve({
               list: [{
                 type: 'text',
                 content: content
               }],
-              title: url.substr(url.lastIndexOf('/') + 1),
-              disableViews: true
+              title: url.substr(url.lastIndexOf('/') + 1)
             })
           }
         })
@@ -203,7 +210,7 @@ const resolveFromHtml = (html, charset, binResult, resolve, url)=>{
   }
 
   const list = []
-  workOnEle($, $('body').get(0), list, 'html')
+  workOnEle($, $('body').get(0), list, 'html>body')
 
   resolve({
     list: list,
