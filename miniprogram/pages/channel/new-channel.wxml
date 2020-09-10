@@ -14,6 +14,16 @@
 									<text>{{item.content}}</text>
 								</view>
 							</view>
+							<view wx:if="{{item.type=='div'}}" class="text-content flex-start">
+								<view class="no-wrap">
+									<text>开始</text>
+								</view>
+							</view>
+							<view wx:if="{{item.type=='/div'}}" class="text-content flex-start">
+								<view class="no-wrap">
+									<text>结束</text>
+								</view>
+							</view>
 						</view>
 					</view>
 				</label>
