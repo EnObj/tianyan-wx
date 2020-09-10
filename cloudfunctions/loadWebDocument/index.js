@@ -82,11 +82,13 @@ const workOnEle = function ($, ele, list, seletor, ref) {
     // console.log(current)
     ref = current.attr('href')
   }
+  let tagIndex = 0
   current.contents().each((index, child) => {
     // console.log(child)
     switch (child.nodeType) {
       case 1:
-        const childSeletor = seletor + '>' + child.tagName + ':nth-child(' + (index + 1) + ')'
+        tagIndex++
+        const childSeletor = seletor + '>' + child.tagName + ':nth-child(' + tagIndex + ')'
         workOnEle($, child, list, childSeletor, ref)
         break;
       case 3:
@@ -203,7 +205,7 @@ const resolveFromHtml = (html, charset, binResult, resolve, url)=>{
   }
 
   const list = []
-  workOnEle($, $('body').get(0), list, 'html')
+  workOnEle($, $('body').get(0), list, 'html>body')
 
   resolve({
     list: list,
