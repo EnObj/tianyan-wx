@@ -21,7 +21,7 @@
 </view> -->
 
 <view class="channel-datas" wx:if="{{channel}}">
-  <view class="channel-datas-title not-importent">变化记录</view>
+  <view class="channel-datas-title not-importent">最近变化</view>
   <view class="channel-data padding-box" wx:for="{{channelDatas}}" wx:key="_id" style="{{!index?'margin-top:0px':''}}">
     <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
     wx:for-item="attr">{{attr.name}}：{{item.data[attr.name]}}</view>
