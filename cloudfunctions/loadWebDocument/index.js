@@ -91,7 +91,26 @@ const workOnEle = function ($, ele, list, seletor, ref) {
       case 1:
         tagIndex++
         const childSeletor = seletor + '>' + child.tagName + ':nth-child(' + tagIndex + ')'
+        const startDiv = {
+          type: 'div',
+          selector: childSeletor,
+          insideId: 'e' + (list.length + 1)
+        }
+        const startDivIndex = list.length
+        list.push(startDiv)
         workOnEle($, child, list, childSeletor, ref)
+        // 判断多层嵌套
+        if (list[list.length - 1] == startDiv) {
+          list.splice(list.length - 1, 1)
+        } else if (list[startDivIndex + 1].type == 'div' && list[startDivIndex + 1].selector == list[list.length - 1].selector) {
+          list.splice(startDivIndex, 1)
+        } else {
+          list.push({
+            type: '/div',
+            selector: childSeletor,
+            insideId: 'e' + (list.length + 1)
+          })
+        }
         break;
       case 3:
         const text = child.data.trim()
