@@ -23,9 +23,13 @@ Page({
         template: res.data
       })
     })
+    this.loadTemplateChannles(options.templateId)
+  },
+
+  loadTemplateChannles(templateId){
     // 加载模版下的频道
     db.collection('ty_channel').where({
-      'channelTemplate._id': options.templateId
+      'channelTemplate._id': templateId
     }).get().then(res=>{
       this.setData({
         channels: res.data
