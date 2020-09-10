@@ -44,13 +44,14 @@ exports.main = async (event, context) => {
     }
 
     // resolve 相对地址
-    document.list.forEach(item=>{
+    document.list.forEach((item, index)=>{
       if(['img', 'video'].includes(item.type)){
         item.content = URL.resolve(url, item.content)
       }
       if(item.ref){
         item.ref = URL.resolve(url, item.ref)
       }
+      item.insideId = 'e' + index
     })
   
     return {
