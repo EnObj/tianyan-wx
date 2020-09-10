@@ -29,10 +29,13 @@ Page({
 
   loadTemplateChannles(templateId){
     // 加载模版下的频道
-    tyUtils.getAll(db.collection('ty_channel').where({
+    tyUtils.getAll(db.collection('ty_channel').where(db.command.or({
       'channelTemplate._id': templateId,
       show: true
-    })).then(list=>{
+    }, {
+      'channelTemplate._id': templateId,
+      createBy: getApp().globalData.userProfile._openid
+    }))).then(list => {
       this.setData({
         channels: list
       })
