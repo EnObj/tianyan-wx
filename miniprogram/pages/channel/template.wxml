@@ -4,8 +4,8 @@
 </view>
 
 <view class="channels flex-start">
-  <navigator class="channel" wx:for="{{channels}}" wx:key="_id" url="/pages/channel/channel?channelId={{item._id}}">
-    <view class="name">{{item.name}}</view>
+  <navigator class="channel no-wrap" wx:for="{{channels}}" wx:key="_id" url="/pages/channel/channel?channelId={{item._id}}">
+    {{item.name}}
   </navigator>
 </view>
 
