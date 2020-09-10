@@ -15,8 +15,26 @@ App({
       })
     }
 
+    // 查询用户profile，无则新增
+    wx.cloud.database().collection('ty_user_profile').where({}).get().then(res => {
+      if(res.data[0]){
+        this.globalData.userProfile = res.data[0]
+      }else{
+        wx.cloud.database().collection('ty_user_profile').add({
+          data:{
+            createTime: Date.now()
+          }
+        }).then(res=>{
+          wx.cloud.database().collection('ty_user_profile').doc(res._id).get().then(res=>{
+            this.globalData.userProfile = res.data
+          })
+        })
+      }
+    })
+
     this.globalData = {
-      needReloadUserChannels: false
+      needReloadUserChannels: false,
+      userProfile: {}
     }
   }
 })
