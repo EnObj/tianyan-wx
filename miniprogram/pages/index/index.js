@@ -49,6 +49,7 @@ Page({
         'channelData.channel._id': userChannel.channel._id
       }).orderBy('createTime', 'desc').limit(1).watch({
         onChange: function(snapshot) {
+          console.log(snapshot)
           const channelDataMessage = snapshot.docs[0]
           // 更新模型
           const updater = {}
@@ -56,7 +57,7 @@ Page({
           // 加入动画
           // this.channelDataRefreshAnimate.translateX(100).step().translateX(0).step()
           // updater[`userChannels[${index}].refreshAnimate`] = this.channelDataRefreshAnimate.export()
-          if (channelDataMessage && channelDataMessage._id != (userChannel.channelDataMessage || {})._id) {
+          if (channelDataMessage) {
             updater[`userChannels[${index}].channelDataMessage`] = channelDataMessage
           }
           this.setData(updater)
@@ -102,6 +103,8 @@ Page({
         notify: 'skip'
       }
     })
+    // 关闭当前渠道的通知
+    this.updateNotify(false, itemIndex)
   },
 
   closeWatchers(){

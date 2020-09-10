@@ -13,7 +13,8 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
   const where = {
-    notify: 'wait'
+    notify: 'wait',
+    readed: false
   }
   while ((await db.collection('ty_user_channel_data_message').where(where).count()).total) {
 
