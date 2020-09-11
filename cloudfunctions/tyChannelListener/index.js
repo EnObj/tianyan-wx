@@ -37,7 +37,7 @@ exports.main = async (event, context) => {
   // 一次只最多处理6个
   const {
     data: channels
-  } = await query.limit(6).get()
+  } = await query.orderBy('nextListenTime', 'asc').limit(6).get()
 
   // 一个一个channel处理（此处不能使用forEach）
   for (let i = 0; i < channels.length; i++) {
