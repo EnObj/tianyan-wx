@@ -31,3 +31,6 @@
   flex:none;
   margin-left: 10px;
 }
+.notify{
+  margin: 20px 10px;
+}

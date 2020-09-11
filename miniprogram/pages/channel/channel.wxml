@@ -16,9 +16,12 @@
   </view>
 </view>
 
-<!-- <view wx:if="{{userChannel}}">
-  <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
-</view> -->
+<view class="notify flex-between" wx:if="{{userChannel}}">
+  <view class="not-importent">通知</view>
+  <view>
+    <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
+  </view>
+</view>
 
 <view class="channel-datas" wx:if="{{channel}}">
   <view class="channel-datas-title not-importent">最近变化</view>
