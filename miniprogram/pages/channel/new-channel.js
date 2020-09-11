@@ -61,6 +61,13 @@ Page({
   },
 
   submit() {
+    if(!(this.selectedSelectors||[]).length){
+      wx.showToast({
+        title: '请至少选中一个内容',
+        icon: 'none'
+      })
+      return
+    }
     wx.showLoading({
       title: '正在处理',
     })
