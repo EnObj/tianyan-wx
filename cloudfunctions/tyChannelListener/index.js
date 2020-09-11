@@ -125,26 +125,45 @@ async function genMessage(channelDataId) {
     data: channelData
   } = await db.collection('ty_channel_data').doc(channelDataId).get()
 
-  // 获得关注列表（TODO 人数大于1000人）
-  const {
-    data: userChannels
-  } = await db.collection('ty_user_channel').where({
+  // 分页批处理
+  const query = db.collection('ty_user_channel').where({
     'channel._id': channelData.channel._id
-  }).get()
-
-  // 生成消息（此处进行比对数据是否有更新）
-  userChannels.forEach(async userChannel => {
-    await db.collection('ty_user_channel_data_message').add({
-      data: {
-        _openid: userChannel._openid,
-        channelData,
-        readed: false,
-        notify: userChannel.notify ? 'wait' : 'skip',
-        createTime: Date.now(),
-        updateTime: Date.now()
-      }
-    })
   })
+
+  const {total: amount} = await query.count()
+  console.log(`预计生成消息数量：${amount}`)
+
+  let counter = 0
+  while(true){
+
+    // 获得关注列表
+    const {
+      data: userChannels
+    } = await query.skip(counter).limit(100).get()
+
+    if(!userChannels.length){
+      break
+    }
+
+    console.log(`用户消息生成进度：${counter} + ${userChannels.length}`)
+    counter += userChannels.length
+  
+    // 生成消息（此处进行比对数据是否有更新）
+    userChannels.forEach(async userChannel => {
+      await db.collection('ty_user_channel_data_message').add({
+        data: {
+          _openid: userChannel._openid,
+          channelData,
+          readed: false,
+          notify: userChannel.notify ? 'wait' : 'skip',
+          createTime: Date.now(),
+          updateTime: Date.now()
+        }
+      })
+    })
+  }
+
+  console.log(`完成，生成消息数量：${counter}`)
 }
 
 function request(url, encoding, options = {}, pipe) {
