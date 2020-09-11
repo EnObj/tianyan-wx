@@ -18,10 +18,10 @@
         wx:key="name" wx:for-item="attr">
         {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
     </view>
-    <view class="flex-start channel-template">
+    <!-- <view class="flex-start channel-template">
       <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}"
         class="not-importent ref-content">@{{item.channel.channelTemplate.name}}</navigator>
-    </view>
+    </view> -->
   </view>
 </view>
 
