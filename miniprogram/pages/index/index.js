@@ -49,7 +49,7 @@ Page({
         'channelData.channel._id': userChannel.channel._id
       }).orderBy('createTime', 'desc').limit(1).watch({
         onChange: function(snapshot) {
-          console.log(snapshot)
+          // console.log(snapshot)
           const channelDataMessage = snapshot.docs[0]
           // 更新模型
           const updater = {}
