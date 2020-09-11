@@ -34,6 +34,10 @@ Page({
         wx.showModal({
           title: '加载失败',
           content: res.result.errMsg,
+          showCancel: false,
+          success(){
+            wx.navigateBack()
+          }
         })
       }else{
         let depth = 0

@@ -1,5 +1,5 @@
 <wxs src="./../../wxs/urlUtils.wxs" module="urlUtils"/>
-<view class="flex-box">
+<view class="flex-box" wx:if="{{document}}">
 	<view class="document padding-box">
 		<scroll-view scroll-y style="height:100%;">
 			<checkbox-group bindchange="checkboxChange" style="padding: 0 10px">
