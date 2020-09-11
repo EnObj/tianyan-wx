@@ -1,6 +1,7 @@
 {
   "name": "渠道模版表",
   "auth": "所有用户可读",
+  "desc": "resourceType/attrs/mintTimeSpace可被channel同名属性复写",
   "example": {
     "_id": "ty_channel_template_1",
     "name": "b站up主有更新",
@@ -9,6 +10,7 @@
       "name": "投稿视频数",
       "path": "data.page.count"
     }],
+    "minTimeSpace": 300000,
     "keyName": "up主名字"
   }
 }
