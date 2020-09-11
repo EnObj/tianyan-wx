@@ -19,6 +19,7 @@
     "show": true,
     "resourceUrl": "https://api.bilibili.com/x/space/arc/search?mid=208557615&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp",
     "createBy": "user_1",
+    "nextListenTime": 123456789,
     "createTime": 123456789
   }
 }
