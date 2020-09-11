@@ -48,6 +48,9 @@ Page({
   },
 
   addUserChannel() {
+    this.setData({
+      userChannel: {}
+    })
     db.collection('ty_user_channel').add({
       data: {
         "channel": this.data.channel,
@@ -59,6 +62,10 @@ Page({
         this.setData({
           userChannel: res.data
         })
+        wx.showToast({
+          title: '订阅成功',
+          icon: 'none'
+        })
       })
       // 标记用户关注渠道有变动
       tyUtils.signUserChannelsChange()
@@ -66,9 +73,14 @@ Page({
   },
 
   removeUserChannel() {
-    db.collection('ty_user_channel').doc(this.data.userChannel._id).remove().then(res => {
-      this.setData({
-        userChannel: null
+    const userChannelId = this.data.userChannel._id
+    this.setData({
+      userChannel: null
+    })
+    db.collection('ty_user_channel').doc(userChannelId).remove().then(res => {
+      wx.showToast({
+        title: '已取消订阅',
+        icon: 'none'
       })
       // 标记用户关注渠道有变动
       tyUtils.signUserChannelsChange()
