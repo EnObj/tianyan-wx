@@ -10,13 +10,18 @@
   color: white;
   font-size: 10px;
 }
+.user-channels{
+  flex-wrap: wrap;
+}
+.user-channel{
+  max-width: calc(100% - 40px);
+}
 .channel-name{
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 14px;
 }
 .notify{
   padding: 5px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .channel-template{
   margin-top: 5px;
@@ -31,4 +36,22 @@
 
 .channel-data-refreshing{
   animation:bianselong 3s linear 0s infinite alternate;
+}
+
+.dt{
+  padding: 5px;
+  border-radius: 50%;
+  background: white;
+  margin-right: 5px;
+}
+
+.dt-refreshing{
+  animation:dta 0.6s linear 0s infinite alternate;
+}
+
+@keyframes dta
+{
+	0%  {background:white;}
+	50%  {background:red;}
+	100% {background:white;}
 }
