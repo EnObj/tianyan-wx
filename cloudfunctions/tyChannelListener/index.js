@@ -18,82 +18,80 @@ exports.main = async (event, context) => {
     channelQueryWhere = {}
   } = event
 
-  const query = db.collection('ty_channel').where({
+  // 构造查询条件
+  const query = db.collection('ty_channel').where(db.command.and({
     ...channelQueryWhere,
-    disabled: db.command.exists(false)
-  })
-  // 打印一下大致数目
+    disabled: db.command.exists(false),
+  }, db.command.or({
+    nextListenTime: db.command.exists(false)
+  }, {
+    nextListenTime: db.command.lte(Date.now())
+  })))
+
+  // 打印一下活动数目
   const {
     total: channelsCount
   } = await query.count()
-  console.log(`开始处理，预计处理活动数目：${channelsCount}`)
+  console.log(`满足条件的活动数目：${channelsCount}`)
 
-  // 记录已经处理过的数目
-  let finishedChannelsCount = 0
-  // 循环分页处理所有channel
-  while (true) {
-    const {
-      data: channels
-    } = await query.skip(finishedChannelsCount).limit(10).get()
+  // 一次只最多处理6个
+  const {
+    data: channels
+  } = await query.limit(6).get()
 
-    if (!channels.length) {
-      console.log(`完成处理，共处理活动数目：${finishedChannelsCount}`)
-      break
+  // 一个一个channel处理（此处不能使用forEach）
+  for (let i = 0; i < channels.length; i++) {
+    const channel = channels[i]
+    const signUpdater = {
+      // 默认间隔15分钟
+      nextListenTime: Date.now() + (channel.minTimeSpace || channel.channelTemplate.minTimeSpace || 15 * 60 * 1000)
     }
+    console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
+    try {
+      // 请求资源
+      const resource = await request(channel.resourceUrl)
+      // 属性值解析器
+      valueResolver = valueResolvers[channel.resourceType || channel.channelTemplate.resourceType]
 
-    console.log(`正在处理：${finishedChannelsCount} + ${channels.length}`)
+      // 将channelData落库
+      const data = (channel.attrs || channel.channelTemplate.attrs).reduce((data, attr) => {
+        data[attr.name] = valueResolver(resource, attr.path)
+        return data
+      }, {})
+      // 获得库里上次的数据（用于比对是否有更新）
+      const {
+        data: [lastChannelData]
+      } = await db.collection('ty_channel_data').where({
+        'channel._id': channel._id
+      }).orderBy('createTime', 'desc').limit(1).get()
+      const dataChanged = !lastChannelData || !isObjectValueEqual(lastChannelData.data, data)
 
-    finishedChannelsCount += channels.length
-
-    // 一个一个channel处理（此处不能使用forEach）
-    for (let i = 0; i < channels.length; i++) {
-      const channel = channels[i]
-      console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
-      try {
-        // 请求资源
-        const resource = await request(channel.resourceUrl)
-        // 属性值解析器
-        valueResolver = valueResolvers[channel.resourceType || channel.channelTemplate.resourceType]
-
-        // 将channelData落库
-        const data = (channel.attrs || channel.channelTemplate.attrs).reduce((data, attr) => {
-          data[attr.name] = valueResolver(resource, attr.path)
-          return data
-        }, {})
-        // 获得库里上次的数据（用于比对是否有更新）
+      if (dataChanged) {
+        console.log('有更新', data)
+        // 生成channelData
         const {
-          data: [lastChannelData]
-        } = await db.collection('ty_channel_data').where({
-          'channel._id': channel._id
-        }).orderBy('createTime', 'desc').limit(1).get()
-        const dataChanged = !lastChannelData || !isObjectValueEqual(lastChannelData.data, data)
-
-        if (dataChanged) {
-          // 生成channelData
-          const {
-            _id: channelDataId
-          } = await db.collection('ty_channel_data').add({
-            data: {
-              "channel": channel,
-              data,
-              dataChanged,
-              "createTime": Date.now()
-            }
-          })
-
-          // 生成消息
-          await genMessage(channelDataId)
-        }
-
-      } catch (err) {
-        console.error(err)
-        // 除名
-        await db.collection('ty_channel').doc(channel._id).update({
+          _id: channelDataId
+        } = await db.collection('ty_channel_data').add({
           data: {
-            disabled: true
+            "channel": channel,
+            data,
+            dataChanged,
+            "createTime": Date.now()
           }
         })
+
+        // 生成消息
+        await genMessage(channelDataId)
       }
+    } catch (err) {
+      console.error(err)
+      // 除名
+      signUpdater.disabled = true
+    } finally {
+      // 更新下次触发时间
+      await db.collection('ty_channel').doc(channel._id).update({
+        data: signUpdater
+      })
     }
   }
 
@@ -127,7 +125,7 @@ async function genMessage(channelDataId) {
     data: channelData
   } = await db.collection('ty_channel_data').doc(channelDataId).get()
 
-  // 获得关注列表
+  // 获得关注列表（TODO 人数大于1000人）
   const {
     data: userChannels
   } = await db.collection('ty_user_channel').where({
