@@ -41,7 +41,7 @@
 .dt{
   padding: 5px;
   border-radius: 50%;
-  background: white;
+  background: gray;
   margin-right: 5px;
 }
 
