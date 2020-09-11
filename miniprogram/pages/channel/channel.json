@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-icon": "../../components/icon/icon"
+  },
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTitleText": "活动"
 }

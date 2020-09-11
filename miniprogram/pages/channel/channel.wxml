@@ -7,7 +7,8 @@
       </view>
     </view>
     <view class="channel-template-name flex-start">
-      <navigator class="not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
+      <navigator class="not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text
+          class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
     </view>
   </view>
   <view class="follow-btn">
@@ -17,17 +18,31 @@
 </view>
 
 <view class="notify flex-between" wx:if="{{userChannel}}">
-  <view class="not-importent">通知</view>
+  <view class="not-importent">
+    通知
+  </view>
   <view>
     <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
   </view>
 </view>
 
 <view class="channel-datas" wx:if="{{channel}}">
-  <view class="channel-datas-title not-importent">最近变化</view>
-  <view class="channel-data padding-box" wx:for="{{channelDatas}}" wx:key="_id" style="{{!index?'margin-top:0px':''}}">
-    <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
-    wx:for-item="attr">{{attr.name}}：{{item.data[attr.name]}}</view>
-    <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
+  <view class="channel-datas-title not-importent">
+    最近变化
+  </view>
+  <view wx:for="{{channelDatas}}" wx:key="_id" class="flex-start channel-data padding-box-no-bg ">
+    <view class="channle-data-index not-importent">
+      <mp-icon icon="time" size="20" color="gray" type="field"></mp-icon>
+    </view>
+    <view class="channel-data-item">
+      <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
+      <view class="channel-attr-items">
+        <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
+          wx:for-item="attr">
+          <text class="not-importent">{{attr.name}}：</text>
+          <text class="attr-value">{{item.data[attr.name]}}</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

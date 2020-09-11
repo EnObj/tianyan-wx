@@ -24,6 +24,9 @@
 .channel-datas{
   margin-top: 20px;
 }
+.channel-data{
+  align-items: flex-start;
+}
 .channel-datas-title{
   margin: 5px 10px;
 }
@@ -33,4 +36,18 @@
 }
 .notify{
   margin: 20px 10px;
+}
+.channel-data-item{
+  margin-left: 5px;
+}
+.channel-data-time{
+  margin-bottom: 5px;
+}
+.channel-attr-items{
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+.attr-value{
+  font-size: 14px;
 }
