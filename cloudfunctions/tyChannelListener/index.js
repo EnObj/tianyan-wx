@@ -53,20 +53,20 @@ exports.main = async (event, context) => {
         }).orderBy('createTime', 'desc').limit(1).get()
         const dataChanged = !lastChannelData || !isObjectValueEqual(lastChannelData.data, data)
 
-        // 生成channelData
-        const {
-          _id: channelDataId
-        } = await db.collection('ty_channel_data').add({
-          data: {
-            "channel": channel,
-            data,
-            dataChanged,
-            "createTime": lastCheckTime
-          }
-        })
+        if (dataChanged) {
+          // 生成channelData
+          const {
+            _id: channelDataId
+          } = await db.collection('ty_channel_data').add({
+            data: {
+              "channel": channel,
+              data,
+              dataChanged,
+              "createTime": lastCheckTime
+            }
+          })
 
         // 生成消息
-        if (dataChanged) {
           await genMessage(channelDataId)
         }
 
