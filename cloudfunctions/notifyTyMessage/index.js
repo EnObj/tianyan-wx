@@ -38,7 +38,7 @@ exports.main = async (event, context) => {
     // 具名渠道代表
     const channel = userMessage.channelDatas[0].channel
     const notifyUpdater = {
-      notifyResult: 'finished',
+      notify: 'finished',
       notifyTime: Date.now()
     }
     try {
