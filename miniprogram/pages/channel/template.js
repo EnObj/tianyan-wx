@@ -59,7 +59,7 @@ Page({
       name: 'resolveTyChannel',
       data: {
         templateId: this.data.template._id,
-        key: keyword
+        key
       }
     }).then(res => {
       wx.hideLoading()
