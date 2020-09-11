@@ -30,7 +30,7 @@
   <view class="channel-datas-title not-importent">
     最近变化
   </view>
-  <view wx:for="{{channelDatas}}" wx:key="_id" class="flex-start channel-data padding-box-no-bg ">
+  <view wx:for="{{channelDatas}}" wx:key="_id" class="flex-start channel-data">
     <view class="channle-data-index not-importent">
       <mp-icon icon="time" size="20" color="gray" type="field"></mp-icon>
     </view>

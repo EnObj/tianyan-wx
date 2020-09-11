@@ -26,6 +26,7 @@
 }
 .channel-data{
   align-items: flex-start;
+  margin: 10px 20px;
 }
 .channel-datas-title{
   margin: 5px 10px;
