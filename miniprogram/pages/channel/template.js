@@ -44,13 +44,25 @@ Page({
   },
 
   submit(event) {
+    const key = event.detail.value.trim()
+    if(!key){
+      wx.showToast({
+        title: this.data.template.keyName + '不能为空',
+        icon: 'none'
+      })
+      return
+    }
+    wx.showLoading({
+      title: '正在处理',
+    })
     wx.cloud.callFunction({
       name: 'resolveTyChannel',
       data: {
         templateId: this.data.template._id,
-        key: event.detail.value
+        key: keyword
       }
     }).then(res => {
+      wx.hideLoading()
       if (!res.result.errCode) {
         wx.navigateTo({
           url: '/pages/channel/channel?channelId=' + res.result.channel._id,
