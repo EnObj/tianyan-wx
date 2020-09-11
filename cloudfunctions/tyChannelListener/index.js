@@ -13,22 +13,37 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  const lastCheckTime = Date.now()
 
   const {
-    channelQueryWhere={}
+    channelQueryWhere = {}
   } = event
 
-  // 循环分批处理所有channel
   const query = db.collection('ty_channel').where({
     ...channelQueryWhere,
-    lastCheckTime: db.command.neq(lastCheckTime),
     disabled: db.command.exists(false)
   })
-  while ((await query.count()).total) {
+  // 打印一下大致数目
+  const {
+    total: channelsCount
+  } = await query.count()
+  console.log(`开始处理，预计处理活动数目：${channelsCount}`)
+
+  // 记录已经处理过的数目
+  let finishedChannelsCount = 0
+  // 循环分页处理所有channel
+  while (true) {
     const {
       data: channels
-    } = await query.get()
+    } = await query.skip(finishedChannelsCount).limit(10).get()
+
+    if (!channels.length) {
+      console.log(`完成处理，共处理活动数目：${finishedChannelsCount}`)
+      break
+    }
+
+    console.log(`正在处理：${finishedChannelsCount} + ${channels.length}`)
+
+    finishedChannelsCount += channels.length
 
     // 一个一个channel处理（此处不能使用forEach）
     for (let i = 0; i < channels.length; i++) {
@@ -62,11 +77,11 @@ exports.main = async (event, context) => {
               "channel": channel,
               data,
               dataChanged,
-              "createTime": lastCheckTime
+              "createTime": Date.now()
             }
           })
 
-        // 生成消息
+          // 生成消息
           await genMessage(channelDataId)
         }
 
@@ -78,18 +93,18 @@ exports.main = async (event, context) => {
             disabled: true
           }
         })
-      } finally {
-        // 更新检查标记
-        await db.collection('ty_channel').doc(channel._id).update({
-          data: {
-            lastCheckTime
-          }
-        })
       }
-
     }
-
   }
+
+  // 统计一下当前禁用数据
+  const {
+    total: disabledCount
+  } = await db.collection('ty_channel').where({
+    disabled: true
+  }).count()
+
+  console.log(`当前禁用活动数目：${disabledCount}`)
 }
 
 const valueResolvers = {
