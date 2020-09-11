@@ -9,7 +9,8 @@ Page({
    */
   data: {
     template: null,
-    channels: []
+    channels: [],
+    focus: false
   },
 
   /**
@@ -66,6 +67,12 @@ Page({
   submitResourceUrl(event){
     wx.navigateTo({
       url: '/pages/channel/new-channel?url=' + encodeURIComponent(event.detail.value),
+    })
+  },
+
+  tapInp(){
+    this.setData({
+      focus: true
     })
   },
 

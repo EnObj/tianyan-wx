@@ -10,13 +10,13 @@
 </view>
 
 <view class="new-channel">
-  <view class="new-channel-title not-importent">搜索</view>
-  <view class="padding-box" style="margin-top:0px;">
+  <view class="new-channel-title not-importent">查找</view>
+  <view class="padding-box" style="margin-top:0px;" bindtap="tapInp">
     <view class="key" wx:if="{{template.keyName}}">
-      <input placeholder="请输入{{template.keyName}}" bindconfirm="submit" confirm-type="search"/>
+      <input placeholder="请输入{{template.keyName}}" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus="{{focus}}"/>
     </view>
     <view class="resource-url" wx:else>
-      <input placeholder="请输入资源地址" bindconfirm="submitResourceUrl" confirm-type="go"/>
+      <input placeholder="请输入资源地址" bindconfirm="submitResourceUrl" confirm-type="go" cursor-spacing="20" focus="{{focus}}"/>
     </view>
   </view>
   <!-- <view class="btn">
