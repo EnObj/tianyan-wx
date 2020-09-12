@@ -8,6 +8,7 @@
       "注意": "此处是某个channel对象，结构见ty_channel.json表"
     },
     "notify": true,
+    "top": true, 
     "createTime": 123456789,
     "updateTime": 123456789
   }
