@@ -14,7 +14,8 @@
   flex-wrap: wrap;
 }
 .user-channel{
-  max-width: calc(100% - 40px);
+  max-width: calc(100% - 20px);
+  box-sizing: border-box;
 }
 .channel-name{
   font-size: 14px;
@@ -54,4 +55,8 @@
 	0%  {background:white;}
 	50%  {background:red;}
 	100% {background:white;}
+}
+
+.top{
+  border-left: 3px #07c160 solid;
 }

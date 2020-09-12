@@ -54,8 +54,8 @@ Page({
     db.collection('ty_user_channel').add({
       data: {
         "channel": this.data.channel,
-        "channelData": {},
-        "notify": false
+        "notify": false,
+        createTime: Date.now()
       }
     }).then(res => {
       db.collection('ty_user_channel').doc(res._id).get().then(res => {
@@ -109,6 +109,22 @@ Page({
     }).then(res => {
       this.setData({
         'userChannel.notify': value
+      })
+      // 标记用户关注渠道有变动
+      tyUtils.signUserChannelsChange()
+    })
+  },
+
+  switchTop(event){
+    const value = event.detail.value
+    db.collection('ty_user_channel').doc(this.data.userChannel._id).update({
+      data: {
+        top: value,
+        updateTime: Date.now()
+      }
+    }).then(res => {
+      this.setData({
+        'userChannel.top': value
       })
       // 标记用户关注渠道有变动
       tyUtils.signUserChannelsChange()
