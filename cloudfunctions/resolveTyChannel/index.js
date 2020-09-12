@@ -138,6 +138,28 @@ const resourceUrlResolverMap = {
       channelName: '话题' + key,
       resourceUrl: `https://v2ex.com/t/${key}`
     }
+  },
+  'weibo_user': async function(key){
+    const json = await request(`https://m.weibo.cn/api/container/getIndex?containerid=${encodeURIComponent('100103type%3D3%26q%3D'+key+'%26t%3D0')}&page_type=searchall`)
+
+    // console.log(json)
+    const jsonObj = JSON.parse(json)
+    const user = jsonObj.data.cards[1].card_group[0].user
+    if(user.screen_name == key){
+      const userId = user.id
+      const containerJson = await request(`https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}`)
+      const containerJsonObj = JSON.parse(containerJson)
+      const containerid = containerJsonObj.data.tabsInfo.tabs[1].containerid
+      return {
+        resourceUrl: `https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}&containerid=${containerid}`,
+        channelName: key
+      }
+    }
+
+    return{
+      errCode: 404,
+      errMsg: '未找到博主'
+    }
   }
 }
 

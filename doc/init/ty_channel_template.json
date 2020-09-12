@@ -26,6 +26,18 @@
   "keyName": "话题ID"
 } 
 {
+  "_id": "weibo_user",
+  "attrs": [{
+      "path": "data.cardlistInfo.total",
+      "name": "微博数"
+    }
+  ],
+  "name": "微博博主",
+  "desc": "用于监测微博博主发布微博，通过此项目关注你喜欢的博主，一旦此博主有新的微博发布，你将第一时间获得通知。",
+  "resourceType": "json",
+  "keyName": "博主名称"
+}
+{
   "_id": "other",
   "attrs": [],
   "name": "其他",
