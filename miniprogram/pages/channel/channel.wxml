@@ -32,22 +32,30 @@
 </mp-cell>
 </mp-cells>
 
-<mp-cells title="最近变化" wx:if="{{channel}}">
-  <mp-cell wx:for="{{channelDatas}}" wx:key="_id">
-    <view class="flex-start channel-data">
-      <view class="channle-data-index not-importent">
-        <mp-icon icon="time" size="20" color="gray"></mp-icon>
-      </view>
-      <view class="channel-data-item">
-        <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
-        <view class="channel-attr-items">
-          <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
-            wx:for-item="attr">
-            <text class="not-importent">{{attr.name}}：</text>
-            <text class="attr-value">{{item.data[attr.name]}}</text>
+<view wx:if="{{channel}}">
+  <view class="weui-cells__title">
+    <view class="flex-start">
+      <view class="dt {{channelDatasWatcherOn?'dt-refreshing':''}}"></view>
+      <view>最近变化记录</view>
+    </view>
+  </view>
+  <mp-cells wx:if="{{channelDatas.length}}">
+    <mp-cell wx:for="{{channelDatas}}" wx:key="_id">
+      <view class="flex-start channel-data">
+        <view class="channle-data-index not-importent">
+          <mp-icon icon="time" size="20" color="gray"></mp-icon>
+        </view>
+        <view class="channel-data-item">
+          <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
+          <view class="channel-attr-items">
+            <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
+              wx:for-item="attr">
+              <text class="not-importent">{{attr.name}}：</text>
+              <text class="attr-value">{{item.data[attr.name]}}</text>
+            </view>
           </view>
         </view>
       </view>
-    </view>
-  </mp-cell>
-</mp-cells>
+    </mp-cell>
+  </mp-cells>
+</view>
