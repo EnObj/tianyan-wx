@@ -134,6 +134,13 @@ const resourceUrlResolverMap = {
     }
   },
   'v2ex_post': async function (key) {
+    // 支持输入资源地址
+    if(/^https:\/\/v2ex.com\/t\/(\d+)/.test(key)){
+      return {
+        channelName: '话题' + RegExp.$1,
+        resourceUrl: key
+      }
+    }
     return {
       channelName: '话题' + key,
       resourceUrl: `https://v2ex.com/t/${key}`
