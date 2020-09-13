@@ -39,13 +39,31 @@ exports.main = async (event, context) => {
     data: channels
   } = await query.orderBy('nextListenTime', 'asc').limit(6).get()
 
-  // 一个一个channel处理（此处不能使用forEach）
-  for (let i = 0; i < channels.length; i++) {
+  // 先打标记，防止并发
+  const myChannels = []
+  for(let i = 0; i < channels.length; i++){
     const channel = channels[i]
-    const signUpdater = {
-      // 默认间隔15分钟
-      nextListenTime: Date.now() + (channel.minTimeSpace || channel.channelTemplate.minTimeSpace || 15 * 60 * 1000)
+    const {stats: {updated}} = await db.collection('ty_channel').where({
+      _id: channel._id,
+      nextListenTime: channel.nextListenTime
+    }).update({
+      data: {
+        // 默认沉默15分钟
+        nextListenTime: Date.now() + (channel.minTimeSpace || channel.channelTemplate.minTimeSpace || 15 * 60 * 1000)
+      }
+    })
+    if(updated){
+      myChannels.push(channel)
+    }else{
+      console.log(`发生并发操作，跳过此活动处理：${channel._id}`)
     }
+  }
+
+  console.log(`实际处理活动数量：${myChannels.length}`)
+
+  // 一个一个channel处理（此处不能使用forEach）
+  for (let i = 0; i < myChannels.length; i++) {
+    const channel = channels[i]
     console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
     try {
       // 请求资源
@@ -86,11 +104,10 @@ exports.main = async (event, context) => {
     } catch (err) {
       console.error(err)
       // 除名
-      signUpdater.disabled = true
-    } finally {
-      // 更新下次触发时间
       await db.collection('ty_channel').doc(channel._id).update({
-        data: signUpdater
+        data: {
+          disabled: true
+        }
       })
     }
   }
