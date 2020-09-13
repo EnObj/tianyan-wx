@@ -1,0 +1,39 @@
+/* miniprogram/pages/vip/index.wxss */
+.vip_status{
+  margin: 30px 50px;
+  padding: 30px;
+  font-size: 26px;
+  text-align: center;
+  background: none;
+  border-radius: 10px;
+  color: gray;
+  font-weight: 500;
+}
+
+.is-vip{
+  color: #07c160;
+}
+
+.start-vip{
+  margin-bottom: 20px;
+}
+
+.start-vip-prompt{
+  margin-left: 10px;
+}
+
+.vip-desc-title{
+  margin-bottom: 5px;
+}
+
+.good-point{
+  color: gray;
+}
+
+.have-title{
+  margin-top: 5px;
+}
+
+.start-vip-btn{
+  margin: 20px 0;
+}

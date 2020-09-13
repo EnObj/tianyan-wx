@@ -1,0 +1,38 @@
+<wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
+<view wx:if="{{userProfile}}">
+  <view class="vip_status">
+    <view wx:if="{{!userProfile.vip}}" class="not-vip">未激活</view>
+    <block wx:else>
+      <view wx:if="{{userProfile.vip && userProfile.vip.endTime > now}}" class="is-vip">已激活</view>
+      <view wx:else class="was-vip">已到期</view>
+      <view class="not-importent">{{timeUtils.showFulture(userProfile.vip.endTime)}}到期</view>
+    </block>
+  </view>
+  
+  <view class="start-vip">
+    <view class="not-importent flex-start start-vip-prompt">
+      <text>激活（</text>
+      <button open-type="contact" type="default" class="contact ref-content" size="mini"
+        style="margin:0;text-align:left;padding:0;background:none;font-size:14px;">联系客服</button>
+      <text>获取激活码）</text>
+    </view>
+    <view class="padding-box have-title">
+      <input placeholder="请输入激活码" value="{{vipFromCode}}" bindinput="vipFromCodeChange"/>
+    </view>
+    <view class="start-vip-btn">
+      <button type="primary" bindtap="startVip">确认</button>
+    </view>
+    <view class="call-contact">
+      <button open-type="contact" type="default">联系客服</button>
+    </view>
+  </view>
+  
+  <view class="vip-desc">
+    <view class="padding-box" style="background:none;">
+      <view class="vip-desc-title not-importent">激活后，您将获得以下权益：</view>
+      <view class="good-point">1. 免广告（示例）</view>
+      <view class="good-point">2. 自由下载资源（示例）</view>
+      <view class="good-point">3. 自由创建小组（示例）</view>
+    </view>
+  </view>
+</view>

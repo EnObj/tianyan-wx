@@ -1,0 +1,9 @@
+{
+  "desc":"存储vip激活码",
+  "auto":"所有用户不可读写",
+  "example": {
+    "_id": "vip_from_1",
+    "type": "all_time/year/half_year/month/week/day",
+    "beUsed": false
+  }
+}

@@ -15,6 +15,14 @@ App({
       })
     }
 
-    this.globalData = {}
+    // 查询是否是vip
+    wx.cloud.database().collection('qs_user_profile').where({}).get().then(res => {
+      var profile = res.data[0]
+      this.globalData.isVip = !!(profile && profile.vip && profile.vip.endTime > Date.now())
+    })
+
+    this.globalData = {
+      isVip: true
+    }
   }
 })
