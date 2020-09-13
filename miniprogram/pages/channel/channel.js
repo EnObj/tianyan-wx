@@ -12,7 +12,8 @@ Page({
   data: {
     channel: null,
     userChannel: null,
-    channelDatas: []
+    channelDatas: [],
+    channelDatasWatcherOn: true
   },
 
   /**
@@ -37,14 +38,39 @@ Page({
       })
     })
     // 加载channelData
-    db.collection('ty_channel_data').where({
-      'channel._id': options.channelId,
-      dataChanged: true
-    }).orderBy('createTime', 'desc').get().then(res=>{
-      this.setData({
-        channelDatas: res.data
-      })
+    this.watchChannelDatas(options.channelId)
+  },
+
+  watchChannelDatas(channelId){
+    this.setData({
+      channelDatas: [],
+      channelDatasWatcherOn: false
     })
+    this.closeWatcher()
+    this.watcher = db.collection('ty_channel_data').where({
+      'channel._id': channelId,
+      dataChanged: true
+    }).orderBy('createTime', 'desc').limit(20).watch({
+      onChange: function(snapshot) {
+        this.setData({
+          channelDatas: snapshot.docs,
+          channelDatasWatcherOn: true
+        })
+      }.bind(this),
+      onError: function(err){
+        console.log(err)
+        this.setData({
+          channelDatasWatcherOn: false
+        })
+      }.bind(this)
+    })
+  },
+
+  closeWatcher(){
+    // 关闭监听
+    if(this.watcher){
+      this.watcher.close()
+    }
   },
 
   addUserChannel() {
@@ -156,14 +182,16 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    // 关闭监听
+    this.closeWatcher()
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.watchChannelDatas(this.data.channel._id)
+    setTimeout(wx.stopPullDownRefresh, 400)
   },
 
   /**

@@ -12,6 +12,7 @@
 }
 .channel-attrs{
   margin-bottom: 5px;
+  flex-wrap: wrap;
 }
 .channel-attr{
   flex: none;

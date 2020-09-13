@@ -3,3 +3,21 @@
 page {
   background: #f6f6f6;
 }
+
+.dt{
+  padding: 5px;
+  border-radius: 50%;
+  background: gray;
+  margin-right: 5px;
+}
+
+.dt-refreshing{
+  animation:dta 0.6s linear 0s infinite alternate;
+}
+
+@keyframes dta
+{
+	0%  {background:white;}
+	50%  {background:red;}
+	100% {background:white;}
+}
