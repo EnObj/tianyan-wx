@@ -17,41 +17,37 @@
   </view>
 </view>
 
-<view class="notify flex-between" wx:if="{{userChannel}}">
-  <view class="not-importent">
-    通知
-  </view>
-  <view>
-    <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
-  </view>
-</view>
-
-<view class="notify flex-between" wx:if="{{userChannel}}">
-  <view class="not-importent">
-    置顶
-  </view>
-  <view>
-    <switch checked="{{userChannel.top}}" bindchange="switchTop" />
-  </view>
-</view>
-
-<view class="channel-datas" wx:if="{{channel}}">
-  <view class="channel-datas-title not-importent">
-    最近变化
-  </view>
-  <view wx:for="{{channelDatas}}" wx:key="_id" class="flex-start channel-data">
-    <view class="channle-data-index not-importent">
-      <mp-icon icon="time" size="20" color="gray" type="field"></mp-icon>
+<mp-cells title="设置" wx:if="{{userChannel}}">
+  <mp-cell>
+      <view>通知</view>
+      <view slot="footer">
+        <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
+      </view>
+  </mp-cell>
+  <mp-cell>
+    <view>置顶</view>
+    <view slot="footer">
+      <switch checked="{{userChannel.top}}" bindchange="switchTop" />
     </view>
-    <view class="channel-data-item">
-      <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
-      <view class="channel-attr-items">
-        <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
-          wx:for-item="attr">
-          <text class="not-importent">{{attr.name}}：</text>
-          <text class="attr-value">{{item.data[attr.name]}}</text>
+</mp-cell>
+</mp-cells>
+
+<mp-cells title="最近变化" wx:if="{{channel}}">
+  <mp-cell wx:for="{{channelDatas}}" wx:key="_id">
+    <view class="flex-start channel-data">
+      <view class="channle-data-index not-importent">
+        <mp-icon icon="time" size="20" color="gray"></mp-icon>
+      </view>
+      <view class="channel-data-item">
+        <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
+        <view class="channel-attr-items">
+          <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
+            wx:for-item="attr">
+            <text class="not-importent">{{attr.name}}：</text>
+            <text class="attr-value">{{item.data[attr.name]}}</text>
+          </view>
         </view>
       </view>
     </view>
-  </view>
-</view>
+  </mp-cell>
+</mp-cells>
