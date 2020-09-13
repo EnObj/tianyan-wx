@@ -46,11 +46,6 @@
 .channel-data-time{
   margin-bottom: 5px;
 }
-.channel-attr-items{
-  /* background: #fff;
-  padding: 10px;
-  border-radius: 5px; */
-}
 .attr-value{
   font-size: 14px;
 }
