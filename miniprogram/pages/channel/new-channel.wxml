@@ -12,7 +12,7 @@
 						<view class="item-content">
 							<view wx:if="{{item.type=='text'}}" class="text-content flex-start">
 								<view class="no-wrap">
-									<text>{{item.content}}</text>
+									{{item.content}}
 								</view>
 							</view>
 							<view wx:if="{{item.type=='div'}}" class="text-content flex-start">
