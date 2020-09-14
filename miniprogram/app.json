@@ -2,7 +2,8 @@
   "pages": [
     "pages/example/index",
     "pages/common/editor",
-    "pages/common/vip"
+    "pages/common/vip",
+    "pages/common/browser"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

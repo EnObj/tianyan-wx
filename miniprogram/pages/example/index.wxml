@@ -1,4 +1,5 @@
 <wxs src="./../../wxs/number.wxs" module="numberUtils"></wxs>
+<wxs src="./../../wxs/urlUtils.wxs" module="urlUtils"></wxs>
 <view class="padding-box">示例padding-box</view>
 
 <view class="flex-between padding-box">
@@ -90,6 +91,11 @@
   <view class="web-document-item" wx:for="{{webDocument.list}}" wx:key="_id">
     {{item.content}}
   </view>
+</view>
+
+<view class="padding-box flex-between">
+  <navigator url="/pages/common/browser?url={{urlUtils.encode('https://developers.weixin.qq.com/miniprogram/dev/extended/weui/cell.html')}}" class="ref-content">打开网址</navigator>
+  <view class="not-importent">http://www.baidu.com</view>
 </view>
 
 <view class="bg">
