@@ -14,18 +14,18 @@
         <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
       </view>
     </view>
-    <!-- <view class="attrs" wx:if="{{item.channelDataMessage}}">
-      <view class="attr not-importent no-wrap" wx:for="{{item.channel.attrs || item.channel.channelTemplate.attrs}}"
-        wx:key="name" wx:for-item="attr">
-        {{attr.name}}：{{item.channelDataMessage.channelData.data[attr.name]}}</view>
-    </view> -->
-    <!-- <view class="flex-start channel-template">
-      <navigator url="/pages/channel/template?templateId={{item.channel.channelTemplate._id}}"
-        class="not-importent ref-content">@{{item.channel.channelTemplate.name}}</navigator>
-    </view> -->
   </view>
-</view>
-
-<view class="explore abs-center" wx:if="{{showExplore}}">
-  <navigator url="/pages/channel/templates" class="abs-center-content"><button type="default">探索</button></navigator>
+  <navigator class="user-channel padding-box" wx:if="{{showExplore}}" url="/pages/channel/templates">
+    <view class="flex-between">
+      <view class="flex-start" style="flex:auto;overflow:hidden;">
+        <view class="dt {{item.watcherOn?'dt-refreshing':''}}" style="background:#07c160;"></view>
+        <view class="channel-name no-wrap">
+          探索
+        </view>
+      </view>
+      <view class="notify">
+        <mp-icon icon="add2" size="20" color="#ddd" type="field"></mp-icon>
+      </view>
+    </view>
+  </navigator>
 </view>
