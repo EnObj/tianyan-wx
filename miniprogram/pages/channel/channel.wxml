@@ -1,4 +1,5 @@
 <wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
+<wxs src="./../../wxs/urlUtils.wxs" module="urlUtils"/>
 <view class="channel flex-between" wx:if="{{channel}}">
   <view class="channel-info">
     <view class="channel-name">{{channel.name}}</view>
@@ -19,17 +20,22 @@
 
 <mp-cells title="设置" wx:if="{{userChannel}}">
   <mp-cell>
-      <view>通知</view>
-      <view slot="footer">
-        <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
-      </view>
+    <view>通知</view>
+    <view slot="footer">
+      <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
+    </view>
   </mp-cell>
   <mp-cell>
     <view>置顶</view>
     <view slot="footer">
       <switch checked="{{userChannel.top}}" bindchange="switchTop" />
     </view>
-</mp-cell>
+  </mp-cell>
+</mp-cells>
+
+<mp-cells title="其他" wx:if="{{channel.openResourceUrl}}">
+  <mp-cell link url="/pages/common/browser?url={{urlUtils.encode(channel.openResourceUrl)}}" hover value="活动地址">
+  </mp-cell>
 </mp-cells>
 
 <view wx:if="{{channel}}">
