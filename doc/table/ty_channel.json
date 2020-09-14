@@ -18,6 +18,7 @@
     "name": "用青春去旅行",
     "show": true,
     "resourceUrl": "https://api.bilibili.com/x/space/arc/search?mid=208557615&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp",
+    "openResourceUrl": "https://space.bilibili.com/208557615",
     "createBy": "user_1",
     "nextListenTime": 123456789,
     "createTime": 123456789
