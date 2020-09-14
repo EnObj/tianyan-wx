@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "wx-server-sdk": "~2.2.0"
+    "iconv-lite": "^0.6.2",
+    "wx-server-sdk": "~2.2.0",
+    "zlib": "^1.0.5"
   }
 }

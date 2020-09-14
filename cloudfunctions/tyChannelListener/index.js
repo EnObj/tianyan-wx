@@ -3,6 +3,9 @@ const cloud = require('wx-server-sdk')
 const http = require('http')
 const https = require('https')
 const cheerio = require('cheerio')
+const zlib = require('zlib')
+const URL = require('url')
+const iconv = require('iconv-lite')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -183,29 +186,87 @@ async function genMessage(channelDataId) {
   console.log(`完成，生成消息数量：${counter}`)
 }
 
-function request(url, encoding, options = {}, pipe) {
+const unGzip = function (gzipData) {
+  return new Promise((resolve, reject) => {
+    zlib.gunzip(Buffer.from(gzipData, 'binary'), (err, result) => {
+      resolve(result)
+    })
+  })
+}
+
+const request = function (url) {
   console.log(url)
+  const myURL = new URL.URL(url)
   const proc = url.startsWith('https') ? https : http
   return new Promise((resolve, reject) => {
-    proc.get(url, options, function (res) {
-      if (encoding) {
-        res.setEncoding(encoding)
+    const options = {
+      ...defaultOptions,
+      hostname: myURL.host,
+      path: myURL.pathname + myURL.search,
+      port: myURL.port,
+      method: 'GET'
+    }
+    console.log(options)
+    proc.get(options, (res) => {
+      console.log(res.headers)
+      if(res.statusCode == 302 || res.statusCode == 301){
+        return request(res.headers.location).then(docSnap=>{
+          resolve(docSnap)
+        }, (res)=>{
+          reject(res)
+        })
       }
+      const contentType = res.headers['content-type'].toLowerCase()
+      // 非文本类型的直接拒绝处理
+      if(!contentType.startsWith('text') && !contentType.startsWith('application/json')){
+        return reject('sorry, it is not support content-type')
+      }
+      res.setEncoding('binary')
       var str = "";
       res.on("data", function (chunk) {
         str += chunk; //监听数据响应，拼接数据片段
       })
+      const gzip = res.headers["content-encoding"] == 'gzip'
       res.on("end", function () {
-        if (pipe) {
-          pipe(str).then(result => {
-            resolve(result)
-          })
-        } else {
-          resolve(str)
-        }
+        (gzip ? unGzip(str) : Promise.resolve(str)).then(result=>{
+          const charset = contentType.split("charset=")[1] || 'utf-8'
+          const content = iconv.decode(Buffer.from(result, 'binary'), charset)
+          if(contentType.startsWith('text/html')){
+            resolveFromHtml(content, charset, result, resolve)
+          }else{
+            resolve(content)
+          }
+        })
       })
     })
   })
+}
+
+const resolveFromHtml = (html, charset, binResult, resolve)=>{
+  var $ = cheerio.load(html)
+  var metaCharset = ''
+  $('head>meta').each((index, item)=>{
+    if(($(item).attr('http-equiv') || '').toLowerCase() == 'content-type'){
+      metaCharset = ($(item).attr('content') || '').toLowerCase().split("charset=")[1]
+    }
+  })
+  if(metaCharset && metaCharset != charset){
+    console.log(`编码转换${charset} to ${metaCharset}`)
+    html = iconv.decode(Buffer.from(binResult, 'binary'), metaCharset)
+  }
+
+  resolve(html)
+}
+
+const defaultOptions = {
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'zh-cn',
+    'Connection': 'keep-alive',
+    'Accept-Encoding': 'gzip'
+  },
+  timeout: 10000, // 10s
 }
 
 // 对比两个对象的值是否完全相等 返回值 true/false
