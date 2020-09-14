@@ -36,5 +36,14 @@ App({
       needReloadUserChannels: false,
       userProfile: {}
     }
+  },
+  onUnhandledRejection(err){
+    console.error(err)
+    wx.hideLoading()
+    wx.showModal({
+      title: '系统异常',
+      content: '请稍后重试或提交反馈',
+      showCancel: false,
+    })
   }
 })
