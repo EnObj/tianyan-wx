@@ -206,9 +206,9 @@ const request = function (url) {
       port: myURL.port,
       method: 'GET'
     }
-    console.log(options)
+    // console.log(options)
     proc.get(options, (res) => {
-      console.log(res.headers)
+      // console.log(res.headers)
       if(res.statusCode == 302 || res.statusCode == 301){
         return request(res.headers.location).then(docSnap=>{
           resolve(docSnap)
