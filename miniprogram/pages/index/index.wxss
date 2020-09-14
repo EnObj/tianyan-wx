@@ -40,5 +40,5 @@
 }
 
 .top{
-  border-left: 3px #07c160 solid;
+  border-left: 3px #ddd solid;
 }
