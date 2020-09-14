@@ -68,6 +68,7 @@ exports.main = async (event, context) => {
         attrs,
         name: resourceUrlResult.channelName,
         resourceUrl: resourceUrlResult.resourceUrl,
+        openResourceUrl: resourceUrlResult.openResourceUrl,
         "createBy": OPENID,
         "createTime": Date.now()
       }
@@ -117,9 +118,11 @@ const resourceUrlResolverMap = {
       const uperNameEle = upers.first().find('div.info-wrap > div.headline > a.title')
       const uperName = uperNameEle.text().trim()
       if (uperName == key) {
+        const userId = uperNameEle.attr('href').match(/bilibili\.com\/(\d+)\?from/)[1]
         return {
-          resourceUrl: `https://api.bilibili.com/x/space/arc/search?mid=${uperNameEle.attr('href').match(/bilibili\.com\/(\d+)\?from/)[1]}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`,
-          channelName: key
+          resourceUrl: `https://api.bilibili.com/x/space/arc/search?mid=${userId}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`,
+          channelName: key,
+          openResourceUrl: `https://space.bilibili.com/${userId}`
         }
       }
       return {
@@ -138,12 +141,14 @@ const resourceUrlResolverMap = {
     if(/^https:\/\/v2ex.com\/t\/(\d+)/.test(key)){
       return {
         channelName: '话题' + RegExp.$1,
-        resourceUrl: key
+        resourceUrl: key,
+        openResourceUrl: key
       }
     }
     return {
       channelName: '话题' + key,
-      resourceUrl: `https://v2ex.com/t/${key}`
+      resourceUrl: `https://v2ex.com/t/${key}`,
+      openResourceUrl: `https://v2ex.com/t/${key}`
     }
   },
   'weibo_user': async function(key){
@@ -159,7 +164,8 @@ const resourceUrlResolverMap = {
       const containerid = containerJsonObj.data.tabsInfo.tabs[1].containerid
       return {
         resourceUrl: `https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}&containerid=${containerid}`,
-        channelName: key
+        channelName: key,
+        openResourceUrl: `https://m.weibo.cn/u/${userId}`
       }
     }
 

@@ -77,7 +77,8 @@ Page({
         templateId: 'other',
         resource: {
           resourceUrl: this.data.document.url,
-          channelName: this.data.document.title
+          channelName: this.data.document.title,
+          openResourceUrl: this.data.document.url
         },
         attrs: this.selectedSelectors.map((selector, index)=>{
           return {
