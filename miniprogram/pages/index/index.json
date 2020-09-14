@@ -2,6 +2,6 @@
   "usingComponents": {
     "mp-icon": "../../components/icon/icon"
   },
-  "navigationBarTitleText": "首页",
+  "navigationBarTitleText": "追更",
   "enablePullDownRefresh": true
 }

@@ -5,6 +5,6 @@
     "mp-cell": "../../components/cell/cell"
   },
   "navigationBarBackgroundColor": "#ffffff",
-  "navigationBarTitleText": "活动详情",
+  "navigationBarTitleText": "详情",
   "enablePullDownRefresh": true
 }
