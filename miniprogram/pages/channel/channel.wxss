@@ -6,7 +6,7 @@
   background: #fff;
 }
 .channel-name{
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -49,4 +49,8 @@
 }
 .attr-value{
   font-size: 14px;
+}
+
+.no-title-cells{
+  margin-top: 16px;
 }

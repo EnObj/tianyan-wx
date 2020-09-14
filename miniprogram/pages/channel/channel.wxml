@@ -18,34 +18,38 @@
   </view>
 </view>
 
-<mp-cells title="设置" wx:if="{{userChannel}}">
-  <mp-cell>
-    <view>通知</view>
-    <view slot="footer">
-      <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
-    </view>
-  </mp-cell>
-  <mp-cell>
-    <view>置顶</view>
-    <view slot="footer">
-      <switch checked="{{userChannel.top}}" bindchange="switchTop" />
-    </view>
-  </mp-cell>
-</mp-cells>
+<view wx:if="{{channel.openResourceUrl}}" class="no-title-cells">
+  <mp-cells>
+    <mp-cell link url="/pages/common/browser?url={{urlUtils.encode(channel.openResourceUrl)}}" hover value="网页地址">
+    </mp-cell>
+  </mp-cells>
+</view>
 
-<mp-cells title="其他" wx:if="{{channel.openResourceUrl}}">
-  <mp-cell link url="/pages/common/browser?url={{urlUtils.encode(channel.openResourceUrl)}}" hover value="活动地址">
-  </mp-cell>
-</mp-cells>
+<view class="no-title-cells" wx:if="{{userChannel}}">
+  <mp-cells>
+    <mp-cell>
+      <view>消息通知</view>
+      <view slot="footer">
+        <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
+      </view>
+    </mp-cell>
+    <mp-cell>
+      <view>置顶</view>
+      <view slot="footer">
+        <switch checked="{{userChannel.top}}" bindchange="switchTop" />
+      </view>
+    </mp-cell>
+  </mp-cells>
+</view>
 
-<view wx:if="{{channel}}">
+<view wx:if="{{channel}}" style="padding-bottom:20px;">
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{channelDatasWatcherOn?'dt-refreshing':''}}"></view>
       <view>最近变化记录</view>
     </view>
   </view>
-  <mp-cells wx:if="{{channelDatas.length}}">
+  <mp-cells wx:if="{{channelDatas.length}}" footer="{{channelDatas.length>15?'最多展示最近20条记录':''}}">
     <mp-cell wx:for="{{channelDatas}}" wx:key="_id">
       <view class="flex-start channel-data">
         <view class="channle-data-index not-importent">
