@@ -1,5 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+const notifyTemplateId = 'vjG2tvg4tUarVWeuez4EaUWnAgzXNSsvPCJK6LLK6iU'
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -54,7 +55,7 @@ exports.main = async (event, context) => {
             value: '有更新'
           }
         },
-        templateId: '-uC7MFgpZqLROkVO_QILbH23d85gg-ErEM0KavcKP6A'
+        templateId: notifyTemplateId
       })
       // 记录状态
     } catch (err) {

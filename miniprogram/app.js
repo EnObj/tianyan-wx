@@ -31,11 +31,6 @@ App({
         })
       }
     })
-
-    this.globalData = {
-      needReloadUserChannels: false,
-      userProfile: {}
-    }
   },
   onUnhandledRejection(err){
     console.error(err)
@@ -45,5 +40,10 @@ App({
       content: '请稍后重试或提交反馈',
       showCancel: false,
     })
+  },
+  globalData: {
+    needReloadUserChannels: false,
+    userProfile: {},
+    notifyTemplateId: 'vjG2tvg4tUarVWeuez4EaUWnAgzXNSsvPCJK6LLK6iU'
   }
 })

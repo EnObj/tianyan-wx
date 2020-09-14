@@ -124,7 +124,7 @@ Page({
     this.setData(updater)
     // 请求订阅
     if (value) {
-      wxApiUtils.askNotify('-uC7MFgpZqLROkVO_QILbH23d85gg-ErEM0KavcKP6A').then(()=>{
+      wxApiUtils.askNotify(getApp().globalData.notifyTemplateId).then(()=>{
         this.updateNotify(true, itemIndex)
       },()=>{
         this.updateNotify(false, itemIndex)
