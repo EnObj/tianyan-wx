@@ -8,7 +8,7 @@
 }
 .title{
   font-size: 18px;
-  font-weight: 450;
+  font-weight: 500;
 }
 .list-item{
   margin: 10px 0;
