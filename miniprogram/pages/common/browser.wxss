@@ -1,0 +1,13 @@
+/* miniprogram/pages/common/browser.wxss */
+
+.title{
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin: 80px 40px 10px;
+}
+.url{
+  margin: 0 20px 20px;
+  text-align: center;
+  word-break: break-all;
+}
