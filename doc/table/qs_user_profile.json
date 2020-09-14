@@ -1,0 +1,18 @@
+{
+  "name": "用户信息表",
+  "desc": "存储用户个人信息，vip信息，活跃时间等",
+  "auto":"仅创建者可读写",
+  "example": {
+    "_id": "user_1",
+    "_openid": "openid_1",
+    "vip": {
+      "startTime": 123934719340,
+      "endTime": 124523454354,
+      "vim_from": "vim_from_1",
+      "createTime": 12343425454,
+      "updateTime": 1234354545453,
+      "vipAge": 0
+    },
+    "createTime": 1234567889
+  }
+}

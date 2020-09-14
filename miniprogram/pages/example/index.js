@@ -10,7 +10,8 @@ Page({
   data: {
     content: '初始内容',
     qrcodeResult: '',
-    messageSubed: false
+    messageSubed: false,
+    isVip: true
   },
 
   callEditor() {
@@ -189,7 +190,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 检查vip
+    this.setData({
+      isVip: getApp().globalData.isVip
+    })
   },
 
   /**

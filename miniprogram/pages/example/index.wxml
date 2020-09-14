@@ -79,6 +79,11 @@
   </view>
 </view>
 
+<view class="padding-box flex-between">
+  <view>激活状态：{{isVip}}</view>
+  <navigator url="/pages/common/vip" class="ref-content">去激活</navigator>
+</view>
+
 <view class="web-document padding-box" wx:if="{{webDocument}}">
   <view class="web-document-title">{{webDocument.title}}</view>
   <view class="web-document-url">{{webDocument.url}}</view>

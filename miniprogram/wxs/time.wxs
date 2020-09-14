@@ -45,5 +45,15 @@ module.exports = {
       sec = '0'+sec
     }
     return '' + min + ':' + sec
+  },
+  showFulture: function(fulture){
+    var passDate = getDate(fulture);
+    var year = passDate.getFullYear();
+    var month = passDate.getMonth() + 1;
+    var day = passDate.getDate();
+    var hour = passDate.getHours()
+    var minute = passDate.getMinutes()
+
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
   }
 }
