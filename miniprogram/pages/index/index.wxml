@@ -18,13 +18,13 @@
   <navigator class="user-channel padding-box" wx:if="{{showExplore}}" url="/pages/channel/templates">
     <view class="flex-between">
       <view class="flex-start" style="flex:auto;overflow:hidden;">
-        <view class="dt {{item.watcherOn?'dt-refreshing':''}}" style="background:#07c160;"></view>
+        <view class="dt" style="background:#07c160;"></view>
         <view class="channel-name no-wrap">
           探索
         </view>
       </view>
       <view class="notify">
-        <mp-icon icon="add2" size="20" color="#ddd" type="field"></mp-icon>
+        <mp-icon icon="discover" size="20" color="gray"></mp-icon>
       </view>
     </view>
   </navigator>
