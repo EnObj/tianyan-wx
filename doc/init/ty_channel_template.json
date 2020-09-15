@@ -35,6 +35,18 @@
   "keyName": "博主名称"
 }
 {
+  "_id": "zhihu_question",
+  "attrs": [{
+      "path": "#QuestionAnswers-answers > div > div > div > div.List-header > h4 > span",
+      "name": "回答数"
+    }
+  ],
+  "name": "知乎问题",
+  "desc": "用于监测知乎问题有新的回答，通过此项目关注你喜欢的知乎问题，一旦此问题有新的回答，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "问题ID或问题链接"
+}
+{
   "_id": "other",
   "attrs": [],
   "name": "其他",
