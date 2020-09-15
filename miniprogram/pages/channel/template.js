@@ -35,7 +35,8 @@ Page({
       show: true
     }, {
       'channelTemplate._id': templateId,
-      createBy: getApp().globalData.userProfile._openid
+      createBy: getApp().globalData.userProfile._openid,
+      'creatorShow': true
     }))).then(list => {
       this.setData({
         channels: list

@@ -18,9 +18,15 @@
   </view>
 </view>
 
-<view wx:if="{{channel.openResourceUrl}}" class="no-title-cells">
+<view wx:if="{{channel.openResourceUrl || showCreatorShowSwitch}}" class="no-title-cells">
   <mp-cells>
-    <mp-cell link url="/pages/common/browser?url={{urlUtils.encode(channel.openResourceUrl)}}" hover value="网页地址">
+    <mp-cell link url="/pages/common/browser?url={{urlUtils.encode(channel.openResourceUrl)}}" hover value="网页地址" wx:if="{{channel.openResourceUrl}}">
+    </mp-cell>
+    <mp-cell wx:if="{{showCreatorShowSwitch}}">
+      <view>在项目页显示</view>
+      <view slot="footer">
+        <switch checked="{{channel.creatorShow}}" bindchange="switchCreatorShow" />
+      </view>
     </mp-cell>
   </mp-cells>
 </view>
@@ -41,6 +47,17 @@
     </mp-cell>
   </mp-cells>
 </view>
+
+<!-- <view class="no-title-cells" wx:if="{{showCreatorShowSwitch}}">
+  <mp-cells>
+    <mp-cell>
+      <view>在项目页显示</view>
+      <view slot="footer">
+        <switch checked="{{channel.creatorShow}}" bindchange="switchCreatorShow" />
+      </view>
+    </mp-cell>
+  </mp-cells>
+</view> -->
 
 <view wx:if="{{channel}}" style="padding-bottom:20px;">
   <view class="weui-cells__title">

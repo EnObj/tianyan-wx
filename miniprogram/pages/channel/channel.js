@@ -13,7 +13,7 @@ Page({
     channel: null,
     userChannel: null,
     channelDatas: [],
-    channelDatasWatcherOn: true
+    showCreatorShowSwitch: false
   },
 
   /**
@@ -25,8 +25,10 @@ Page({
     // }
     // 加载channel
     db.collection('ty_channel').doc(options.channelId).get().then(res => {
+      const channel = res.data
       this.setData({
-        channel: res.data
+        channel: channel,
+        showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy
       })
     })
     // 加载用户channel
@@ -154,6 +156,39 @@ Page({
       })
       // 标记用户关注渠道有变动
       tyUtils.signUserChannelsChange()
+    })
+  },
+
+  switchCreatorShow(event){
+    const value = event.detail.value
+    wx.cloud.callFunction({
+      name: 'updateTyChannelByCreator',
+      data: {
+        channelId: this.data.channel._id,
+        updateData: {
+          creatorShow: value
+        }
+      }
+    }).then(res => {
+      if(res.result.errCode){
+        throw res.result
+      }else{
+        this.setData({
+          'channel.creatorShow': value
+        })
+      }
+    }).catch(err=>{
+      console.error(err)
+      wx.showModal({
+        title: '切换失败',
+        content: '系统异常，请稍后重试或提交反馈',
+        showCancel: false,
+        success: function(){
+          this.setData({
+            'channel.creatorShow': !value
+          })
+        }.bind(this)
+      })
     })
   },
 
