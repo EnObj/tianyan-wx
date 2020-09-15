@@ -76,7 +76,11 @@ exports.main = async (event, context) => {
 
       // 将channelData落库
       const data = (channel.attrs || channel.channelTemplate.attrs).reduce((data, attr) => {
-        data[attr.name] = valueResolver(resource, attr.path)
+         let value = valueResolver(resource, attr.path)
+         if(attr.replaceRegExp){
+          value = value.replace(new RegExp(attr.replaceRegExp), '')
+         }
+         data[attr.name] = value
         return data
       }, {})
       // 获得库里上次的数据（用于比对是否有更新）
