@@ -116,9 +116,6 @@ Page({
         title: '操作失败',
         content: '系统异常，请稍后重试或提交反馈',
         showCancel: false,
-        success(){
-          wx.navigateBack()
-        }
       })
     })
   },

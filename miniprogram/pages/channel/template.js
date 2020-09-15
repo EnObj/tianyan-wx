@@ -73,6 +73,14 @@ Page({
           content: res.result.errMsg,
         })
       }
+    }).catch(err=>{
+      console.error(err)
+      wx.hideLoading()
+      wx.showModal({
+        title: '处理失败',
+        content: '系统异常，请稍后重试或提交反馈',
+        showCancel: false,
+      })
     })
   },
 
