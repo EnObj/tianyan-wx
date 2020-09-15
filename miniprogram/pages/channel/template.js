@@ -77,8 +77,16 @@ Page({
   },
 
   submitResourceUrl(event){
+    const url = event.detail.value.trim()
+    if(!url){
+      wx.showToast({
+        title: '资源地址不能为空',
+        icon: 'none'
+      })
+      return
+    }
     wx.navigateTo({
-      url: '/pages/channel/new-channel?url=' + encodeURIComponent(event.detail.value),
+      url: '/pages/channel/new-channel?url=' + encodeURIComponent(url),
     })
   },
 
