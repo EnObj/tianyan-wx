@@ -67,6 +67,7 @@ exports.main = async (event, context) => {
         resourceUrl: resourceUrlResult.resourceUrl,
         openResourceUrl: resourceUrlResult.openResourceUrl,
         "createBy": OPENID,
+        creatorShow: true,
         "createTime": Date.now()
       }
     })
