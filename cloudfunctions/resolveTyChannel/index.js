@@ -137,19 +137,21 @@ const resourceUrlResolverMap = {
     }
   },
   'v2ex_post': async function (key) {
-    // 支持输入资源地址
-    if(/^https:\/\/v2ex.com\/t\/(\d+)/.test(key)){
-      return {
-        channelName: '话题' + RegExp.$1,
-        resourceUrl: key,
-        openResourceUrl: key
-      }
-    }
-    return {
-      channelName: '话题' + key,
+    let result = {
       resourceUrl: `https://v2ex.com/t/${key}`,
       openResourceUrl: `https://v2ex.com/t/${key}`
     }
+    // 支持输入资源地址
+    if(/^https:\/\/v2ex.com\/t\/(\d+)/.test(key)){
+      result.resourceUrl = result.openResourceUrl = key
+    }
+
+    // 得到标题
+    const html = await request(result.resourceUrl)
+    const $ = cheerio.load(html)
+    result.channelName = $('title').text().trim() || '未知'
+
+    return result
   },
   'weibo_user': async function(key){
     const json = await request(`https://m.weibo.cn/api/container/getIndex?containerid=${encodeURIComponent('100103type%3D3%26q%3D'+key+'%26t%3D0')}&page_type=searchall`)
