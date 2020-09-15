@@ -12,12 +12,9 @@
 {
   "_id": "v2ex_post",
   "attrs": [{
-      "path": "#Main > div:nth-child(2) > div.header > small",
-      "name": "点击量"
-    },
-    {
       "path": "#Main > div:nth-child(4) > div:nth-child(1) > span",
-      "name": "评论数"
+      "name": "评论数",
+      "replaceRegExp": "\\s条回复.*$"
     }
   ],
   "name": "v2ex话题",
