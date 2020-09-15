@@ -9,7 +9,7 @@
     "attrs": [{
       "name": "投稿视频数",
       "path": "data.page.count",
-      "regExp": "\\d{1,3}"
+      "replaceRegExp": "\\d{1,3}"
     }],
     "minTimeSpace": 300000,
     "keyName": "up主名字"
