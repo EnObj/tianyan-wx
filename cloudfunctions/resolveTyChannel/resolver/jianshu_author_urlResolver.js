@@ -7,7 +7,7 @@ module.exports = {
     if (/^https:\/\/www\.jianshu\.com\/u\/([a-f0-9]+)/.test(key)) {
       const authorHomePage = `https://www.jianshu.com/u/${RegExp.$1}`
       const html = await resolverUtils.request(authorHomePage)
-      console.log(html)
+      // console.log(html)
       const $ = cheerio.load(html)
       const authorName = $('body > div.container.person > div > div.col-xs-16.main > div.main-top > div.title > a').text().trim()
       return {
