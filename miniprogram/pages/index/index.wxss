@@ -12,10 +12,12 @@
 }
 .user-channels{
   flex-wrap: wrap;
+  padding: 15px;
 }
 .user-channel{
-  max-width: calc(100% - 20px);
+  max-width: 100%;
   box-sizing: border-box;
+  margin: 0px 15px 15px 0px;
 }
 .channel-name{
   font-size: 14px;
