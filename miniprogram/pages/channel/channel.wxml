@@ -45,7 +45,7 @@
 <view wx:if="{{channel}}" style="padding-bottom:20px;">
   <view class="weui-cells__title">
     <view class="flex-start">
-      <view class="dt {{channelDatasWatcherOn?'dt-refreshing':''}}"></view>
+      <view class="dt {{channelDatasWatcherOn && !channel.disabled ?'dt-refreshing':''}}"></view>
       <view>最近变化记录</view>
     </view>
   </view>
