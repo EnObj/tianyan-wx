@@ -53,6 +53,17 @@ Page({
           document: res.result.document
         })
       }
+    }).catch(err=>{
+      console.error(err)
+      wx.hideLoading()
+      wx.showModal({
+        title: '加载失败',
+        content: '系统异常，请稍后重试或提交反馈',
+        showCancel: false,
+        success(){
+          wx.navigateBack()
+        }
+      })
     })
   },
 
