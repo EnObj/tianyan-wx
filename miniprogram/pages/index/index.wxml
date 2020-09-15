@@ -1,4 +1,17 @@
 <view class="user-channels flex-start">
+  <navigator class="user-channel padding-box top" wx:if="{{showExplore}}" url="/pages/channel/templates">
+    <view class="flex-between">
+      <view class="flex-start" style="flex:auto;overflow:hidden;">
+        <view class="dt" style="background:#07c160;"></view>
+        <view class="channel-name no-wrap">
+          探索
+        </view>
+      </view>
+      <view class="notify">
+        <mp-icon icon="discover" size="20" color="gray"></mp-icon>
+      </view>
+    </view>
+  </navigator>
   <view class="user-channel padding-box {{item.top?'top':''}}" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
     <view class="flex-between">
       <view class="flex-start" style="flex:auto;overflow:hidden;">
@@ -15,17 +28,4 @@
       </view>
     </view>
   </view>
-  <navigator class="user-channel padding-box" wx:if="{{showExplore}}" url="/pages/channel/templates">
-    <view class="flex-between">
-      <view class="flex-start" style="flex:auto;overflow:hidden;">
-        <view class="dt" style="background:#07c160;"></view>
-        <view class="channel-name no-wrap">
-          探索
-        </view>
-      </view>
-      <view class="notify">
-        <mp-icon icon="discover" size="20" color="gray"></mp-icon>
-      </view>
-    </view>
-  </navigator>
 </view>
