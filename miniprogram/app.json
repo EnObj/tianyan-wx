@@ -5,7 +5,8 @@
     "pages/channel/template",
     "pages/channel/templates",
     "pages/channel/channel",
-    "pages/common/browser"
+    "pages/common/browser",
+    "pages/common/feedback"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
