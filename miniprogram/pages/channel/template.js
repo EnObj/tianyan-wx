@@ -72,6 +72,7 @@ Page({
         wx.showModal({
           title: '操作失败',
           content: res.result.errMsg,
+          showCancel: false,
         })
       }
     }).catch(err=>{
