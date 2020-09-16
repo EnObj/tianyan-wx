@@ -19,21 +19,26 @@
   </view>
 </view>
 
-<view class="no-title-cells" wx:if="{{userChannel || showCreatorShowSwitch}}">
+<view class="no-title-cells" wx:if="{{userChannel}}">
   <mp-cells>
-    <mp-cell wx:if="{{userChannel}}">
+    <mp-cell>
       <view>消息通知</view>
       <view slot="footer">
         <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
       </view>
     </mp-cell>
-    <mp-cell wx:if="{{userChannel}}">
+    <mp-cell>
       <view>在首页置顶</view>
       <view slot="footer">
         <switch checked="{{userChannel.top}}" bindchange="switchTop" />
       </view>
     </mp-cell>
-    <mp-cell wx:if="{{showCreatorShowSwitch}}">
+  </mp-cells>
+</view>
+
+<view wx:if="{{showCreatorShowSwitch}}" class="no-title-cells">
+  <mp-cells footer="开启后，仅自己可见">
+    <mp-cell>
       <view>在项目页显示</view>
       <view slot="footer">
         <switch checked="{{channel.creatorShow}}" bindchange="switchCreatorShow" />
