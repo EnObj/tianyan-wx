@@ -17,7 +17,7 @@
 .user-channel{
   max-width: 100%;
   box-sizing: border-box;
-  margin: 0px 15px 15px 0px;
+  margin: 0px 10px 10px 0px;
 }
 .channel-name{
   font-size: 14px;
