@@ -64,6 +64,19 @@
   "dataDisplay": "show"
 }
 {
+  "_id": "rss",
+  "attrs": [{
+      "path": "entry>updated",
+      "name": "源更新时间"
+    }
+  ],
+  "name": "RSS订阅源",
+  "desc": "用于监测RSS订阅源有更新，通过此项目订阅你收藏的RSS源，一旦此RSS源有新的内容更新，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "Feed地址",
+  "dataDisplay": "show"
+}
+{
   "_id": "other",
   "attrs": [],
   "name": "其他",
