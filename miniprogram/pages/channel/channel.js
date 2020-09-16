@@ -13,7 +13,8 @@ Page({
     channel: null,
     userChannel: null,
     channelDatas: [],
-    showCreatorShowSwitch: false
+    showCreatorShowSwitch: false,
+    channelLimit: 0
   },
 
   /**
@@ -28,7 +29,8 @@ Page({
       const channel = res.data
       this.setData({
         channel: channel,
-        showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy
+        showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy,
+        channelLimit: getApp().globalData.userProfile.channelLimit || 19
       })
     })
     // 加载用户channel
@@ -76,27 +78,39 @@ Page({
   },
 
   addUserChannel() {
-    this.setData({
-      userChannel: {}
-    })
-    db.collection('ty_user_channel').add({
-      data: {
-        "channel": this.data.channel,
-        "notify": false,
-        createTime: Date.now()
-      }
-    }).then(res => {
-      db.collection('ty_user_channel').doc(res._id).get().then(res => {
+    db.collection('ty_user_channel').where({}).count().then(res=>{
+      // 检查额度
+      if(res.total >= this.data.channelLimit){
+        wx.showModal({
+          title: '提示',
+          content: `已超出订阅额度，当前订阅活动额度限制为（${this.data.channelLimit}），请取消其他订阅后重新订阅此活动`,
+          showCancel: false
+        })
+      }else{
+        // 订阅流程
         this.setData({
-          userChannel: res.data
+          userChannel: {}
         })
-        wx.showToast({
-          title: '订阅成功',
-          icon: 'none'
+        db.collection('ty_user_channel').add({
+          data: {
+            "channel": this.data.channel,
+            "notify": false,
+            createTime: Date.now()
+          }
+        }).then(res => {
+          db.collection('ty_user_channel').doc(res._id).get().then(res => {
+            this.setData({
+              userChannel: res.data
+            })
+            wx.showToast({
+              title: '订阅成功',
+              icon: 'none'
+            })
+          })
+          // 标记用户关注渠道有变动
+          tyUtils.signUserChannelsChange()
         })
-      })
-      // 标记用户关注渠道有变动
-      tyUtils.signUserChannelsChange()
+      }
     })
   },
 
