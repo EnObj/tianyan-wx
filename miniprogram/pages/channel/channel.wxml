@@ -1,5 +1,6 @@
 <wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
 <wxs src="./../../wxs/urlUtils.wxs" module="urlUtils"/>
+<wxs src="./../../wxs/channel.wxs" module="channelUtils"/>
 <view class="channel flex-between" wx:if="{{channel}}">
   <view class="channel-info">
     <view class="channel-name">{{channel.name}}</view>
@@ -67,7 +68,7 @@
             <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
               wx:for-item="attr">
               <text class="not-importent">{{attr.name}}：</text>
-              <text class="attr-value">{{item.data[attr.name]}}</text>
+              <text class="attr-value">{{channelUtils.displayAttrValue(item.data[attr.name], channel.dataDisplay || channel.channelTemplate.dataDisplay)}}</text>
             </view>
           </view>
         </view>

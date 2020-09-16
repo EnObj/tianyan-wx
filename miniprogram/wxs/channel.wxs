@@ -1,0 +1,9 @@
+module.exports = {
+  displayAttrValue: function(value, displayType){
+    value = (value || '').toString()
+    if(displayType == 'show'){
+      return value
+    }
+    return value.replace(getRegExp('.', 'g'), '*')
+  }
+}

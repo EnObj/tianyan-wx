@@ -49,6 +49,7 @@
 }
 .attr-value{
   font-size: 14px;
+  word-break: break-all;
 }
 
 .no-title-cells{
