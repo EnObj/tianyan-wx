@@ -58,7 +58,10 @@
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{channelDatasWatcherOn && !channel.disabled ?'dt-refreshing':''}}"></view>
-      <view>最近变化记录</view>
+      <view>数据更新记录</view>
+      <view class="help-data-display" wx:if="{{(channel.dataDisplay || channel.channelTemplate.dataDisplay) != 'show'}}" bindtap="tapDataDisplayHelp">
+        <mp-icon icon="help" size="20" color="gray"></mp-icon>
+      </view>
     </view>
   </view>
   <mp-cells wx:if="{{channelDatas.length}}" footer="{{channelDatas.length>15?'最多展示最近20条记录':''}}">

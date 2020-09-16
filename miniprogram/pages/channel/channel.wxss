@@ -55,3 +55,6 @@
 .no-title-cells{
   margin-top: 16px;
 }
+.help-data-display{
+  margin-left: 5px;
+}
