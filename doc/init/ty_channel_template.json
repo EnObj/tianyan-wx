@@ -66,8 +66,8 @@
 {
   "_id": "rss",
   "attrs": [{
-      "path": "entry>updated",
-      "name": "源更新时间"
+      "path": "feed>entry:nth-of-type(1)>title",
+      "name": "首篇标题"
     }
   ],
   "name": "RSS订阅源",
