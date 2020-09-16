@@ -82,8 +82,8 @@ Page({
       // 检查额度
       if(res.total >= this.data.channelLimit){
         wx.showModal({
-          title: '提示',
-          content: `已超出订阅额度，当前订阅活动额度限制为（${this.data.channelLimit}），请取消其他订阅后重新订阅此活动`,
+          title: '超出订阅额度',
+          content: `当前订阅活动额度限制为${this.data.channelLimit}，请取消其他订阅后重新订阅此活动`,
           showCancel: false
         })
       }else{
