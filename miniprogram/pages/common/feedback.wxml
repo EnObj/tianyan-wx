@@ -1,0 +1,8 @@
+<view class="main">
+  <view class="route feedback">
+    <button type="primary" open-type="feedback">意见反馈</button>
+  </view>
+  <view class="route contact">
+    <button type="default" open-type="contact">客服</button>
+  </view>
+</view>
