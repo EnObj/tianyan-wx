@@ -89,14 +89,14 @@ Page({
         resource: {
           resourceUrl: this.data.document.url,
           channelName: this.data.document.title,
-          openResourceUrl: this.data.document.url
+          openResourceUrl: this.data.document.url,
+          attrs: this.selectedSelectors.map((selector, index)=>{
+            return {
+              path: selector,
+              name: `活动数据${index+1}`
+            }
+          })
         },
-        attrs: this.selectedSelectors.map((selector, index)=>{
-          return {
-            path: selector,
-            name: `活动数据${index+1}`
-          }
-        })
       }
     }).then(res=>{
       if (!res.result.errCode) {

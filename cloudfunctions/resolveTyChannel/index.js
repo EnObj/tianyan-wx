@@ -17,8 +17,7 @@ exports.main = async (event, context) => {
   const {
     templateId,
     key, // 传key，则说明来自“具体项目”，否则来自“其他”
-    resource,
-    attrs
+    resource
   } = event
 
   // 来自项目的先查库，有则直接返回
@@ -62,7 +61,7 @@ exports.main = async (event, context) => {
       data: {
         "channelTemplate": template,
         key,
-        attrs,
+        attrs: resourceUrlResult.attrs,
         name: resourceUrlResult.channelName,
         resourceUrl: resourceUrlResult.resourceUrl,
         openResourceUrl: resourceUrlResult.openResourceUrl,
