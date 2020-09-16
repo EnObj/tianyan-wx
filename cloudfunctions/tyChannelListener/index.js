@@ -222,7 +222,7 @@ const request = function (url) {
       }
       const contentType = res.headers['content-type'].toLowerCase()
       // 非文本类型的直接拒绝处理
-      if(!contentType.startsWith('text') && !contentType.startsWith('application/json')){
+      if(!contentType.startsWith('text') && !contentType.startsWith('application/json') && !contentType.startsWith('application/xml')){
         return reject('sorry, it is not support content-type')
       }
       res.setEncoding('binary')
