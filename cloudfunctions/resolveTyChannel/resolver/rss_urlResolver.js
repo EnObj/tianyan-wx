@@ -6,6 +6,19 @@ module.exports = {
     const xml = await resolverUtils.request(key)
     const $ = cheerio.load(xml)
 
+    // 判断是否是2.0的标准
+    if($("rss").attr('version') == '2.0'){
+      return {
+        channelName: $('rss>channel>title').text().trim(),
+        resourceUrl: key,
+        openResourceUrl: $('rss>channel>link').text().trim(),
+        attrs: [{
+          name: '首篇标题',
+          path: 'rss>channel>item:nth-of-type(1)>title'
+        }]
+      }
+    }
+
     return {
       channelName: $('feed>title').text().trim(),
       resourceUrl: key,
