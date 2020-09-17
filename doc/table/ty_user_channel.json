@@ -9,6 +9,7 @@
     },
     "notify": true,
     "top": true, 
+    "hiddenName": false, 
     "createTime": 123456789,
     "updateTime": 123456789
   }
