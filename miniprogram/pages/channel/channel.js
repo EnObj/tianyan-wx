@@ -188,6 +188,22 @@ Page({
     })
   },
 
+  switchHiddenName(event){
+    const value = event.detail.value
+    db.collection('ty_user_channel').doc(this.data.userChannel._id).update({
+      data: {
+        hiddenName: value,
+        updateTime: Date.now()
+      }
+    }).then(res => {
+      this.setData({
+        'userChannel.hiddenName': value
+      })
+      // 标记用户关注渠道有变动
+      tyUtils.signUserChannelsChange()
+    })
+  },
+
   switchCreatorShow(event){
     const value = event.detail.value
     wx.cloud.callFunction({

@@ -28,9 +28,15 @@
       </view>
     </mp-cell>
     <mp-cell>
-      <view>在首页置顶</view>
+      <view>置顶</view>
       <view slot="footer">
         <switch checked="{{userChannel.top}}" bindchange="switchTop" />
+      </view>
+    </mp-cell>
+    <mp-cell>
+      <view>隐藏名称</view>
+      <view slot="footer">
+        <switch checked="{{userChannel.hiddenName}}" bindchange="switchHiddenName" />
       </view>
     </mp-cell>
   </mp-cells>
