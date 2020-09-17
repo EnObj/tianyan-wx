@@ -54,7 +54,7 @@ Page({
       return
     }
     wx.showLoading({
-      title: '正在处理',
+      title: '正在加载',
     })
     wx.cloud.callFunction({
       name: 'resolveTyChannel',
@@ -70,7 +70,7 @@ Page({
         })
       } else {
         wx.showModal({
-          title: '操作失败',
+          title: '加载失败',
           content: res.result.errMsg,
           showCancel: false,
         })
@@ -79,7 +79,7 @@ Page({
       console.error(err)
       wx.hideLoading()
       wx.showModal({
-        title: '处理失败',
+        title: '加载失败',
         content: '系统异常，请稍后重试或提交反馈',
         showCancel: false,
       })
