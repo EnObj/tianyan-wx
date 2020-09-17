@@ -37,10 +37,10 @@ exports.main = async (event, context) => {
   } = await query.count()
   console.log(`满足条件的活动数目：${channelsCount}`)
 
-  // 一次只最多处理6个
+  // 一次只处理n个，单个平均分配时长=云函数超时时间/n，其中云函数超时时间可以设置为最大60s
   const {
     data: channels
-  } = await query.orderBy('nextListenTime', 'asc').limit(6).get()
+  } = await query.orderBy('nextListenTime', 'asc').limit(3).get()
 
   // 先打标记，防止并发
   const myChannels = []
@@ -66,6 +66,7 @@ exports.main = async (event, context) => {
 
   // 一个一个channel处理（此处不能使用forEach）
   for (let i = 0; i < myChannels.length; i++) {
+    const startTime = Date.now()
     const channel = channels[i]
     console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
     try {
@@ -117,6 +118,7 @@ exports.main = async (event, context) => {
         }
       })
     }
+    console.log('一个活动采集处理完成，共耗时：' + (Date.now() - startTime))
   }
 
   // 统计一下当前禁用数据
