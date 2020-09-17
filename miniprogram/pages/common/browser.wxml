@@ -1,5 +1,5 @@
 <view class="main">
-  <view class="title">小程序内不支持打开网页链接，如需浏览，请复制后使用系统浏览器或桌面浏览器访问</view>
+  <view class="title">小程序内暂不支持打开网页，如需浏览，请复制后使用系统浏览器或桌面浏览器访问</view>
   <view class="url not-importent">{{url}}</view>
   <view class="btn">
     <button type="primary" bindtap="copyUrl">复制</button>
