@@ -24,7 +24,7 @@
   margin: 0 5px;
 }
 .notify{
-  padding: 5px;
+  padding: 0px;
 }
 .channel-template{
   margin-top: 5px;
