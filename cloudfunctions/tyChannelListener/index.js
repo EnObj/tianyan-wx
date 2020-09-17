@@ -75,6 +75,13 @@ exports.main = async (event, context) => {
       // 属性值解析器
       valueResolver = valueResolvers[channel.resourceType || channel.channelTemplate.resourceType]
 
+      // 解析openResourceUrl（如果声明了的话）
+      let openResourceUrl
+      const openResourceUrlPath = channel.openResourceUrlPath || channel.channelTemplate.openResourceUrlPath
+      if(openResourceUrlPath){
+        openResourceUrl = valueResolver(resource, openResourceUrlPath)
+      }
+
       // 将channelData落库
       const data = (channel.attrs || channel.channelTemplate.attrs).reduce((data, attr) => {
          let value = valueResolver(resource, attr.path)
@@ -102,6 +109,7 @@ exports.main = async (event, context) => {
             "channel": channel,
             data,
             dataChanged,
+            openResourceUrl,
             "createTime": Date.now()
           }
         })
