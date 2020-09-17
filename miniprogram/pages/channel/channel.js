@@ -37,7 +37,7 @@ Page({
       this.setData({
         channel: {
           _id: options.channelId,
-          name: "__活动已不存在__"
+          name: "__活动不存在__"
         }
       })
     })
