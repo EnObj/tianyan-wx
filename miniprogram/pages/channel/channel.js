@@ -92,7 +92,14 @@ Page({
         wx.showModal({
           title: '超出订阅额度',
           content: `当前订阅活动额度限制为${this.data.channelLimit}，请取消其他订阅后重新订阅此活动`,
-          showCancel: false
+          cancelText: '提升额度',
+          success: function(res){
+            if(!res.confirm){
+              wx.navigateTo({
+                url: '/pages/common/feedback',
+              })
+            }
+          }
         })
       }else{
         // 订阅流程
@@ -224,7 +231,14 @@ Page({
     wx.showModal({
       title: '帮助',
       content: '“数据更新记录”展示当前活动数据最近变化的时间轨迹，在不影响得到“更新”这一基本事实的情况下为了防止敏感内容渗入，活动数据可能被隐藏，如果您认为此处的数据安全无风险，可以通过反馈通道告诉我们，平台确认后将开放展示。',
-      showCancel: false
+      cancelText: '反馈',
+      success: function(res){
+        if(!res.confirm){
+          wx.navigateTo({
+            url: '/pages/common/feedback',
+          })
+        }
+      }
     })
   },
 
