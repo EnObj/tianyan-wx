@@ -21,10 +21,10 @@
 }
 .channel-name{
   font-size: 14px;
+  margin: 0 5px;
 }
 .notify{
   padding: 5px;
-  margin-left: 5px;
 }
 .channel-template{
   margin-top: 5px;

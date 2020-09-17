@@ -65,7 +65,7 @@
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{channelDatasWatcherOn && !channel.disabled ?'dt-refreshing':''}}"></view>
-      <view>数据更新记录</view>
+      <view class="channel-datas-title">数据更新记录</view>
       <view class="help-data-display" wx:if="{{(channel.dataDisplay || channel.channelTemplate.dataDisplay) != 'show'}}" bindtap="tapDataDisplayHelp">
         <mp-icon icon="help" size="20" color="gray"></mp-icon>
       </view>
