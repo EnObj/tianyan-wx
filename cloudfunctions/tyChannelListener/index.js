@@ -16,7 +16,7 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-
+  const mainStart = Date.now()
   const {
     channelQueryWhere = {}
   } = event
@@ -129,6 +129,7 @@ exports.main = async (event, context) => {
   }).count()
 
   console.log(`当前禁用活动数目：${disabledCount}`)
+  console.log(`当前函数执行结束，共耗时：${Date.now() - mainStart}`)
 }
 
 const valueResolvers = {
@@ -175,7 +176,8 @@ async function genMessage(channelDataId) {
     counter += userChannels.length
   
     // 生成消息（此处进行比对数据是否有更新）
-    userChannels.forEach(async userChannel => {
+    for (let i = 0; i < userChannels.length; i++) {
+      const userChannel = userChannels[i]
       await db.collection('ty_user_channel_data_message').add({
         data: {
           _openid: userChannel._openid,
@@ -186,7 +188,7 @@ async function genMessage(channelDataId) {
           updateTime: Date.now()
         }
       })
-    })
+    }
   }
 
   console.log(`完成，生成消息数量：${counter}`)
@@ -200,7 +202,7 @@ const unGzip = function (gzipData) {
   })
 }
 
-const request = function (url) {
+async function request(url) {
   console.log(url)
   const myURL = new URL.URL(url)
   const proc = url.startsWith('https') ? https : http
@@ -216,15 +218,19 @@ const request = function (url) {
     proc.get(options, (res) => {
       // console.log(res.headers)
       if(res.statusCode == 302 || res.statusCode == 301){
-        return request(res.headers.location).then(docSnap=>{
-          resolve(docSnap)
-        }, (res)=>{
-          reject(res)
-        })
+        // 这一句很重要，否则可能这个请求处理一直挂着耗费资源，最终导致云函数超时失败
+        res.resume()
+        return request(res.headers.location).then(resolve, reject)
+      }
+      // 检查200响应成功
+      if (res.statusCode != 200) {
+        res.resume()
+        return reject(`请求失败：${res.statusCode}`)
       }
       const contentType = res.headers['content-type'].toLowerCase()
       // 非文本类型的直接拒绝处理
       if(!contentType.startsWith('text') && !contentType.startsWith('application/json') && !contentType.startsWith('application/xml') && !contentType.startsWith('application/rss+xml')){
+        res.resume()
         return reject('sorry, it is not support content-type')
       }
       res.setEncoding('binary')
@@ -244,6 +250,9 @@ const request = function (url) {
           }
         })
       })
+    }).on('error', (e) => {
+      console.error(`Got error: ${e.message}`)
+      reject('请求错误')
     })
   })
 }
