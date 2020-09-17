@@ -1,1 +1,4 @@
 /* miniprogram/pages/channel/templates.wxss */
+.templates{
+  padding-bottom: 15px;
+}
