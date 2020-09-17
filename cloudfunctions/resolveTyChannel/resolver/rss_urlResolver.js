@@ -11,18 +11,16 @@ module.exports = {
       return {
         channelName: $('rss>channel>title').text().trim(),
         resourceUrl: key,
-        openResourceUrl: $('rss>channel>link').text().trim(),
         attrs: [{
           name: '首篇标题',
           path: 'rss>channel>item:nth-of-type(1)>title'
-        }]
+        }],
       }
     }
 
     return {
       channelName: $('feed>title').text().trim(),
       resourceUrl: key,
-      openResourceUrl: $('feed>link[type="text/html"]').attr('href') || $('author>uri').first().text().trim()
     }
   }
 }
