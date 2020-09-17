@@ -11,6 +11,7 @@
       "path": "data.page.count",
       "replaceRegExp": "\\d{1,3}"
     }],
+    "openResourceUrlPath": "data.list[0].url",
     "minTimeSpace": 300000,
     "keyName": "up主名字",
     "dataDisplay": "show/hidden"
