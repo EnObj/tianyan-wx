@@ -40,7 +40,7 @@ exports.main = async (event, context) => {
   // 一次只处理n个，单个平均分配时长=云函数超时时间/n，其中云函数超时时间可以设置为最大60s
   const {
     data: channels
-  } = await query.orderBy('nextListenTime', 'asc').limit(3).get()
+  } = await query.orderBy('nextListenTime', 'asc').limit(12).get()
 
   // 先打标记，防止并发
   const myChannels = []
@@ -215,7 +215,7 @@ async function request(url) {
       method: 'GET'
     }
     // console.log(options)
-    proc.get(options, (res) => {
+    const req = proc.get(options, (res) => {
       // console.log(res.headers)
       if(res.statusCode == 302 || res.statusCode == 301){
         // 这一句很重要，否则可能这个请求处理一直挂着耗费资源，最终导致云函数超时失败
@@ -250,9 +250,17 @@ async function request(url) {
           }
         })
       })
-    }).on('error', (e) => {
-      console.error(`Got error: ${e.message}`)
+    })
+    
+    req.on('error', (e) => {
+      req.abort()
+      console.error(`Got error: ${e}`)
       reject('请求错误')
+    })
+
+    req.on('timeout', ()=>{
+      req.abort()
+      reject('请求超时')
     })
   })
 }
@@ -281,7 +289,7 @@ const defaultOptions = {
     'Connection': 'keep-alive',
     'Accept-Encoding': 'gzip'
   },
-  timeout: 10000, // 10s
+  timeout: 5 * 1000, // 5s
 }
 
 // 对比两个对象的值是否完全相等 返回值 true/false
