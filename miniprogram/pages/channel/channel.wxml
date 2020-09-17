@@ -8,7 +8,7 @@
       <view class="channel-attr" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name">{{item.name}}
       </view>
     </view>
-    <view class="channel-template-name flex-start">
+    <view class="channel-template-name flex-start" wx:if="{{channel.channelTemplate}}">
       <navigator class="not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text
           class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
     </view>
@@ -61,7 +61,7 @@
   </mp-cells>
 </view>
 
-<view wx:if="{{channel}}" style="padding-bottom:20px;">
+<view wx:if="{{channel.attrs||channel.channelTemplate.attrs}}" style="padding-bottom:20px;">
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{channelDatasWatcherOn && !channel.disabled ?'dt-refreshing':''}}"></view>

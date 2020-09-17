@@ -32,6 +32,14 @@ Page({
         showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy,
         channelLimit: getApp().globalData.userProfile.channelLimit || 19
       })
+    }).catch(err=>{
+      console.error(err)
+      this.setData({
+        channel: {
+          _id: options.channelId,
+          name: "__活动已不存在__"
+        }
+      })
     })
     // 加载用户channel
     db.collection('ty_user_channel').where({
