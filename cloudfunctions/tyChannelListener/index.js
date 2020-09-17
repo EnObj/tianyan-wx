@@ -84,7 +84,7 @@ exports.main = async (event, context) => {
 
       // 将channelData落库
       const data = (channel.attrs || channel.channelTemplate.attrs).reduce((data, attr) => {
-         let value = valueResolver(resource, attr.path)
+         let value = '' + valueResolver(resource, attr.path)
          if(attr.replaceRegExp){
           value = value.replace(new RegExp(attr.replaceRegExp), '')
          }
