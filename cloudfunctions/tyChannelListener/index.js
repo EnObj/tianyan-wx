@@ -220,7 +220,7 @@ async function request(url) {
       if(res.statusCode == 302 || res.statusCode == 301){
         // 这一句很重要，否则可能这个请求处理一直挂着耗费资源，最终导致云函数超时失败
         res.resume()
-        return request(res.headers.location).then(resolve, reject)
+        return request(URL.resolve(url, res.headers.location)).then(resolve, reject)
       }
       // 检查200响应成功
       if (res.statusCode != 200) {
