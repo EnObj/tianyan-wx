@@ -1,5 +1,6 @@
 const db = wx.cloud.database()
 const tyUtils = require('./../../utils/tyUtils.js')
+const wxApiUtils = require("../../utils/wxApiUtils")
 
 // miniprogram/pages/channel/template.js
 Page({
@@ -30,16 +31,16 @@ Page({
 
   loadTemplateChannles(templateId){
     // 加载模版下的频道
-    tyUtils.getAll(db.collection('ty_channel').where(db.command.or({
+    tyUtils.getAll(db.collection('ty_channel').where({
       'channelTemplate._id': templateId,
       show: true
-    }, {
-      'channelTemplate._id': templateId,
-      createBy: getApp().globalData.userProfile._openid,
-      'creatorShow': true
-    }))).then(list => {
-      this.setData({
-        channels: list
+    })).then(list => {
+      tyUtils.getTyChannelHistorysByTemplateId(templateId).then(historys=>{
+        this.setData({
+          channels: list.concat(historys.map(history=>{
+            return history.tyChannel
+          }))
+        })
       })
     })
   },
@@ -106,6 +107,33 @@ Page({
     })
   },
 
+  openChannel(event){
+    const tapIndex = +event.currentTarget.dataset.channelIndex
+    const channel = this.data.channels[tapIndex]
+
+    wx.navigateTo({
+      url: '/pages/channel/channel?channelId=' + channel._id,
+    })
+  },
+
+  showChannelMenu(event){
+    const tapIndex = +event.currentTarget.dataset.channelIndex
+    const channel = this.data.channels[tapIndex]
+
+    wxApiUtils.showActions([{
+      name: '删除',
+      callback: function(){
+        tyUtils.pullTyChanneHistory(channel._id).then(res=>{
+          this.data.channels.splice(tapIndex, 1)
+          this.setData({
+            channels: this.data.channels
+          })
+        })
+      }.bind(this),
+      condition: true
+    }])
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -117,7 +145,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

@@ -4,6 +4,29 @@ module.exports = {
   },
   getAll(query){
     return getByPage(query, [])
+  },
+  pushTyChannelHistory(tyChannel){
+    let historys = wx.getStorageSync('tyChannelHistorys') || []
+    wx.setStorageSync('tyChannelHistorys', historys.filter(history=>{
+      return history.tyChannel._id != tyChannel._id
+    }).concat([{
+      tyChannel,
+      time: Date.now()
+    }]))
+    return Promise.resolve()
+  },
+  getTyChannelHistorysByTemplateId(channelTemplateId){
+    let historys = wx.getStorageSync('tyChannelHistorys') || []
+    return Promise.resolve(historys.filter(history=>{
+      return history.tyChannel.channelTemplate._id == channelTemplateId
+    }))
+  },
+  pullTyChanneHistory(tyChannelId){
+    let historys = wx.getStorageSync('tyChannelHistorys') || []
+    wx.setStorageSync('tyChannelHistorys', historys.filter(history=>{
+      return history.tyChannel._id != tyChannelId
+    }))
+    return Promise.resolve()
   }
 }
 

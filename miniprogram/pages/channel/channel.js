@@ -32,6 +32,7 @@ Page({
         showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy,
         channelLimit: getApp().globalData.userProfile.channelLimit || 19
       })
+      tyUtils.pushTyChannelHistory(channel)
     }).catch(err=>{
       console.error(err)
       this.setData({
