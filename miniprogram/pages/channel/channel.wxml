@@ -15,7 +15,7 @@
   </view>
   <view class="follow-btn">
     <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini" type="default">已订阅</button>
-    <button bindtap="addUserChannel" type="primary" size="mini" wx:else>订阅</button>
+    <button bindtap="addUserChannel" type="primary" size="mini" wx:if="{{!userChannel && channel.channelTemplate}}">订阅</button>
   </view>
 </view>
 
