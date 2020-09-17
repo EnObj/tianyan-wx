@@ -47,12 +47,12 @@
   </mp-cells>
 </view>
 
-<view wx:if="{{channel.openResourceUrl}}" class="no-title-cells">
+<!-- <view wx:if="{{channel.openResourceUrl}}" class="no-title-cells">
   <mp-cells>
     <mp-cell link url="/pages/common/browser?url={{urlUtils.encode(channel.openResourceUrl)}}" hover value="网页地址">
     </mp-cell>
   </mp-cells>
-</view>
+</view> -->
 
 <!-- <view class="no-title-cells">
   <mp-cells>
@@ -72,7 +72,7 @@
     </view>
   </view>
   <mp-cells wx:if="{{channelDatas.length}}" footer="{{channelDatas.length>15?'最多展示最近20条记录':''}}">
-    <mp-cell wx:for="{{channelDatas}}" wx:key="_id">
+    <mp-cell wx:for="{{channelDatas}}" wx:key="_id" link="{{item.openResourceUrl || item.channel.openResourceUrl}}" hover="{{item.openResourceUrl || item.channel.openResourceUrl}}" url="/pages/common/browser?url={{urlUtils.encode(item.openResourceUrl || item.channel.openResourceUrl)}}">
       <view class="flex-start channel-data">
         <view class="channle-data-index not-importent">
           <mp-icon icon="time" size="20" color="gray"></mp-icon>
