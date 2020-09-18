@@ -194,7 +194,6 @@ Page({
     db.collection('ty_user_channel').doc(this.data.userChannel._id).update({
       data: {
         hiddenName: value,
-        updateTime: Date.now()
       }
     }).then(res => {
       this.setData({
