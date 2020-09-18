@@ -43,13 +43,14 @@ exports.main = async (event, context) => {
       notifyTime: Date.now()
     }
     try {
+      console.log(`正在发送：${channel._id}`)
       // 发消息
       await cloud.openapi.subscribeMessage.send({
         touser: userMessage._id,
         page: '/pages/index/index',
         data: {
           thing1: {
-            value: channel.name + (userMessage.channelDatas.length > 1 ? ("等" + userMessage.channelDatas.length + "个活动") : "")
+            value: (channel.name + (userMessage.channelDatas.length > 1 ? ("等" + userMessage.channelDatas.length + "个活动") : "")).substr(0, 20)
           },
           phrase2: {
             value: '有更新'
