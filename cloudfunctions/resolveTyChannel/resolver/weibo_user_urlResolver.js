@@ -6,17 +6,21 @@ module.exports = {
 
     // console.log(json)
     const jsonObj = JSON.parse(json)
-    const user = jsonObj.data.cards[1].card_group[0].user
-    if(user.screen_name == key){
-      const userId = user.id
-      const containerJson = await resolverUtils.request(`https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}`)
-      const containerJsonObj = JSON.parse(containerJson)
-      const containerid = containerJsonObj.data.tabsInfo.tabs[1].containerid
-      return {
-        resourceUrl: `https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}&containerid=${containerid}`,
-        channelName: key,
-        openResourceUrl: `https://m.weibo.cn/u/${userId}`
+    try{
+      const user = jsonObj.data.cards[1].card_group[0].user
+      if(user.screen_name == key){
+        const userId = user.id
+        const containerJson = await resolverUtils.request(`https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}`)
+        const containerJsonObj = JSON.parse(containerJson)
+        const containerid = containerJsonObj.data.tabsInfo.tabs[1].containerid
+        return {
+          resourceUrl: `https://m.weibo.cn/api/container/getIndex?type=uid&value=${userId}&containerid=${containerid}`,
+          channelName: key,
+          openResourceUrl: `https://m.weibo.cn/u/${userId}`
+        }
       }
+    }catch(err){
+      console.error(err)
     }
 
     return{
