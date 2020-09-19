@@ -2,6 +2,19 @@
   "name": "用户关注渠道数据消息表",
   "auth": "仅创建者可读写",
   "desc": "每次渠道数据有更新，将根据用户关注渠道表将数据分发到此表。",
+  "index": [{
+    "name": "ty_user_channel_data_message_channel_createTime",
+    "fields": [{
+      "name": "_openid",
+      "sort": 1
+    },{
+      "name": "channelData.channel._id",
+      "sort": 1
+    },{
+      "name": "createTime",
+      "sort": 1
+    }]
+  }],
   "example": {
     "_id": "ty_user_channel_data_message_1",
     "_openid": "user_1",
