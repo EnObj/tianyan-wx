@@ -1,6 +1,16 @@
 {
   "name": "渠道数据表",
   "auth": "所有用户可读",
+  "index": [{
+    "name": "ty_channel_data_index_channel_time",
+    "fields": [{
+      "name": "channel._id",
+      "sort": 1
+    },{
+      "name": "createTime",
+      "sort": 1
+    }]
+  }],
   "example": {
     "_id":"ty_channel_data_1",
     "channel": {
