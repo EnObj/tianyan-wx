@@ -93,14 +93,15 @@ Page({
         wx.showModal({
           title: '超出订阅额度',
           content: `当前订阅活动额度限制为${this.data.channelLimit}，请取消其他订阅后重新订阅此活动`,
-          cancelText: '提升额度',
-          success: function(res){
-            if(!res.confirm){
-              wx.navigateTo({
-                url: '/pages/common/feedback',
-              })
-            }
-          }
+          showCancel: false,
+          // cancelText: '提升额度',
+          // success: function(res){
+          //   if(!res.confirm){
+          //     wx.navigateTo({
+          //       url: '/pages/common/feedback',
+          //     })
+          //   }
+          // }
         })
       }else{
         // 订阅流程
