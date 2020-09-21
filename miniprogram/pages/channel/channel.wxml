@@ -19,8 +19,8 @@
   </view>
 </view>
 
-<view class="no-title-cells" wx:if="{{userChannel}}">
-  <mp-cells>
+<view wx:if="{{userChannel}}">
+  <mp-cells title="开启后，一旦活动有更新，您将收到一条微信服务通知">
     <mp-cell>
       <view>消息通知</view>
       <view slot="footer">
@@ -33,12 +33,12 @@
         <switch checked="{{userChannel.top}}" bindchange="switchTop" />
       </view>
     </mp-cell>
-    <mp-cell>
+    <!-- <mp-cell>
       <view>隐藏名称</view>
       <view slot="footer">
         <switch checked="{{userChannel.hiddenName}}" bindchange="switchHiddenName" />
       </view>
-    </mp-cell>
+    </mp-cell> -->
   </mp-cells>
 </view>
 
