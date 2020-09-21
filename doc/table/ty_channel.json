@@ -7,6 +7,15 @@
       "name": "channelTemplate._id",
       "sort": 1
     }]
+  },{
+    "name": "ty_channel_index_template_show",
+    "fields": [{
+      "name": "channelTemplate._id",
+      "sort": 1
+    },{
+      "name": "show",
+      "sort": 1
+    }]
   }],
   "auth": "所有用户可读",
   "example": {
