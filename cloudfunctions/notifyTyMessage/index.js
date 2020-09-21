@@ -1,6 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-const notifyTemplateId = 'vjG2tvg4tUarVWeuez4EaUWnAgzXNSsvPCJK6LLK6iU'
+const notifyTemplateId = 'NW6QfOU9WUBKxXaCqHatxASKZwLk2IX9jjnU7ZzGI3k'
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -49,11 +49,11 @@ exports.main = async (event, context) => {
         touser: userMessage._id,
         page: '/pages/index/index',
         data: {
-          thing1: {
-            value: (channel.name + (userMessage.channelDatas.length > 1 ? ("等" + userMessage.channelDatas.length + "个活动") : "")).substr(0, 20)
+          name1: {
+            value: channel.name.substr(0, 10)
           },
-          phrase2: {
-            value: '有更新'
+          thing7: {
+            value: (userMessage.channelDatas.length > 1 ? ("等" + userMessage.channelDatas.length + "个活动") : "") + '有更新'
           }
         },
         templateId: notifyTemplateId

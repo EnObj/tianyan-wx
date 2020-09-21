@@ -44,6 +44,6 @@ App({
   globalData: {
     needReloadUserChannels: false,
     userProfile: {},
-    notifyTemplateId: 'vjG2tvg4tUarVWeuez4EaUWnAgzXNSsvPCJK6LLK6iU'
+    notifyTemplateId: 'NW6QfOU9WUBKxXaCqHatxASKZwLk2IX9jjnU7ZzGI3k'
   }
 })
