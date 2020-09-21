@@ -22,6 +22,15 @@
       "name": "channel._id",
       "sort": 1
     }]
+  },{
+    "name":"ty_user_channel_index_id_openid",
+    "fields": [{
+      "name": "_id",
+      "sort": 1
+    },{
+      "name": "_openid",
+      "sort": 1
+    }]
   }],
   "example": {
     "_id": "ty_user_channel_1",
