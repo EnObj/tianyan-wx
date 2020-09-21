@@ -52,7 +52,8 @@ exports.main = async (event, context) => {
     }).update({
       data: {
         // 默认沉默15分钟
-        nextListenTime: Date.now() + (channel.minTimeSpace || channel.channelTemplate.minTimeSpace || 15 * 60 * 1000)
+        nextListenTime: Date.now() + (channel.minTimeSpace || channel.channelTemplate.minTimeSpace || 15 * 60 * 1000),
+        beforeDisabled: db.command.remove(), // 移除标记
       }
     })
     if(updated){
@@ -119,11 +120,19 @@ exports.main = async (event, context) => {
       }
     } catch (err) {
       console.error(err)
-      // 除名
-      await db.collection('ty_channel').doc(channel._id).update({
-        data: {
+      const updater = {
+        beforeDisabled: (channel.beforeDisabled || 0) + 1
+      }
+      if(updater.beforeDisabled <= 5){
+        updater.nextListenTime = Date.now() + (channel.minTimeSpace || channel.channelTemplate.minTimeSpace || 15 * 60 * 1000) * Math.pow(2, updater.beforeDisabled)
+      }else{
+        updater = {
           disabled: true
         }
+      }
+      // 除名
+      await db.collection('ty_channel').doc(channel._id).update({
+        data: updater
       })
     }
     console.log('一个活动采集处理完成，共耗时：' + (Date.now() - startTime))
