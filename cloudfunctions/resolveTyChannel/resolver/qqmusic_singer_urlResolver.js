@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 
 module.exports = {
   resolve: async function(key){
-    const json = await resolverUtils.request(`https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?is_xml=0&key=${key}&g_tk_new_20200303=5381&g_tk=5381&jsonpCallback=SmartboxKeysCallbackmod_search2580&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0`)
+    const json = await resolverUtils.request(`https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?is_xml=0&key=${encodeURIComponent(key)}&g_tk_new_20200303=5381&g_tk=5381&jsonpCallback=SmartboxKeysCallbackmod_search2580&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0`)
     
     // console.log(json)
 
