@@ -37,6 +37,19 @@
   "dataDisplay": "show"
 }
 {
+  "_id": "qqmusic_singer",
+  "attrs": [{
+      "path": "body > div.main > div.mod_data > div > ul > li:nth-child(1) > a > strong",
+      "name": "歌曲数"
+    }
+  ],
+  "name": "QQ音乐人",
+  "desc": "用于监测歌手有新的歌曲发布，通过此项目关注你喜欢的歌手，一旦此歌手发布新歌曲，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "歌手名称",
+  "dataDisplay": "show"
+}
+{
   "_id": "zhihu_question",
   "attrs": [{
       "path": "#QuestionAnswers-answers > div > div > div > div.List-header > h4 > span",
