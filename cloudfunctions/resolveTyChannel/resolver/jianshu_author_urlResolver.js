@@ -1,24 +1,58 @@
-const resolverUtils = require('../resolverUtils.js')
-const cheerio = require('cheerio')
+const puppeteer = require('puppeteer')
 
 module.exports = {
   resolve: async function (key) {
-    // 支持输入资源地址
-    if (/^https:\/\/www\.jianshu\.com\/u\/([a-f0-9]+)/.test(key)) {
-      const authorHomePage = `https://www.jianshu.com/u/${RegExp.$1}`
-      const html = await resolverUtils.request(authorHomePage)
-      // console.log(html)
-      const $ = cheerio.load(html)
-      const authorName = $('body > div.container.person > div > div.col-xs-16.main > div.main-top > div.title > a').text().trim()
-      return {
-        resourceUrl: authorHomePage,
-        openResourceUrl: authorHomePage,
-        channelName: authorName || '未知作者'
-      }
-    }
-    return {
-      errCode: 404,
-      errMsg: '未发现作者'
-    }
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox']
+    })
+    const page = await browser.newPage()
+    return new Promise(resolve => {
+      page.on('response', (response) => {
+        // 目标地址
+        const url = response.url()
+        // console.log(url)
+        if (/^https:\/\/www\.jianshu\.com\/search\/do\?q=/.test(url)) {
+          response.json().then(async json => {
+            browser.close().then(() => {
+              const user = json.entries[0]
+              // console.log(user)
+              if(user){
+                if(user.nickname == key){
+                  resolve({
+                    resourceUrl: `https://www.jianshu.com/u/${user.slug}`,
+                    channelName: key,
+                    openResourceUrl: `https://www.jianshu.com/u/${user.slug}`
+                  })
+                }else{
+                  resolve({
+                    errCode: 405,
+                    advices: [user.nickname],
+                    errMsg: '未发现作者，如果你找的是【' + user.nickname + "】，请输入完整名称重试"
+                  })
+                }
+              }else{
+                resolve({
+                  errCode: 404,
+                  errMsg: '未发现作者'
+                })
+              }
+            })
+          })
+        }
+      })
+      page.on('load', function () {
+        // 保证最久等待10s后必须关闭
+        setTimeout(() => {
+          console.log('强制关闭浏览器')
+          browser.close().then(() => {
+            resolve({
+              errCode: 404,
+              errMsg: '未发现作者'
+            })
+          })
+        }, 5 * 1000)
+      })
+      page.goto(`https://www.jianshu.com/search?q=${encodeURIComponent(key)}&page=1&type=user`)
+    })
   }
 }
