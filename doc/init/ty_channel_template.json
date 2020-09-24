@@ -50,6 +50,19 @@
   "dataDisplay": "show"
 }
 {
+  "_id": "jd_item",
+  "attrs": [{
+      "path": "#priceSale",
+      "name": "价格"
+    }
+  ],
+  "name": "京东商品",
+  "desc": "用于监测京东商品价格变动，通过此项目关注你中意的商品，一旦此商品价格有变动，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "商品ID或商品链接",
+  "dataDisplay": "show"
+} 
+{
   "_id": "zhihu_question",
   "attrs": [{
       "path": "#QuestionAnswers-answers > div > div > div > div.List-header > h4 > span",
