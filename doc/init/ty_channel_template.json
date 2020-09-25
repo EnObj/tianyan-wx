@@ -6,6 +6,7 @@
     }
   ],
   "name": "微博博主",
+  "logo": "/image/logo/weibo_user.svg",
   "desc": "用于监测微博博主发布微博，通过此项目关注你喜欢的博主，一旦此博主有新的微博发布，你将第一时间获得通知。",
   "resourceType": "json",
   "keyName": "博主名称",
@@ -19,6 +20,7 @@
     "name": "投稿视频数"
   }],
   "name": "b站up主",
+  "logo": "/image/logo/bili_uper.svg",
   "desc": "用于监测b站up主视频动态更新，通过此项目关注你喜欢的up主并开启通知，一旦up主上传新的视频动态，你将第一时间获得通知。",
   "resourceType": "json",
   "keyName": "up主名字",
@@ -77,6 +79,7 @@
     }
   ],
   "name": "知乎问题",
+  "logo": "/image/logo/zhihu_question.svg",
   "desc": "用于监测知乎问题有新的回答，通过此项目关注你喜欢的知乎问题，一旦此问题有新的回答，你将第一时间获得通知。",
   "resourceType": "html",
   "keyName": "问题ID或问题链接",
@@ -121,6 +124,7 @@
     }
   ],
   "name": "RSS订阅源",
+  "logo": "/image/logo/rss.svg",
   "desc": "用于监测RSS订阅源有更新，通过此项目订阅你收藏的RSS源，一旦此RSS源有新的内容更新，你将第一时间获得通知。",
   "resourceType": "html",
   "keyName": "Feed地址",
