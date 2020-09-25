@@ -1,6 +1,6 @@
 /* miniprogram/pages/channel/template.wxss */
 .template{
-  padding: 15px 20px;
+  padding: 20px;
 }
 .template-desc{
   color: #666;
