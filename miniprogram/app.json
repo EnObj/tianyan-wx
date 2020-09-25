@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/channel/templates",
     "pages/index/index",
+    "pages/channel/templates",
     "pages/channel/new-channel",
     "pages/channel/template",
     "pages/channel/channel",
