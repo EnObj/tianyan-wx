@@ -1,6 +1,7 @@
 <view class="user-channels flex-start">
-  <navigator class="user-channel padding-box top" wx:if="{{showExplore}}" url="/pages/channel/templates">
+  <navigator class="user-channel padding-box" wx:if="{{showExplore}}" url="/pages/channel/templates">
     <view class="flex-between">
+      <view class="top"></view>
       <view class="flex-start" style="flex:auto;overflow:hidden;">
         <view class="dt" style="background:#07c160;"></view>
         <view class="channel-name no-wrap">
@@ -12,8 +13,9 @@
       </view>
     </view>
   </navigator>
-  <view class="user-channel padding-box {{item.top?'top':''}}" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
+  <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}">
     <view class="flex-between">
+      <view class="top" wx:if="{{item.top}}"></view>
       <view class="flex-start" style="flex:auto;overflow:hidden;">
         <view class="dt {{item.watcherOn?'dt-refreshing':''}}"></view>
         <view class="channel-name no-wrap" hidden="{{item.hiddenName}}">
