@@ -10,7 +10,12 @@
 </view>
 
 <view class="new-channel">
-  <view class="new-channel-title not-importent">查找</view>
+  <view class="new-channel-title not-importent flex-start"> 
+    <view>查找</view> 
+    <view class="help-new-channel" wx:if="{{template.keyHelp}}" bindtap="tapDisplayHelp" style="margin-left:5px;"> 
+      <mp-icon icon="help" size="20" color="gray"></mp-icon> 
+    </view> 
+  </view>
   <view class="padding-box" style="margin-top:0px;" bindtap="tapInp">
     <view class="key" wx:if="{{template.keyName}}">
       <input placeholder="请输入{{template.keyName}}" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus="{{focus}}"/>

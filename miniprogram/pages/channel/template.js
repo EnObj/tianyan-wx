@@ -155,6 +155,14 @@ Page({
     }])
   },
 
+  tapDisplayHelp(){ 
+    wx.showModal({ 
+      title: `怎样获取“${this.data.template.keyName}”？`, 
+      content: this.data.template.keyHelp, 
+      showCancel: false 
+    }) 
+  }, 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
