@@ -4,7 +4,7 @@
 </view>
 
 <view class="channels flex-start">
-  <view class="channel no-wrap" wx:for="{{channels}}" wx:key="_id" bindtap="openChannel" data-channel-index="{{index}}" bindlongpress="showChannelMenu">
+  <view class="channel no-wrap" wx:for="{{channels}}" wx:key="_id" bindtap="openChannel" data-channel-index="{{index}}" bindlongpress="showChannelMenu" style="background:{{template.mainColor||'gray'}}">
     {{item.name}}
   </view>
 </view>
