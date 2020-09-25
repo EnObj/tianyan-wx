@@ -20,6 +20,7 @@
   margin: 0px 10px 10px 0px;
   position: relative;
   overflow: hidden;
+  border-left: gray 3px solid;
 }
 .channel-name{
   font-size: 14px;

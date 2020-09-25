@@ -16,7 +16,7 @@ page {
 
 @keyframes dta
 {
-	0%  {background:white;}
-	50%  {background:red;}
-	100% {background:white;}
+	0%  {opacity:1;}
+	50%  {opacity:0;}
+	100% {opacity:1;}
 }
