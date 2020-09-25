@@ -5,6 +5,7 @@
   "example": {
     "_id": "ty_channel_template_1",
     "name": "b站up主有更新",
+    "logo": "/image/logo/bili_uper.svg",
     "resourceType": "json",
     "attrs": [{
       "name": "投稿视频数",
