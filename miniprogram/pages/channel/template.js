@@ -22,13 +22,13 @@ Page({
     //   templateId: 'other'
     // }
     this.laodTemplate(options.templateId).then(template => {
-      this.setData({
-        template
-      })
       // 设置主题色
       wx.setNavigationBarColor({
         backgroundColor: template.mainColor || '#808080',
         frontColor: '#ffffff',
+      })
+      this.setData({
+        template
       })
     })
     this.loadTemplateChannles(options.templateId)
