@@ -1,6 +1,6 @@
 <view class="templates">
-  <navigator class="template padding-box" url="/pages/channel/template?templateId={{item._id}}" wx:for="{{templates}}" wx:key="_id">
+  <view class="template padding-box active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
     <view class="template-name">{{item.name}}</view>
     <view class="template-desc not-importent">{{item.desc}}</view>
-  </navigator>
+  </view>
 </view>

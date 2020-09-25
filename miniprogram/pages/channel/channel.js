@@ -259,6 +259,16 @@ Page({
     })
   },
 
+  openTemplate(){
+    const template = this.data.channel.channelTemplate
+    // 缓存
+    getApp().globalData.activeTemplate = template
+
+    wx.navigateTo({
+      url: '/pages/channel/template?templateId=' + template._id,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -9,8 +9,8 @@
       </view>
     </view>
     <view class="channel-template-name flex-start" wx:if="{{channel.channelTemplate}}">
-      <navigator class="not-importent" url="/pages/channel/template?templateId={{channel.channelTemplate._id}}"><text
-          class="ref-content">@{{channel.channelTemplate.name}}</text></navigator>
+      <view class="not-importent" bindtap="openTemplate"><text
+          class="ref-content">@{{channel.channelTemplate.name}}</text></view>
     </view>
   </view>
   <view class="follow-btn">

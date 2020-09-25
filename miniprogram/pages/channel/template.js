@@ -21,12 +21,28 @@ Page({
     // options = {
     //   templateId: 'other'
     // }
-    db.collection('ty_channel_template').doc(options.templateId).get().then(res => {
+    this.laodTemplate(options.templateId).then(template => {
       this.setData({
-        template: res.data
+        template
       })
     })
     this.loadTemplateChannles(options.templateId)
+  },
+
+  laodTemplate(templateId){
+    // 检查缓存
+    const activeTemplate = getApp().globalData.activeTemplate
+    if(activeTemplate && activeTemplate._id == templateId){
+      return Promise.resolve(activeTemplate)
+    }
+    // 查询数据库
+    wx.showLoading({
+      title: '正在加载',
+    })
+    return db.collection('ty_channel_template').doc(templateId).get().then(res => {
+      wx.hideLoading()
+      return res.data
+    })
   },
 
   loadTemplateChannles(templateId){

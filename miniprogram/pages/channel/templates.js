@@ -22,6 +22,18 @@ Page({
     })
   },
 
+  openChannelTemplate(event){
+    const itemIndex = +event.currentTarget.dataset.itemIndex
+    const template = this.data.templates[itemIndex]
+
+    // 缓存
+    getApp().globalData.activeTemplate = template
+
+    wx.navigateTo({
+      url: '/pages/channel/template?templateId=' + template._id,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
