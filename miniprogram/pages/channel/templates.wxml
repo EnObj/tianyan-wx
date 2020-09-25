@@ -1,6 +1,9 @@
-<view class="templates">
-  <view class="template padding-box active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
+<view class="flex-between templates">
+  <view class="template active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
+    <view class="template-logo" style="background:{{item.mainColor||'gray'}};">
+      <image src="{{item.logo}}" wx:if="{{item.logo}}"></image>
+    </view>
     <view class="template-name">{{item.name}}</view>
-    <view class="template-desc not-importent">{{item.desc}}</view>
+    <!-- <view class="template-desc not-importent">{{item.desc}}</view> -->
   </view>
 </view>

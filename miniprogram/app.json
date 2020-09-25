@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/channel/templates",
     "pages/index/index",
     "pages/channel/new-channel",
     "pages/channel/template",
-    "pages/channel/templates",
     "pages/channel/channel",
     "pages/common/browser",
     "pages/common/feedback"
