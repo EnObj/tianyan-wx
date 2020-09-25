@@ -159,7 +159,9 @@ Page({
     wx.showModal({ 
       title: `怎样获取“${this.data.template.keyName}”？`, 
       content: this.data.template.keyHelp, 
-      showCancel: false 
+      showCancel: false,
+      confirmText: '我知道了',
+      confirmColor: '#07c160'
     }) 
   }, 
 
