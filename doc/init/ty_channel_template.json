@@ -36,6 +36,7 @@
   "desc": "用于监测抖音账号发布新的抖音视频，通过此项目关注你喜欢的抖音账号，一旦此账号有新的视频发布，你将第一时间获得通知。",
   "resourceType": "json",
   "keyName": "抖音账号链接地址",
+  "keyHelp": "打开抖音-找到喜欢的账号-点击右上角“分享”-复制链接",
   "dataDisplay": "show",
   "mainColor": "#FE2C55"
 }
@@ -64,6 +65,7 @@
   "desc": "用于监测京东商品价格变动，通过此项目关注你中意的商品，一旦此商品价格有变动，你将第一时间获得通知。",
   "resourceType": "html",
   "keyName": "商品ID或商品链接",
+  "keyHelp": "打开京东APP-找到喜欢的商品-点击右上角分享-复制链接",
   "dataDisplay": "show",
   "mainColor": "#e1251b"
 } 
@@ -78,6 +80,7 @@
   "desc": "用于监测知乎问题有新的回答，通过此项目关注你喜欢的知乎问题，一旦此问题有新的回答，你将第一时间获得通知。",
   "resourceType": "html",
   "keyName": "问题ID或问题链接",
+  "keyHelp": "打开知乎app-选择一个知乎问题-点击右上角分享-复制链接",
   "dataDisplay": "show",
   "mainColor": "#0084ff"
 }
