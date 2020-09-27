@@ -46,7 +46,15 @@
   "_id": "qqmusic_singer",
   "attrs": [{
       "path": "body > div.main > div.mod_data > div > ul > li:nth-child(1) > a > strong",
-      "name": "歌曲数"
+      "name": "歌曲"
+    },
+    {
+      "path": "body > div.main > div.mod_data > div > ul > li:nth-child(2) > a > strong",
+      "name": "专辑"
+    },
+    {
+      "path": "body > div.main > div.mod_data > div > ul > li:nth-child(3) > a > strong",
+      "name": "MV"
     }
   ],
   "name": "QQ音乐人",
