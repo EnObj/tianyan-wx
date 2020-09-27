@@ -6,7 +6,7 @@ module.exports = {
     const result = {}
     // 支持输入资源地址
     if(/^https:\/\/apps\.apple\.com\/cn\/app\/(.+)\/id(\d{9})/.test(key)){
-      result.channelName = RegExp.$1
+      result.channelName = decodeURIComponent(RegExp.$1)
       result.resourceUrl = result.openResourceUrl = key
     } else{
       return {
