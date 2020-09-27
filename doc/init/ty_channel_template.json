@@ -108,6 +108,23 @@
   "mainColor": "#e1251b"
 } 
 {
+  "_id": "app_store",
+  "attrs": [{
+      "path": "div.whats-new__latest > div > p",
+      "name": "版本号",
+      "replaceRegExp": "版本\\s"
+    }
+  ],
+  "name": "苹果应用",
+  "logo": "/image/logo/app_store.svg",
+  "desc": "用于监测app有新版本，通过此项目关注你喜欢的app，一旦此app有新版本，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "app地址",
+  "keyHelp": "打开App Store-找到喜欢的app-点击分享-复制链接",
+  "dataDisplay": "show",
+  "mainColor": "#0071e3"
+} 
+{
   "_id": "zhihu_question",
   "attrs": [{
       "path": "#QuestionAnswers-answers > div > div > div > div.List-header > h4 > span",
