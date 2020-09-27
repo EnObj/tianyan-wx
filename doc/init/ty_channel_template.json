@@ -57,6 +57,20 @@
   "mainColor": "#31c27c"
 }
 {
+  "_id": "haokan_user",
+  "attrs": [{
+      "path": "#div.uinfo > ul > li:nth-child(2) > p",
+      "name": "视频数"
+    }
+  ],
+  "name": "好看视频作者",
+  "desc": "用于监测作者有新的视频发布，通过此项目关注你喜欢的视频作者，一旦此作者发布新的视频，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "作者名称",
+  "dataDisplay": "show",
+  "mainColor": "#ff4141"
+}
+{
   "_id": "jd_item",
   "attrs": [{
       "path": "#priceSale",
