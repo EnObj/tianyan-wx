@@ -71,6 +71,20 @@
   "mainColor": "#ff4141"
 }
 {
+  "_id": "xigua_user",
+  "attrs": [{
+      "path": "#App > div > div.v3-app-layout__content > div > div.userDetailV3__header-wrap > div.sticky-outer-wrapper > div > div > div.compoent-sortTabs__container > div.compoent-sortTabs__tabItemWrapper.first > div.count",
+      "name": "视频数"
+    }
+  ],
+  "name": "西瓜视频作者",
+  "desc": "用于监测作者有新的视频发布，通过此项目关注你喜欢的视频作者，一旦此作者发布新的视频，你将第一时间获得通知。",
+  "resourceType": "html",
+  "keyName": "作者名称",
+  "dataDisplay": "show",
+  "mainColor": "#ff142b"
+}
+{
   "_id": "jd_item",
   "attrs": [{
       "path": "#priceSale",
