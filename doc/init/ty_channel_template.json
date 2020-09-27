@@ -115,7 +115,7 @@
       "replaceRegExp": "版本\\s"
     }
   ],
-  "name": "苹果应用",
+  "name": "苹果应用商店app",
   "logo": "/image/logo/app_store.svg",
   "desc": "用于监测app有新版本，通过此项目关注你喜欢的app，一旦此app有新版本，你将第一时间获得通知。",
   "resourceType": "html",
