@@ -1,0 +1,13 @@
+<view class="main">
+  <view class="about">
+    <view class="about-part">
+      本小程序提供XXXX，XXXX，XXXX及XXXX功能，使用户XXXXX。
+    </view>
+    <view class="about-part not-importent">
+      小程序内XXXX均来源于互联网公开信息，仅供用户学习和浏览使用，如果某些内容侵犯了您的某些权益，请通过反馈通道及时联系我们。
+    </view>
+  </view>
+  <view class="feedback">
+    <button open-type="feedback" type="primary">问题反馈/建议</button>
+  </view>
+</view>

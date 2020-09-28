@@ -1,0 +1,15 @@
+.main{
+  padding: 20px;
+}
+
+.about{
+  margin-bottom: 50px;
+}
+
+.about-part{
+  margin-bottom: 20px;
+}
+
+.thanks{
+  margin-bottom: 50px;
+}
