@@ -1,18 +1,10 @@
+<view class="empty-tip abs-center" wx:if="{{showExplore && !userChannels.length}}">
+  <view class="abs-center-content flex-start" style="flex-direction:column">
+    <view class="nothing not-importent">还没有任何订阅</view>
+    <navigator class="door" url="/pages/channel/templates" open-type="switchTab">探索</navigator>
+  </view>
+</view>
 <view class="user-channels flex-start">
-  <navigator class="user-channel padding-box" wx:if="{{showExplore}}" url="/pages/channel/templates" style="border-left-color:#07c160;">
-    <view class="flex-between">
-      <view class="top"></view>
-      <view class="flex-start" style="flex:auto;overflow:hidden;">
-        <view class="dt" style="background:#07c160;"></view>
-        <view class="channel-name no-wrap">
-          探索
-        </view>
-      </view>
-      <view class="notify">
-        <mp-icon icon="discover" size="20" color="gray"></mp-icon>
-      </view>
-    </view>
-  </navigator>
   <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}" style="border-left-color:{{item.channel.channelTemplate.mainColor||'gray'}}">
     <view class="flex-between">
       <view class="top" wx:if="{{item.top}}"></view>

@@ -54,3 +54,15 @@
   transform: rotate(45deg);
   background: gray;
 }
+
+.empty-tip{
+  height: 80vh;
+}
+
+.door{
+  padding: 10px 30px;
+  background: #07c160;
+  border-radius: 20px;
+  margin-top: 20px;
+  color: #fff;
+}
