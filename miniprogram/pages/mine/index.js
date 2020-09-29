@@ -38,7 +38,7 @@ Page({
       })
     })
     // 加载用户
-    userProfileUtils.getUserProfile().then(userProfile=>{
+    userProfileUtils.getUserProfile(true).then(userProfile=>{
       this.setData({
         userProfile
       })
@@ -79,7 +79,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '追你所爱',
-      path: '/pages/index/index?fromUser=' + this.data.userProfile._id,
+      path: '/pages/index/index?fromUser=' + this.data.userProfile._openid,
       imageUrl: '/image/wx-share.png'
     }
   }

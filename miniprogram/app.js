@@ -15,9 +15,6 @@ App({
         // env: 'prod-4tbxs',
         traceUser: true,
       })
-
-      // 加载一下用户信息
-      userProfileUtils.getUserProfile()
     }
   },
 

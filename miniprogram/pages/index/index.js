@@ -18,9 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    // 设置推荐人
-    userProfileUtils.setFromUser(options.fromUser)
+    wx.setStorageSync('fromUser', options.fromUser)
     // 加载订阅列表
     this.loadUserChannels().then(()=>{
       this.setData({

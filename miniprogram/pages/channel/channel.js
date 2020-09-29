@@ -280,7 +280,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    userProfileUtils.getUserProfile(userProfile=>{
+    userProfileUtils.getUserProfile().then(userProfile=>{
       this.setData({
         userProfile
       })
