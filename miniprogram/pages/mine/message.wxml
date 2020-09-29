@@ -1,0 +1,21 @@
+<wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
+<wxs src="./../../wxs/textUtils.wxs" module="textUtils"/>
+<wxs src="./../../wxs/channel.wxs" module="channelUtils"/>
+<view class="messages">
+  <view class="message flex-start" wx:for="{{items}}" wx:key="_id">
+    <view class="template-logo" style="background:{{item.channelData.channel.channelTemplate.mainColor||'gray'}};">
+      <image src="{{item.channelData.channel.channelTemplate.logo}}" wx:if="{{item.channelData.channel.channelTemplate.logo}}"></image>
+      <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelData.channel.channelTemplate.name)}}</view>
+    </view>
+    <view class="message-item flex-start">
+      <view class="channel-name" bindtap="openChannel" data-item-index="{{index}}">{{item.channelData.channel.name}}</view>
+      <view class="create-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
+      <view class="channel-data">
+        <view wx:for="{{item.channelData.channel.channel.attrs || item.channelData.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">
+          <text class="not-importent">{{attr.name}}</text>
+          <text class="attr-value">{{channelUtils.displayAttrValue(item.channelData.data[attr.name], item.channelData.channel.dataDisplay || item.channelData.channel.channelTemplate.dataDisplay)}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

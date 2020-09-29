@@ -1,0 +1,42 @@
+/* miniprogram/pages/mine/message.wxss */
+.message{
+  margin: 15px 20px;
+  align-items: flex-start;
+}
+.template-logo{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: gray;
+  padding: 5px;
+  display: flex;
+}
+
+.text-logo{
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin: auto;
+}
+
+.template-logo>image{
+  width: 100%;
+  height: 100%;
+}
+
+.message-item{
+  margin-left: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.channel-data{
+  background: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.attr-value{
+  margin-left: 10px;
+}

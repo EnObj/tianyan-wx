@@ -1,0 +1,5 @@
+module.exports = {
+  getFirstChar: function(text){
+    return (text || "？").substring(0, 1);
+  }
+}

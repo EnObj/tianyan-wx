@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/mine/index",
+    "pages/mine/message",
     "pages/channel/templates",
     "pages/channel/new-channel",
     "pages/channel/template",
@@ -18,30 +20,30 @@
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "tabBar": { 
-    "color": "#000000", 
-    "selectedColor": "#07c160", 
-    "backgroundColor": "#ffffff", 
-    "borderStyle": "white", 
-    "list": [ 
-      { 
-        "pagePath": "pages/index/index", 
-        "text": "追更", 
-        "iconPath": "image/icon/home-7-line.png", 
-        "selectedIconPath": "image/icon/home-7-fill.png" 
-      }, 
-      { 
-        "pagePath": "pages/channel/templates", 
-        "text": "探索", 
-        "iconPath": "image/icon/eye-line.png", 
-        "selectedIconPath": "image/icon/eye-fill.png" 
-      }, 
-      { 
-        "pagePath": "pages/common/feedback", 
-        "text": "更多", 
-        "iconPath": "image/icon/more-line.png", 
-        "selectedIconPath": "image/icon/more-fill.png" 
-      } 
-    ] 
-  } 
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "追更",
+        "iconPath": "image/icon/home-7-line.png",
+        "selectedIconPath": "image/icon/home-7-fill.png"
+      },
+      {
+        "pagePath": "pages/channel/templates",
+        "text": "探索",
+        "iconPath": "image/icon/eye-line.png",
+        "selectedIconPath": "image/icon/eye-fill.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "更多",
+        "iconPath": "image/icon/more-line.png",
+        "selectedIconPath": "image/icon/more-fill.png"
+      }
+    ]
+  }
 }
