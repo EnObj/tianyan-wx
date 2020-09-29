@@ -29,12 +29,14 @@ Page({
   },
 
   loadUserChannels(){
+    wx.showNavigationBarLoading()
     // 关闭监听
     this.closeWatchers()
     // 取消全局标记
     delete getApp().globalData.needReloadUserChannels
     // 加载频道
     return tyUtils.getAll(db.collection('ty_user_channel').where({}).orderBy('top', 'desc').orderBy('updateTime', 'desc')).then(list => {
+      wx.hideNavigationBarLoading()
       this.setData({
         userChannels: list
       })
