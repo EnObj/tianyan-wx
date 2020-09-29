@@ -1,0 +1,11 @@
+<mp-cells title="常见问题">
+  <mp-cell value="怎样提升额度" footer="把小程序分享给朋友">
+  </mp-cell>
+  <mp-cell value="为什么通知只生效一次" footer="防止打扰">
+  </mp-cell>
+</mp-cells>
+
+<mp-cells title="支持联系客服">
+  <mp-cell value="反馈" link url="/pages/common/feedback" hover>
+  </mp-cell>
+</mp-cells>

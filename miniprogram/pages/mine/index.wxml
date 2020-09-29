@@ -15,4 +15,11 @@
   <view class="no-title-cells">
     <button class="share-button" open-type="share" style="width:100%;margin:0;text-align:left;padding:16px;color:#000;font-weight:400;background:#fff;min-height:0;border-top:1rpx solid rgba(0,0,0,0.1);border-bottom:1rpx solid rgba(0,0,0,0.1)">推荐给朋友</button>
   </view>
+
+  <mp-cells ext-class="no-title-cells">
+    <mp-cell link url="/pages/mine/help" hover value="帮助与反馈">
+    </mp-cell>
+    <mp-cell link url="/pages/common/about" hover value="关于">
+    </mp-cell>
+  </mp-cells>
 </view>

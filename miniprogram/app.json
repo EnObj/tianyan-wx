@@ -9,7 +9,8 @@
     "pages/channel/channel",
     "pages/common/browser",
     "pages/common/feedback",
-    "pages/common/about"
+    "pages/common/about",
+    "pages/mine/help"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
