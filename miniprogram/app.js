@@ -1,7 +1,9 @@
+const userProfileUtils = require('./utils/userProfileUtils.js')
+
 //app.js
 App({
   onLaunch: function () {
-    
+
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -13,37 +15,14 @@ App({
         // env: 'prod-4tbxs',
         traceUser: true,
       })
-    }
 
-    // 查询用户profile，无则新增
-    wx.cloud.database().collection('ty_user_profile').where({}).get().then(res => {
-      if(res.data[0]){
-        this.globalData.userProfile = res.data[0]
-      }else{
-        wx.cloud.database().collection('ty_user_profile').add({
-          data:{
-            createTime: Date.now()
-          }
-        }).then(res=>{
-          wx.cloud.database().collection('ty_user_profile').doc(res._id).get().then(res=>{
-            this.globalData.userProfile = res.data
-          })
-        })
-      }
-    })
+      // 加载一下用户信息
+      userProfileUtils.getUserProfile()
+    }
   },
-  // onUnhandledRejection(err){
-  //   console.error(err)
-  //   wx.hideLoading()
-  //   wx.showModal({
-  //     title: '系统异常',
-  //     content: '请稍后重试或提交反馈',
-  //     showCancel: false,
-  //   })
-  // },
+
   globalData: {
     needReloadUserChannels: false,
-    userProfile: {},
     notifyTemplateId: 'NW6QfOU9WUBKxXaCqHatxASKZwLk2IX9jjnU7ZzGI3k'
   }
 })

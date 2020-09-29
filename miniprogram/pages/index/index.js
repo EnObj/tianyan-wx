@@ -1,6 +1,7 @@
 const db = wx.cloud.database()
 const tyUtils = require('./../../utils/tyUtils.js')
 const wxApiUtils = require("../../utils/wxApiUtils")
+const userProfileUtils = require('../../utils/userProfileUtils.js')
 
 // miniprogram/pages/index/index.js
 Page({
@@ -17,6 +18,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    // 设置推荐人
+    userProfileUtils.setFromUser(options.fromUser)
+    // 加载订阅列表
     this.loadUserChannels().then(()=>{
       this.setData({
         showExplore: true

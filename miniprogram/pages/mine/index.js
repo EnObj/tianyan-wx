@@ -1,5 +1,6 @@
 // miniprogram/pages/mine/index.js
 const db = wx.cloud.database()
+const userProfileUtils = require('../../utils/userProfileUtils.js')
 
 Page({
 
@@ -7,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lastUnreadedMessage: null
+    lastUnreadedMessage: null,
+    userProfile: {} 
   },
 
   /**
@@ -33,6 +35,12 @@ Page({
     }).orderBy('createTime', 'desc').limit(1).get().then(res=>{
       this.setData({
         lastUnreadedMessage: res.data[0] || null
+      })
+    })
+    // 加载用户
+    userProfileUtils.getUserProfile().then(userProfile=>{
+      this.setData({
+        userProfile
       })
     })
   },
@@ -69,6 +77,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '追你所爱',
+      path: '/pages/index/index?fromUser=' + this.data.userProfile._id,
+      imageUrl: '/image/wx-share.png'
+    }
   }
 })

@@ -1,5 +1,6 @@
 const wxApiUtils = require("../../utils/wxApiUtils")
 const tyUtils = require('./../../utils/tyUtils.js')
+const userProfileUtils = require('../../utils/userProfileUtils.js')
 
 const db = wx.cloud.database()
 
@@ -14,7 +15,7 @@ Page({
     userChannel: null,
     channelDatas: [],
     showCreatorShowSwitch: false,
-    channelLimit: 0
+    userProfile: null
   },
 
   /**
@@ -30,7 +31,6 @@ Page({
       this.setData({
         channel: channel,
         showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy,
-        channelLimit: getApp().globalData.userProfile.channelLimit || 19
       })
       tyUtils.pushTyChannelHistory(channel)
     }).catch(err=>{
@@ -89,10 +89,10 @@ Page({
   addUserChannel() {
     db.collection('ty_user_channel').where({}).count().then(res=>{
       // 检查额度
-      if(res.total >= this.data.channelLimit){
+      if(res.total >= this.data.userProfile.channelLimit){
         wx.showModal({
           title: '超出订阅额度',
-          content: `当前订阅活动额度限制为${this.data.channelLimit}，请取消其他订阅后重新订阅此活动`,
+          content: `当前订阅活动额度限制为${this.data.userProfile.channelLimit}，请取消其他订阅后重新订阅此活动`,
           showCancel: false,
           // cancelText: '提升额度',
           // success: function(res){
@@ -280,7 +280,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    userProfileUtils.getUserProfile(userProfile=>{
+      this.setData({
+        userProfile
+      })
+    })
   },
 
   /**
