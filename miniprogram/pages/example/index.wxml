@@ -102,6 +102,10 @@
   <navigator class="ref-content" url="/pages/common/feedback">反馈/建议/客服</navigator>
 </view>
 
+<view class="padding-box flex-start">
+  <navigator class="ref-content" url="/pages/common/about">关于</navigator>
+</view>
+
 <view class="bg">
 	<image src="./../../image/background.jpg" class="bg-img" mode="aspectFill" style="opacity:1"></image>
 </view>
