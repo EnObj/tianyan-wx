@@ -27,6 +27,10 @@ Page({
     // 加载channel
     db.collection('ty_channel').doc(options.channelId).get().then(res => {
       const channel = res.data
+      wx.setNavigationBarColor({
+        backgroundColor: channel.channelTemplate.mainColor || 'gray',
+        frontColor: '#ffffff',
+      })
       this.setData({
         channel: channel
       })

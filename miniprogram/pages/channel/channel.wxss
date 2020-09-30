@@ -3,7 +3,8 @@
 
 .channel{
   padding: 15px;
-  background: #fff;
+  background: gray;
+  color: #fff;
 }
 .channel-name{
   font-size: 22px;

@@ -1,17 +1,17 @@
 <wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
 <wxs src="./../../wxs/urlUtils.wxs" module="urlUtils"/>
 <wxs src="./../../wxs/channel.wxs" module="channelUtils"/>
-<view class="channel flex-between" wx:if="{{channel}}">
+<view class="channel flex-between" wx:if="{{channel}}" style="background:{{channel.channelTemplate.mainColor||'gray'}}">
   <view class="channel-info">
     <view class="channel-name">{{channel.name}}</view>
   </view>
   <view class="follow-btn">
-    <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini" type="default">已订阅</button>
-    <button bindtap="addUserChannel" type="primary" size="mini" wx:if="{{!userChannel && channel.channelTemplate}}">订阅</button>
+    <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini" style="color:#fff;background:{{channel.channelTemplate.mainColor||'gray'}}">已订阅</button>
+    <button bindtap="addUserChannel" size="mini" wx:if="{{!userChannel && channel.channelTemplate}}" style="color:{{channel.channelTemplate.mainColor||'gray'}}">订阅</button>
   </view>
 </view>
 
-<view wx:if="{{channel.attrs||channel.channelTemplate.attrs}}" style="padding-bottom:20px;">
+<view wx:if="{{channel.attrs||channel.channelTemplate.attrs}}">
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{!channel.disabled ?'dt-refreshing':''}}" style="background:{{channel.channelTemplate.mainColor||'gray'}}"></view>
@@ -45,13 +45,13 @@
     <mp-cell>
       <view>消息通知</view>
       <view slot="footer">
-        <switch checked="{{userChannel.notify}}" bindchange="switchNotify" />
+        <switch checked="{{userChannel.notify}}" bindchange="switchNotify" color="{{channel.channelTemplate.mainColor||'gray'}}"/>
       </view>
     </mp-cell>
     <mp-cell>
       <view>置顶</view>
       <view slot="footer">
-        <switch checked="{{userChannel.top}}" bindchange="switchTop" />
+        <switch checked="{{userChannel.top}}" bindchange="switchTop" color="{{channel.channelTemplate.mainColor||'gray'}}"/>
       </view>
     </mp-cell>
     <!-- <mp-cell>

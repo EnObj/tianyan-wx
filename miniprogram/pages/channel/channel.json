@@ -4,6 +4,5 @@
     "mp-cells": "../../components/cells/cells",
     "mp-cell": "../../components/cell/cell"
   },
-  "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTitleText": "详情"
 }
