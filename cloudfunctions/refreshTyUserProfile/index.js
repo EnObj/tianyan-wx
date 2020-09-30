@@ -5,7 +5,9 @@ cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 })
 
-const db = cloud.database()
+const db = cloud.database({
+  throwOnNotFound: false,
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -16,50 +18,43 @@ exports.main = async (event, context) => {
     fromUser = 'weixin'
   } = event
 
-  // 查询用户信息
-  let {
-    data: [userProfile]
-  } = await db.collection('ty_user_profile').where({
-    _openid: openid
-  }).get()
+  // 开启事务处理
+  const userProfile = await db.runTransaction(async transaction => {
 
-  // 用户记录不存在
-  if (!userProfile) {
-    userProfile = {
-      _openid: openid,
-      fromUser,
-      channelLimit: 20,
-      createTime: Date.now()
-    }
-    res = await db.collection('ty_user_profile').add({
+    // 查询用户信息
+    let {
       data: userProfile
-    })
-    userProfile._id = res._id
-
-    return {
-      userProfile
-    }
-  }
-
-  // 计算总邀请用户数
-  const {
-    total: invitedUserCount
-  } = await db.collection('ty_user_profile').where({
-    fromUser: openid
-  }).count()
-
-  // 核算新邀请数
-  const newCount = invitedUserCount - (userProfile.invitedUserCount || 0)
-  if (newCount) {
-    await db.collection('ty_user_profile').doc(userProfile._id).update({
-      data: {
-        channelLimit: db.command.inc(newCount),
-        invitedUserCount
+    } = await transaction.collection('ty_user_profile').doc(openid).get()
+  
+    // 用户记录不存在，创建用户
+    if (!userProfile) {
+      userProfile = {
+        _id: openid,
+        _openid: openid,
+        fromUser,
+        channelLimit: 20,
+        invitedUserCount: 0,
+        createTime: Date.now()
       }
-    })
-    // 重新查询一遍
-    userProfile = (await db.collection('ty_user_profile').doc(userProfile._id).get()).data
-  }
+      await transaction.collection('ty_user_profile').add({
+        data: userProfile
+      })
+
+      if(fromUser){
+        console.log(`thanks fromUser: ${fromUser}`)
+  
+        // 感谢fromUser
+        await transaction.collection('ty_user_profile').doc(fromUser).update({
+          data: {
+            channelLimit: db.command.inc(1),
+            invitedUserCount: db.command.inc(1)
+          }
+        })
+      }
+    }
+
+    return userProfile
+  })
 
   return {
     userProfile
