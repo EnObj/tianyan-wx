@@ -28,12 +28,6 @@ Page({
         duration: 300
       })
     })
-    // 加载用户信息
-    userProfileUtils.getUserProfile().then(userProfile=>{
-      this.setData({
-        userProfile
-      })
-    })
   },
 
   loadUserChannels(){

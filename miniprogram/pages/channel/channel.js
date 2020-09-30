@@ -81,17 +81,17 @@ Page({
       // 检查额度
       if(res.total >= this.data.channelLimit){
         wx.showModal({
-          title: '超出订阅额度',
+          title: `超出订阅额度${this.data.channelLimit}`,
           content: '请取消其他订阅后重新订阅此活动',
-          showCancel: false,
-          cancelText: '查看我的额度',
-          success: function(res){
-            if(!res.confirm){
-              wx.navigateTo({
-                url: '/pages/mine/index',
-              })
-            }
-          }
+          showCancel: false
+          // cancelText: '查看额度',
+          // success: function(res){
+          //   if(!res.confirm){
+          //     wx.switchTab({
+          //       url: '/pages/mine/index',
+          //     })
+          //   }
+          // }
         })
       }else{
         // 订阅流程
