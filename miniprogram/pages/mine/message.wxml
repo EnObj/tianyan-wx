@@ -20,7 +20,7 @@
   </view>
 </view>
 
-<view class="empty-tip abs-center" wx:if="{{loaded && !messages.length}}">
+<view class="empty-tip abs-center" wx:if="{{loaded && !items.length}}">
   <view class="abs-center-content">
     <view class="nothing not-importent">空空如也</view>
   </view>
