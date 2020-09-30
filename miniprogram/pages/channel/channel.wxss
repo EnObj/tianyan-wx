@@ -30,7 +30,7 @@
 }
 .channel-data{
   align-items: flex-start;
-  /* margin: 10px 20px; */
+  margin-right: 20px;
 }
 .channel-datas-title{
   margin: 5px 10px;
@@ -48,6 +48,7 @@
 .attr-value{
   font-size: 14px;
   word-break: break-all;
+  margin-left: 5px;
 }
 
 .no-title-cells{

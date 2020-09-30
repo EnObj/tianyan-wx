@@ -30,7 +30,7 @@
               <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
                 wx:for-item="attr">
                 <text class="">{{attr.name}}</text>
-                <text class="attr-value not-importent">（{{channelUtils.displayAttrValue(lastChannelData.data[attr.name], channel.dataDisplay || channel.channelTemplate.dataDisplay)}}）</text>
+                <text class="attr-value not-importent">{{channelUtils.displayAttrValue(lastChannelData.data[attr.name], channel.dataDisplay || channel.channelTemplate.dataDisplay)}}</text>
               </view>
             </view>
           </view>
