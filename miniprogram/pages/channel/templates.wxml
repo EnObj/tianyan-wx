@@ -11,7 +11,7 @@
       <image src="{{item.logo}}" wx:if="{{item.logo}}"></image>
       <view wx:else class="text-logo">{{textUtils.getFirstChar(item.name)}}</view>
     </view>
-    <view class="template-name">{{item.name}}</view>
+    <view class="template-name no-wrap">{{item.name}}</view>
     <!-- <view class="template-desc not-importent">{{item.desc}}</view> -->
   </view>
 </view>
