@@ -209,6 +209,20 @@ Page({
     })
   },
 
+  showBeforeData(){
+    if(this.data.lastChannelData.beforeData){
+      wx.showModal({
+        title: '更新前',
+        content: (this.data.channel.attrs || this.data.channel.channelTemplate.attrs).reduce((content, attr)=>{
+          return content += attr.name + `（${this.data.lastChannelData.beforeData[attr.name]}）\r\n`
+        }, ''),
+        showCancel: false
+      })
+    }else{
+      console.log('no before data')
+    }
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
