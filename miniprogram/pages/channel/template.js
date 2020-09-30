@@ -92,7 +92,6 @@ Page({
         })
       } else {
         wx.showModal({
-          title: '加载失败',
           content: res.result.errMsg,
           showCancel: false,
         })
