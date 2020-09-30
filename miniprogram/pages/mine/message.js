@@ -37,6 +37,10 @@ Page({
   openChannel(event){
     const itemIndex = +event.currentTarget.dataset.itemIndex
     const item = this.data.items[itemIndex]
+
+    // 加一层缓存，避免打开时的闪烁
+    getApp().globalData.activeChannel = item.channelData.channel
+
     wx.navigateTo({
       url: '/pages/channel/channel?channelId=' + item.channelData.channel._id
     })
