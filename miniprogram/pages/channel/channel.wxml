@@ -4,15 +4,38 @@
 <view class="channel flex-between" wx:if="{{channel}}">
   <view class="channel-info">
     <view class="channel-name">{{channel.name}}</view>
-    <view class="channel-attrs flex-start not-importent">
-      <view class="channel-attr" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name">{{item.name}}
-      </view>
-    </view>
   </view>
   <view class="follow-btn">
     <button bindtap="removeUserChannel" wx:if="{{userChannel}}" size="mini" type="default">已订阅</button>
     <button bindtap="addUserChannel" type="primary" size="mini" wx:if="{{!userChannel && channel.channelTemplate}}">订阅</button>
   </view>
+</view>
+
+<view wx:if="{{channel.attrs||channel.channelTemplate.attrs}}" style="padding-bottom:20px;">
+  <view class="weui-cells__title">
+    <view class="flex-start">
+      <view class="dt {{!channel.disabled ?'dt-refreshing':''}}" style="background:{{channel.channelTemplate.mainColor||'gray'}}"></view>
+      <view class="channel-datas-title">活动数据</view>
+      <view class="help-data-display" wx:if="{{(channel.dataDisplay || channel.channelTemplate.dataDisplay) != 'show'}}" bindtap="tapDataDisplayHelp">
+        <mp-icon icon="help" size="20" color="gray"></mp-icon>
+      </view>
+    </view>
+  </view>
+  <mp-cells wx:if="{{lastChannelData}}">
+    <mp-cell hover="{{lastChannelData.beforeData}}" footer="{{timeUtils.formatPass(lastChannelData.createTime)}}已更新">
+      <view class="flex-start channel-data">
+        <view class="channel-data-item">
+          <view class="channel-attr-items">
+            <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
+              wx:for-item="attr">
+              <text class="">{{attr.name}}</text>
+              <text class="attr-value not-importent">（{{channelUtils.displayAttrValue(lastChannelData.data[attr.name], channel.dataDisplay || channel.channelTemplate.dataDisplay)}}）</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-cell>
+  </mp-cells>
 </view>
 
 <view wx:if="{{userChannel}}">
@@ -48,37 +71,6 @@
 <view class="no-title-cells" wx:if="{{channel.channelTemplate}}" bindtap="openTemplate">
   <mp-cells>
     <mp-cell link hover value="来源项目" footer="{{channel.channelTemplate.name}}">
-    </mp-cell>
-  </mp-cells>
-</view>
-
-<view wx:if="{{channel.attrs||channel.channelTemplate.attrs}}" style="padding-bottom:20px;">
-  <view class="weui-cells__title">
-    <view class="flex-start">
-      <view class="dt {{channelDatasWatcherOn && !channel.disabled ?'dt-refreshing':''}}" style="background:{{channel.channelTemplate.mainColor||'gray'}}"></view>
-      <view class="channel-datas-title">数据更新记录</view>
-      <view class="help-data-display" wx:if="{{(channel.dataDisplay || channel.channelTemplate.dataDisplay) != 'show'}}" bindtap="tapDataDisplayHelp">
-        <mp-icon icon="help" size="20" color="gray"></mp-icon>
-      </view>
-    </view>
-  </view>
-  <mp-cells wx:if="{{channelDatas.length}}" footer="{{channelDatas.length>15?'最多展示最近20条记录':''}}">
-    <mp-cell wx:for="{{channelDatas}}" wx:key="_id" link="{{item.openResourceUrl}}" hover="{{item.openResourceUrl}}" url="/pages/common/browser?url={{urlUtils.encode(item.openResourceUrl)}}">
-      <view class="flex-start channel-data">
-        <view class="channle-data-index not-importent">
-          <mp-icon icon="time" size="20" color="gray"></mp-icon>
-        </view>
-        <view class="channel-data-item">
-          <view class="channel-data-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
-          <view class="channel-attr-items">
-            <view class="channel-attr-item" wx:for="{{channel.attrs||channel.channelTemplate.attrs}}" wx:key="name"
-              wx:for-item="attr">
-              <text class="not-importent">{{attr.name}}：</text>
-              <text class="attr-value">{{channelUtils.displayAttrValue(item.data[attr.name], channel.dataDisplay || channel.channelTemplate.dataDisplay)}}</text>
-            </view>
-          </view>
-        </view>
-      </view>
     </mp-cell>
   </mp-cells>
 </view>

@@ -41,9 +41,6 @@
 .notify{
   margin: 20px 10px;
 }
-.channel-data-item{
-  margin-left: 5px;
-}
 .channel-data-time{
   margin-bottom: 5px;
 }

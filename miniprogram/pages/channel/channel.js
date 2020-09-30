@@ -13,8 +13,8 @@ Page({
   data: {
     channel: null,
     userChannel: null,
-    channelDatas: [],
-    userProfile: null
+    userProfile: null,
+    lastChannelData: null
   },
 
   /**
@@ -22,7 +22,7 @@ Page({
    */
   onLoad: function (options) {
     // options = {
-    //   channelId: '7498b5fe5f548b2d011246381b43e773'
+    //   channelId: 'e656fa635f6d7f5f0079ee5e6e0c1709'
     // }
     // 加载channel
     db.collection('ty_channel').doc(options.channelId).get().then(res => {
@@ -49,39 +49,14 @@ Page({
       })
     })
     // 加载channelData
-    this.watchChannelDatas(options.channelId)
-  },
-
-  watchChannelDatas(channelId){
-    this.setData({
-      channelDatas: [],
-      channelDatasWatcherOn: false
-    })
-    this.closeWatcher()
-    this.watcher = db.collection('ty_channel_data').where({
-      'channel._id': channelId,
+    db.collection('ty_channel_data').where({
+      'channel._id': options.channelId,
       dataChanged: true
-    }).orderBy('createTime', 'desc').limit(20).watch({
-      onChange: function(snapshot) {
-        this.setData({
-          channelDatas: snapshot.docs,
-          channelDatasWatcherOn: true
-        })
-      }.bind(this),
-      onError: function(err){
-        console.log(err)
-        this.setData({
-          channelDatasWatcherOn: false
-        })
-      }.bind(this)
+    }).orderBy('createTime', 'desc').limit(1).get().then(res=>{
+      this.setData({
+        lastChannelData: res.data[0] || null
+      })
     })
-  },
-
-  closeWatcher(){
-    // 关闭监听
-    if(this.watcher){
-      this.watcher.close()
-    }
   },
 
   addUserChannel() {
@@ -203,39 +178,6 @@ Page({
     })
   },
 
-  switchCreatorShow(event){
-    const value = event.detail.value
-    wx.cloud.callFunction({
-      name: 'updateTyChannelByCreator',
-      data: {
-        channelId: this.data.channel._id,
-        updateData: {
-          creatorShow: value
-        }
-      }
-    }).then(res => {
-      if(res.result.errCode){
-        throw res.result
-      }else{
-        this.setData({
-          'channel.creatorShow': value
-        })
-      }
-    }).catch(err=>{
-      console.error(err)
-      wx.showModal({
-        title: '切换失败',
-        content: '系统异常，请稍后重试或提交反馈',
-        showCancel: false,
-        success: function(){
-          this.setData({
-            'channel.creatorShow': !value
-          })
-        }.bind(this)
-      })
-    })
-  },
-
   copyOpenResourceUrl(){
     wx.setClipboardData({
       data: this.data.channel.openReourceUrl,
@@ -245,7 +187,7 @@ Page({
   tapDataDisplayHelp(){
     wx.showModal({
       title: '帮助',
-      content: '“数据更新记录”展示当前活动数据最近变化的时间轨迹，在不影响得到“更新”这一基本事实的情况下为了防止敏感内容渗入，活动数据可能被隐藏，如果您认为此处的数据安全无风险，可以通过反馈通道告诉我们，平台确认后将开放展示。',
+      content: '在不影响得到“更新”这一基本事实的情况下为了防止敏感内容渗入，数据值可能被隐藏（使用符号“*”覆盖），如果您认为此处的数据安全无风险，可以通过反馈通道告诉我们，平台确认后将开放展示。',
       cancelText: '反馈',
       success: function(res){
         if(!res.confirm){
@@ -296,16 +238,14 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    // 关闭监听
-    this.closeWatcher()
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.watchChannelDatas(this.data.channel._id)
-    setTimeout(wx.stopPullDownRefresh, 400)
+
   },
 
   /**
