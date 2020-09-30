@@ -57,6 +57,8 @@ exports.main = async (event, context) => {
         invitedUserCount
       }
     })
+    // 重新查询一遍
+    userProfile = (await db.collection('ty_user_profile').doc(userProfile._id).get()).data
   }
 
   return {
