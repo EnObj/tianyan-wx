@@ -14,7 +14,6 @@ Page({
     channel: null,
     userChannel: null,
     channelDatas: [],
-    showCreatorShowSwitch: false,
     userProfile: null
   },
 
@@ -29,8 +28,7 @@ Page({
     db.collection('ty_channel').doc(options.channelId).get().then(res => {
       const channel = res.data
       this.setData({
-        channel: channel,
-        showCreatorShowSwitch: getApp().globalData.userProfile._openid == channel.createBy,
+        channel: channel
       })
       tyUtils.pushTyChannelHistory(channel)
     }).catch(err=>{
