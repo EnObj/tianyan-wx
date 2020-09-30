@@ -2,7 +2,7 @@
   <mp-cells ext-class="no-title-cells">
     <mp-cell link url="/pages/mine/message" hover value="站内通知">
       <view slot="footer">
-        <view class="unreaded" wx:if="{{lastUnreadedMessage}}" style="background:{{lastUnreadedMessage.channel.channelTemplate.mainColor||'gray'}}">新</view>
+        <view class="unreaded" wx:if="{{lastUnreadedMessage}}" style="background:{{lastUnreadedMessage.channelData.channel.channelTemplate.mainColor||'gray'}}">新</view>
       </view>
     </mp-cell>
   </mp-cells>

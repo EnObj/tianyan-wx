@@ -18,6 +18,13 @@ Page({
    */
   onLoad: function (options) {
     this.loadItems()
+
+    // 全部已读
+    wx.cloud.callFunction({
+      name: 'readAllTyUserMessage'
+    }).then(res=>{
+      console.log(JSON.stringify(res.result))
+    })
   },
 
   loadItems(items = []) {
