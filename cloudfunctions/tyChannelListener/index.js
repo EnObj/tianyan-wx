@@ -110,6 +110,7 @@ exports.main = async (event, context) => {
             "channel": channel,
             data,
             dataChanged,
+            beforeData: lastChannelData && lastChannelData.data,
             openResourceUrl,
             "createTime": Date.now()
           }
