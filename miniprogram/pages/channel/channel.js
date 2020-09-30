@@ -25,25 +25,7 @@ Page({
     //   channelId: 'e656fa635f6d7f5f0079ee5e6e0c1709'
     // }
     // 加载channel
-    db.collection('ty_channel').doc(options.channelId).get().then(res => {
-      const channel = res.data
-      wx.setNavigationBarColor({
-        backgroundColor: channel.channelTemplate.mainColor || 'gray',
-        frontColor: '#ffffff',
-      })
-      this.setData({
-        channel: channel
-      })
-      tyUtils.pushTyChannelHistory(channel)
-    }).catch(err=>{
-      console.error(err)
-      this.setData({
-        channel: {
-          _id: options.channelId,
-          name: "__活动不存在__"
-        }
-      })
-    })
+    this.loadChannel(options.channelId)
     // 加载用户channel
     db.collection('ty_user_channel').where({
       'channel._id': options.channelId
@@ -59,6 +41,37 @@ Page({
     }).orderBy('createTime', 'desc').limit(1).get().then(res=>{
       this.setData({
         lastChannelData: res.data[0] || null
+      })
+    })
+  },
+
+  loadChannel(channelId){
+    // 检查缓存（只是为了给顶栏快速上色）
+    const activeChannel = getApp().globalData.activeChannel
+    if(activeChannel && activeChannel._id == channelId){
+      wx.setNavigationBarColor({
+        backgroundColor: activeChannel.channelTemplate.mainColor || 'gray',
+        frontColor: '#ffffff',
+      })
+    }
+    // 正式加载数据库
+    db.collection('ty_channel').doc(channelId).get().then(res => {
+      const channel = res.data
+      wx.setNavigationBarColor({
+        backgroundColor: channel.channelTemplate.mainColor || 'gray',
+        frontColor: '#ffffff',
+      })
+      this.setData({
+        channel: channel
+      })
+      tyUtils.pushTyChannelHistory(channel)
+    }).catch(err=>{
+      console.error(err)
+      this.setData({
+        channel: {
+          _id: channelId,
+          name: "__活动不存在__"
+        }
       })
     })
   },

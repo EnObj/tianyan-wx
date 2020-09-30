@@ -159,6 +159,9 @@ Page({
     if(userChannel.channelDataMessage && !userChannel.channelDataMessage.readed){
       this.readed(itemIndex)
     }
+    // 加一层缓存，避免打开时的闪烁
+    getApp().globalData.activeChannel = userChannel.channel
+
     wx.navigateTo({
       url: '/pages/channel/channel?channelId=' + userChannel.channel._id,
     })

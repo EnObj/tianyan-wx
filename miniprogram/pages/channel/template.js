@@ -132,6 +132,9 @@ Page({
     const tapIndex = +event.currentTarget.dataset.channelIndex
     const channel = this.data.channels[tapIndex]
 
+    // 加一层缓存，避免打开时的闪烁
+    getApp().globalData.activeChannel = channel
+
     wx.navigateTo({
       url: '/pages/channel/channel?channelId=' + channel._id,
     })
