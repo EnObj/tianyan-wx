@@ -13,7 +13,6 @@ Page({
   data: {
     channel: null,
     userChannel: null,
-    channelLimit: null,
     lastChannelData: null
   },
 
@@ -77,47 +76,42 @@ Page({
   },
 
   addUserChannel() {
-    db.collection('ty_user_channel').where({}).count().then(res=>{
-      // 检查额度
-      if(res.total >= this.data.channelLimit){
-        wx.showModal({
-          title: `超出订阅额度${this.data.channelLimit}`,
-          content: '请取消其他订阅后重新订阅此活动',
-          showCancel: false
-          // cancelText: '查看额度',
-          // success: function(res){
-          //   if(!res.confirm){
-          //     wx.switchTab({
-          //       url: '/pages/mine/index',
-          //     })
-          //   }
-          // }
-        })
-      }else{
-        // 订阅流程
-        this.setData({
-          userChannel: {}
-        })
-        db.collection('ty_user_channel').add({
-          data: {
-            "channel": this.data.channel,
-            "notify": false,
-            createTime: Date.now()
-          }
-        }).then(res => {
-          db.collection('ty_user_channel').doc(res._id).get().then(res => {
-            this.setData({
-              userChannel: res.data
-            })
-            wx.showToast({
-              title: '订阅成功',
-              icon: 'none'
-            })
+    userProfileUtils.getUserProfile().then(userProfile=>{
+      const channelLimit = userProfile.channelLimit
+      db.collection('ty_user_channel').where({}).count().then(res=>{
+        // 检查额度
+        if(res.total >= channelLimit){
+          wx.showModal({
+            title: `超出订阅额度${channelLimit}`,
+            content: '请取消其他订阅后重新订阅此活动',
+            showCancel: false
           })
-          // 标记用户关注渠道有变动
-          tyUtils.signUserChannelsChange()
-        })
-      }
+        }else{
+          // 订阅流程
+          this.setData({
+            userChannel: {}
+          })
+          db.collection('ty_user_channel').add({
+            data: {
+              "channel": this.data.channel,
+              "notify": false,
+              createTime: Date.now()
+            }
+          }).then(res => {
+            db.collection('ty_user_channel').doc(res._id).get().then(res => {
+              this.setData({
+                userChannel: res.data
+              })
+              wx.showToast({
+                title: '订阅成功',
+                icon: 'none'
+              })
+            })
+            // 标记用户关注渠道有变动
+            tyUtils.signUserChannelsChange()
+          })
+        }
+      })
     })
   },
 
@@ -251,11 +245,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    userProfileUtils.getUserProfile().then(userProfile=>{
-      this.setData({
-        channelLimit: userProfile.channelLimit
-      })
-    })
+    
   },
 
   /**
