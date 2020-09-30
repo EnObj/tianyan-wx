@@ -80,6 +80,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '探索',
+      path: '/pages/channel/templates?fromUser=' + getApp().globalData.userOpenid
+    }
   }
 })

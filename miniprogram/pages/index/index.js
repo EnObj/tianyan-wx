@@ -18,7 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setStorageSync('fromUser', options.fromUser)
     // 加载订阅列表
     this.loadUserChannels().then(()=>{
       this.setData({
@@ -27,6 +26,12 @@ Page({
       this.channelDataRefreshAnimate = wx.createAnimation({
         timingFunction: 'ease-out',
         duration: 300
+      })
+    })
+    // 加载用户信息
+    userProfileUtils.getUserProfile().then(userProfile=>{
+      this.setData({
+        userProfile
       })
     })
   },
@@ -219,6 +224,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '追你所爱',
+      path: '/pages/index/index?fromUser=' + getApp().globalData.userOpenid,
+      imageUrl: '/image/wx-share.png'
+    }
   }
 })

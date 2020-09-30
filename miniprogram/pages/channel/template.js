@@ -213,6 +213,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '分享给你一个追更项目',
+      path: '/pages/channel/template?templateId=' + this.data.template._id + '&fromUser=' + getApp().globalData.userOpenid
+    }
   }
 })

@@ -13,7 +13,7 @@ Page({
   data: {
     channel: null,
     userChannel: null,
-    userProfile: null,
+    channelLimit: null,
     lastChannelData: null
   },
 
@@ -79,19 +79,19 @@ Page({
   addUserChannel() {
     db.collection('ty_user_channel').where({}).count().then(res=>{
       // 检查额度
-      if(res.total >= this.data.userProfile.channelLimit){
+      if(res.total >= this.data.channelLimit){
         wx.showModal({
           title: '超出订阅额度',
-          content: `当前订阅活动额度限制为${this.data.userProfile.channelLimit}，请取消其他订阅后重新订阅此活动`,
+          content: '请取消其他订阅后重新订阅此活动',
           showCancel: false,
-          // cancelText: '提升额度',
-          // success: function(res){
-          //   if(!res.confirm){
-          //     wx.navigateTo({
-          //       url: '/pages/common/feedback',
-          //     })
-          //   }
-          // }
+          cancelText: '查看我的额度',
+          success: function(res){
+            if(!res.confirm){
+              wx.navigateTo({
+                url: '/pages/mine/index',
+              })
+            }
+          }
         })
       }else{
         // 订阅流程
@@ -253,7 +253,7 @@ Page({
   onShow: function () {
     userProfileUtils.getUserProfile().then(userProfile=>{
       this.setData({
-        userProfile
+        channelLimit: userProfile.channelLimit
       })
     })
   },
@@ -291,8 +291,8 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '分享给你一个活动',
-      path: '/pages/channel/channel?channelId=' + this.data.channel._id
+      title: '分享给你一个追更活动',
+      path: '/pages/channel/channel?channelId=' + this.data.channel._id + '&fromUser=' + getApp().globalData.userOpenid
     }
   }
 })
