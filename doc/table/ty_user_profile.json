@@ -4,8 +4,9 @@
   "example": {
     "_id": "ty_user_profile_1",
     "_openid": "user_1",
-    "channelLimit": 20,
+    "channelLimit": 21,
     "fromUser": "user_2",
+    "invitedUserCount": 1,
     "createTime": 123456789
   }
 }
