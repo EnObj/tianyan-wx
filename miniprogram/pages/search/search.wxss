@@ -1,0 +1,19 @@
+/* miniprogram/pages/search/search.wxss */
+.search{
+  padding: 10px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+}
+.inp-area{
+  background: #f6f6f6;
+  /* border: 2px #aaa solid; */
+  padding: 15px;
+  border-radius: 15px;
+}
+.inp{
+  flex: auto;
+}
+.clean-icon{
+  margin: 0 15px;
+}

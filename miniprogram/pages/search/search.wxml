@@ -1,0 +1,21 @@
+<view class="search">
+  <view class="flex-between inp-area">
+    <view class="inp">
+      <input placeholder="搜索或输入网址" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus maxlength="500" value="{{keyword}}" bindinput="keywordChange"/>
+    </view>
+    <view class="clean-icon" bindtap="cleanKeyword" hidden="{{!keyword}}">
+			<mp-icon icon="close2" size="20" type="field" color="gray" />
+		</view>
+    <navigator open-type="navigateBack" class="not-importent ref-content">取消</navigator>
+  </view>
+</view>
+<view class="result">
+  <view class="channels">
+    <navigator url="/pages/channel/channel?channelId={{item._id}}" class="channel padding-box" wx:for="{{channels}}" wx:key="_id">
+      <view class="channel-name">
+        {{item.name}}
+      </view>
+      <view class="channel-template not-importent">{{item.channelTemplate.name}}</view>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,62 @@
+/* miniprogram/pages/index/explore.wxss */
+.main{
+  padding: 30px;
+}
+
+.logo{
+  margin-top: 80px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 900px;
+  color: #333;
+}
+
+.inp{
+  border: 2px #aaa solid;
+  height: 50px;
+  border-radius: 15px;
+  margin: 20px 0;
+}
+
+.templates{
+  flex-wrap: wrap;
+  /* padding: 15px 20px; */
+}
+
+.template{
+  width: 25%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  /* background: #fff; */
+  /* padding: 15px; */
+  border-radius: 15px;
+}
+
+.template-logo{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: gray;
+  margin:auto;
+  padding: 5px;
+  display: flex;
+}
+
+.text-logo{
+  font-size: 25px;
+  font-weight: 700;
+  color: #fff;
+  margin: auto;
+}
+
+.template-logo>image{
+  width: 100%;
+  height: 100%;
+}
+
+.template-name{
+  font-size: 14px;
+  margin-top:10px;
+  text-align: center;
+  padding: 0 5px;
+}

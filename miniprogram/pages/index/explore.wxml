@@ -1,0 +1,27 @@
+<wxs module="textUtils"> 
+  module.exports = {
+    getFirstChar: function(text){
+      return (text || "？").substring(0, 1);
+    }
+  }
+</wxs>
+<view class="main">
+  <view class="logo">探索</view>
+  <navigator class="inp" url="/pages/search/search">
+  </navigator>
+  <view class="flex-start templates">
+    <view class="template active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
+      <view class="template-logo" style="background:{{item.mainColor||'gray'}};">
+        <image src="{{item.logo}}" wx:if="{{item.logo}}"></image>
+        <view wx:else class="text-logo">{{textUtils.getFirstChar(item.name)}}</view>
+      </view>
+      <view class="template-name no-wrap">{{item.name}}</view>
+    </view>
+    <navigator url="/pages/channel/templates" class="template active-hover">
+      <view class="template-logo" style="background:#fff;">
+        <image src="/image/icon/eye-line.png"></image>
+      </view>
+      <view class="template-name no-wrap">更多</view>
+    </navigator>
+  </view>
+</view>
