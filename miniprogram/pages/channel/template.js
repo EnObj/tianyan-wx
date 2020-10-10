@@ -75,6 +75,10 @@ Page({
       })
       return
     }
+    this.search(key)
+  },
+
+  search(key){
     wx.showLoading({
       title: '正在加载',
     })
@@ -91,10 +95,23 @@ Page({
           url: '/pages/channel/channel?channelId=' + res.result.channel._id,
         })
       } else {
-        wx.showModal({
-          content: res.result.errMsg,
-          showCancel: false,
-        })
+        // 处理405建议：
+        if(res.result.errCode == 405){
+          wxApiUtils.showActions(res.result.advices.map(advice=>{
+            return {
+              name: `建议：${advice}`,
+              callback: function(){
+                this.search(advice)
+              }.bind(this),
+              condition: true
+            }
+          }))
+        }else{
+          wx.showModal({
+            content: res.result.errMsg,
+            showCancel: false,
+          })
+        }
       }
     }).catch(err=>{
       console.error(err)
