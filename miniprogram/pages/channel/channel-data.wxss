@@ -1,0 +1,8 @@
+/* miniprogram/pages/channel/channel-data.wxss */
+@import "./../../components/weui-wxss/dist/style/weui.wxss";
+
+.attr-value{
+  font-size: 14px;
+  word-break: break-all;
+  margin-left: 5px;
+}
