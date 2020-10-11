@@ -12,7 +12,8 @@ Page({
     channels: [],
     maybeChannels: [],
     keyword: '',
-    focus: true
+    focus: true,
+    finishedSearchCount: 0
   },
 
   /**
@@ -36,7 +37,8 @@ Page({
   startFocus(){
     this.setData({
       channels: [],
-      maybeChannels: []
+      maybeChannels: [],
+      finishedSearchCount: 0
     })
   },
 
@@ -64,6 +66,9 @@ Page({
         wx.hideLoading({
           success: (res) => {},
         })
+        this.setData({
+          finishedSearchCount: this.data.finishedSearchCount + 1
+        })
         if (!res.result.errCode) {
           this.setData({
             channels: this.data.channels.concat([res.result.channel])
@@ -84,6 +89,9 @@ Page({
           }
         }
       }).catch(err=>{
+        this.setData({
+          finishedSearchCount: this.data.finishedSearchCount + 1
+        })
         console.error(err)
       })
     })

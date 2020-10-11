@@ -10,6 +10,7 @@
     <navigator open-type="navigateBack" class="not-importent ref-content">取消</navigator>
   </view>
 </view>
+<progress percent="{{finishedSearchCount/templates.length * 100}}" active stroke-width="3" wx:if="{{finishedSearchCount && finishedSearchCount != templates.length}}" active-mode="forwards"/>
 <view class="result">
   <view class="channels" wx:if="{{channels.length}}">
     <mp-cells title="已收录">
