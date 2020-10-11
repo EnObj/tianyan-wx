@@ -33,8 +33,16 @@ Page({
     })
   },
 
-  search(event){
-    
+  openTemplates(){
+    wx.navigateTo({
+      url: '/pages/channel/templates',
+    })
+  },
+
+  openSearch(){
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
   },
 
   /**

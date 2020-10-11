@@ -40,3 +40,15 @@
   margin-top:10px;
   text-align: center;
 }
+
+.add-to-explore{
+  text-align: center;
+  margin: 5px auto;
+  background: #07c160;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+
+.add-to-explore-done{
+  background: #ddd;
+}

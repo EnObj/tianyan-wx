@@ -12,6 +12,10 @@
       <view wx:else class="text-logo">{{textUtils.getFirstChar(item.name)}}</view>
     </view>
     <view class="template-name no-wrap">{{item.name}}</view>
-    <!-- <view class="template-desc not-importent">{{item.desc}}</view> -->
+    <view class="flex-around">
+      <view class="add-to-explore {{index > 4 ? '' : 'add-to-explore-done'}}">
+        <mp-icon icon="{{index > 4 ? 'add' : 'done'}}" size="20" color="white"></mp-icon>
+      </view>
+    </view>
   </view>
 </view>

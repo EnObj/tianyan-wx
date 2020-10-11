@@ -6,9 +6,11 @@
   }
 </wxs>
 <view class="main">
-  <view class="logo">探索</view>
-  <navigator class="inp" url="/pages/search/search">
-  </navigator>
+  <view class="logo">
+    <image class="logo-img" src="/image/explore.png" mode="widthFix"></image>
+  </view>
+  <view class="inp" bindtap="openSearch">
+  </view>
   <view class="flex-start templates">
     <view class="template active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
       <view class="template-logo" style="background:{{item.mainColor||'gray'}};">
@@ -17,11 +19,11 @@
       </view>
       <view class="template-name no-wrap">{{item.name}}</view>
     </view>
-    <navigator url="/pages/channel/templates" class="template active-hover">
+    <view url="/pages/channel/templates" class="template active-hover" bindtap="openTemplates">
       <view class="template-logo" style="background:#fff;">
-        <image src="/image/icon/eye-line.png"></image>
+        <image src="/image/icon/add-fill.png"></image>
       </view>
       <view class="template-name no-wrap">更多</view>
-    </navigator>
+    </view>
   </view>
 </view>

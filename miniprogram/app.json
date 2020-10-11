@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/explore",
+    "pages/channel/templates",
     "pages/index/index",
     "pages/channel/channel",
     "pages/mine/index",
     "pages/mine/message",
-    "pages/channel/templates",
     "pages/channel/new-channel",
     "pages/channel/template",
     "pages/common/browser",
