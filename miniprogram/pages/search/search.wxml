@@ -33,4 +33,13 @@
       </mp-cell>
     </mp-cells>
   </view>
+  <view class="new-cahnnel-door" wx:if="{{showNewChannelDoor}}" bindtap="newChannel">
+    <mp-cells title="定制">
+      <mp-cell link hover value="{{keyword}}">
+        <view slot="icon" class="template-logo">
+          <view class="text-logo">{{textUtils.getFirstChar('链')}}</view>
+        </view>
+      </mp-cell>
+    </mp-cells>
+  </view>
 </view>

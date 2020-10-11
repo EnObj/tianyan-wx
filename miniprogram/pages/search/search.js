@@ -11,6 +11,7 @@ Page({
     templates: [],
     channels: [],
     maybeChannels: [],
+    showNewChannelDoor: false,
     keyword: '',
     focus: true,
     finishedSearchCount: 0
@@ -38,7 +39,8 @@ Page({
     this.setData({
       channels: [],
       maybeChannels: [],
-      finishedSearchCount: 0
+      finishedSearchCount: 0,
+      showNewChannelDoor: false
     })
   },
 
@@ -54,6 +56,11 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
+    if(/^https?:\/\//.test(keyword)){
+      this.setData({
+        showNewChannelDoor: true
+      })
+    }
     // 分发查询
     this.data.templates.forEach(template=>{
       wx.cloud.callFunction({
@@ -130,6 +137,13 @@ Page({
         content: '系统异常，请稍后重试或提交反馈',
         showCancel: false,
       })
+    })
+  },
+
+  newChannel(){
+    const url = this.data.keyword
+    wx.navigateTo({
+      url: '/pages/channel/new-channel?url=' + encodeURIComponent(url),
     })
   },
 
