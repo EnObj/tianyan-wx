@@ -10,8 +10,8 @@
     <navigator open-type="navigateBack" class="not-importent ref-content">取消</navigator>
   </view>
 </view>
-<view class="result" wx:if="{{channels.length}}">
-  <view class="channels">
+<view class="result">
+  <view class="channels" wx:if="{{channels.length}}">
     <mp-cells title="已收录">
       <mp-cell wx:for="{{channels}}" wx:key="_id" link url="/pages/channel/channel?channelId={{item._id}}" hover value="{{item.name}}">
         <view slot="icon" class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
@@ -20,14 +20,16 @@
         </view>
       </mp-cell>
     </mp-cells>
-    <!-- <navigator url="/pages/channel/channel?channelId={{item._id}}" class="channel flex-start" wx:for="{{channels}}" wx:key="_id">
-      <view class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
-        <image src="{{item.channelTemplate.logo}}" wx:if="{{item.channelTemplate.logo}}"></image>
-        <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelTemplate.name)}}</view>
-      </view>
-      <view class="channel-name">
-        {{item.name}}
-      </view>
-    </navigator> -->
+  </view>
+  <view class="maybe-channels" wx:if="{{maybeChannels.length}}">
+    <mp-cells title="建议">
+      <mp-cell wx:for="{{maybeChannels}}" wx:key="_id" link hover>
+        <view bindtap="resolveMaybeChannel" data-item-index="{{index}}">{{item.name}}</view>
+        <view slot="icon" class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
+          <image src="{{item.channelTemplate.logo}}" wx:if="{{item.channelTemplate.logo}}"></image>
+          <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelTemplate.name)}}</view>
+        </view>
+      </mp-cell>
+    </mp-cells>
   </view>
 </view>

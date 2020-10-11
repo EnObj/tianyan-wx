@@ -1,4 +1,5 @@
 const db = wx.cloud.database()
+const tyUtils = require('./../../utils/tyUtils.js')
 
 // miniprogram/pages/search/search.js
 Page({
@@ -7,7 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    templates: [],
     channels: [],
+    maybeChannels: [],
     keyword: '',
     focus: true
   },
@@ -16,7 +19,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    tyUtils.getAll(db.collection('ty_channel_template').where({})).then(list=>{
+      this.setData({
+        templates: list
+      })
+    })
   },
 
   cleanKeyword(){
@@ -28,7 +35,8 @@ Page({
 
   startFocus(){
     this.setData({
-      channels: []
+      channels: [],
+      maybeChannels: []
     })
   },
 
@@ -44,17 +52,75 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    db.collection('ty_channel').where({
-      name: db.RegExp({
-        regexp: keyword,
-        options: 'i'
+    // 分发查询
+    this.data.templates.forEach(template=>{
+      wx.cloud.callFunction({
+        name: 'resolveTyChannel',
+        data: {
+          templateId: template._id,
+          key: keyword
+        }
+      }).then(res=>{
+        wx.hideLoading({
+          success: (res) => {},
+        })
+        if (!res.result.errCode) {
+          this.setData({
+            channels: this.data.channels.concat([res.result.channel])
+          })
+        } else {
+          // 处理405建议：
+          if(res.result.errCode == 405){
+            this.setData({
+              maybeChannels: this.data.maybeChannels.concat(res.result.advices.map(advice=>{
+                return {
+                  name: `${advice}`,
+                  channelTemplate: template
+                }
+              }))
+            })
+          }else{
+            console.error(res.result.errMsg)
+          }
+        }
+      }).catch(err=>{
+        console.error(err)
       })
-    }).get().then(res=>{
-      wx.hideLoading({
-        success: (res) => {},
-      })
-      this.setData({
-        channels: res.data
+    })
+  },
+
+  resolveMaybeChannel(event){
+    const itemIndex = +event.currentTarget.dataset.itemIndex
+    const maybeChannel = this.data.maybeChannels[itemIndex]
+
+    wx.showLoading({
+      title: '正在加载',
+    })
+    wx.cloud.callFunction({
+      name: 'resolveTyChannel',
+      data: {
+        templateId: maybeChannel.channelTemplate._id,
+        key: maybeChannel.name
+      }
+    }).then(res=>{
+      wx.hideLoading()
+      if (!res.result.errCode) {
+        wx.navigateTo({
+          url: '/pages/channel/channel?channelId=' + res.result.channel._id,
+        })
+      }else{
+        wx.showModal({
+          content: res.result.errMsg,
+          showCancel: false,
+        })
+      }
+    }).catch(err=>{
+      console.error(err)
+      wx.hideLoading()
+      wx.showModal({
+        title: '加载失败',
+        content: '系统异常，请稍后重试或提交反馈',
+        showCancel: false,
       })
     })
   },
