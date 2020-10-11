@@ -1,7 +1,8 @@
+<wxs src="./../../wxs/textUtils.wxs" module="textUtils"/>
 <view class="search">
   <view class="flex-between inp-area">
     <view class="inp">
-      <input placeholder="搜索或输入网址" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus maxlength="500" value="{{keyword}}" bindinput="keywordChange"/>
+      <input placeholder="搜索或输入网址" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus="{{focus}}" maxlength="500" value="{{keyword}}" bindinput="keywordChange" bindfocus="startFocus"/>
     </view>
     <view class="clean-icon" bindtap="cleanKeyword" hidden="{{!keyword}}">
 			<mp-icon icon="close2" size="20" type="field" color="gray" />
@@ -9,13 +10,24 @@
     <navigator open-type="navigateBack" class="not-importent ref-content">取消</navigator>
   </view>
 </view>
-<view class="result">
+<view class="result" wx:if="{{channels.length}}">
   <view class="channels">
-    <navigator url="/pages/channel/channel?channelId={{item._id}}" class="channel padding-box" wx:for="{{channels}}" wx:key="_id">
+    <mp-cells title="已收录">
+      <mp-cell wx:for="{{channels}}" wx:key="_id" link url="/pages/channel/channel?channelId={{item._id}}" hover value="{{item.name}}">
+        <view slot="icon" class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
+          <image src="{{item.channelTemplate.logo}}" wx:if="{{item.channelTemplate.logo}}"></image>
+          <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelTemplate.name)}}</view>
+        </view>
+      </mp-cell>
+    </mp-cells>
+    <!-- <navigator url="/pages/channel/channel?channelId={{item._id}}" class="channel flex-start" wx:for="{{channels}}" wx:key="_id">
+      <view class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
+        <image src="{{item.channelTemplate.logo}}" wx:if="{{item.channelTemplate.logo}}"></image>
+        <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelTemplate.name)}}</view>
+      </view>
       <view class="channel-name">
         {{item.name}}
       </view>
-      <view class="channel-template not-importent">{{item.channelTemplate.name}}</view>
-    </navigator>
+    </navigator> -->
   </view>
 </view>

@@ -8,7 +8,8 @@ Page({
    */
   data: {
     channels: [],
-    keyword: ''
+    keyword: '',
+    focus: true
   },
 
   /**
@@ -20,7 +21,14 @@ Page({
 
   cleanKeyword(){
     this.setData({
-      keyword: ''
+      keyword: '',
+      focus: true
+    })
+  },
+
+  startFocus(){
+    this.setData({
+      channels: []
     })
   },
 
