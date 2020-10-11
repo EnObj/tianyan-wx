@@ -72,7 +72,7 @@
 
 <view class="no-title-cells" wx:if="{{channel.channelTemplate}}" bindtap="openTemplate">
   <mp-cells>
-    <mp-cell link hover value="来源项目" footer="{{channel.channelTemplate.name}}">
+    <mp-cell link hover value="站点" footer="{{channel.channelTemplate.name}}">
     </mp-cell>
   </mp-cells>
 </view>
