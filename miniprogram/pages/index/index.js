@@ -1,7 +1,6 @@
 const db = wx.cloud.database()
 const tyUtils = require('./../../utils/tyUtils.js')
 const wxApiUtils = require("../../utils/wxApiUtils")
-const userProfileUtils = require('../../utils/userProfileUtils.js')
 
 // miniprogram/pages/index/index.js
 Page({

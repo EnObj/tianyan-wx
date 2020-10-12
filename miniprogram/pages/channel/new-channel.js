@@ -1,3 +1,5 @@
+const wxApiUtils = require("../../utils/wxApiUtils")
+
 // miniprogram/pages/channel/new-channel.js
 Page({
 
@@ -51,6 +53,17 @@ Page({
         })
         this.setData({
           document: res.result.document
+        })
+
+        // 标题内容安全检测
+        wxApiUtils.checkContentSafe(this.data.document.title).then(()=>{},()=>{
+          wx.showToast({
+            title: '标题含有违法违规内容',
+            icon: 'none'
+          })
+          this.setData({
+            'document.title': '。。。'
+          })
         })
       }
     }).catch(err=>{
