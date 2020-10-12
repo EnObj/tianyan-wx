@@ -18,9 +18,18 @@ module.exports = {
       }
     }
 
-    return {
-      channelName: $('feed>title').text().trim(),
-      resourceUrl: key,
+    const title = $('feed>title').text().trim()
+    if(title){
+      return {
+        channelName: title,
+        resourceUrl: key,
+      }
     }
+
+    return {
+      errCode: 401,
+      errMsg: '请重新输入'
+    }
+
   }
 }

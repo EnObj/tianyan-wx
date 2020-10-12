@@ -2,6 +2,15 @@ const puppeteer = require('puppeteer')
 
 module.exports = {
   resolve: async function (key) {
+    
+    // 不处理链接
+    if(/https?:\/\//.test(key)){
+      return {
+        errCode: 401,
+        errMsg: '请重新输入'
+      }
+    }
+
     const browser = await puppeteer.launch({
       args: ['--no-sandbox']
     })
