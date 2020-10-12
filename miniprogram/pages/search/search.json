@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "mp-icon": "../../components/icon/icon",
+    "mp-cells": "../../components/cells/cells",
+    "mp-cell": "../../components/cell/cell"
+  },
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTitleText": "搜索"
 }
