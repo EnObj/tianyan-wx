@@ -1,17 +1,18 @@
-<wxs module="textUtils"> 
-  module.exports = {
-    getFirstChar: function(text){
-      return (text || "？").substring(0, 1);
-    }
-  }
-</wxs>
+<wxs src="./../../wxs/textUtils.wxs" module="textUtils"/>
 <view class="flex-between templates">
-  <view class="template active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
+  <view class="template" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}">
     <view class="template-logo" style="background:{{item.mainColor||'gray'}};">
       <image src="{{item.logo}}" wx:if="{{item.logo}}"></image>
       <view wx:else class="text-logo">{{textUtils.getFirstChar(item.name)}}</view>
     </view>
     <view class="template-name no-wrap">{{item.name}}</view>
-    <!-- <view class="template-desc not-importent">{{item.desc}}</view> -->
+    <view class="flex-around">
+      <view wx:if="{{item.signMine}}" class="sign-my-template sign-mine" catchtap="removeMyTemplate" data-item-index="{{index}}">
+        <image class="sign-img" src="/image/icon/check-fill.svg" mode="widthFix"></image>
+      </view>
+      <view wx:else class="sign-my-template" catchtap="pushMyTemplate" data-item-index="{{index}}">
+        <image class="sign-img" src="/image/icon/add-fill.svg" mode="widthFix"></image>
+      </view>
+    </view>
   </view>
 </view>

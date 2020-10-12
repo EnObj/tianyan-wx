@@ -1,0 +1,25 @@
+<wxs src="./../../wxs/textUtils.wxs" module="textUtils"/>
+<view class="main abs-center"> 
+  <view class="abs-center-content" style="flex:auto;">
+    <view class="logo">
+      <image src="/image/explore.png" class="logo-img" mode="widthFix"></image>
+    </view> 
+    <view class="inp" bindtap="openSearch"> 
+    </view> 
+    <view class="flex-start templates"> 
+      <view class="template active-hover" wx:for="{{templates}}" wx:key="_id" bindtap="openChannelTemplate" data-item-index="{{index}}"> 
+        <view class="template-logo" style="background:{{item.mainColor||'gray'}};"> 
+          <image src="{{item.logo}}" wx:if="{{item.logo}}"></image> 
+          <view wx:else class="text-logo">{{textUtils.getFirstChar(item.name)}}</view> 
+        </view> 
+        <view class="template-name no-wrap">{{item.name}}</view> 
+      </view> 
+      <view class="template" bindtap="openTemplates"> 
+        <view class="template-logo" style="background:#fff;"> 
+          <image src="/image/icon/add-fill.png"></image> 
+        </view> 
+        <view class="template-name no-wrap">更多</view> 
+      </view> 
+    </view> 
+  </view>
+</view>

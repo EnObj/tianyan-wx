@@ -16,8 +16,16 @@ Page({
    */
   onLoad: function (options) {
     tyUtils.getAll(db.collection('ty_channel_template').where({})).then(list=>{
-      this.setData({
-        templates: list
+      tyUtils.getMyTemplates().then(myTemplates=>{
+        const myTemplateIds = myTemplates.map(myTemplate=>{
+          return myTemplate._id
+        })
+        this.setData({
+          templates: list.map(template=>{
+            template.signMine = myTemplateIds.includes(template._id)
+            return template
+          })
+        })
       })
     })
   },
@@ -31,6 +39,38 @@ Page({
 
     wx.navigateTo({
       url: '/pages/channel/template?templateId=' + template._id,
+    })
+  },
+
+  removeMyTemplate(event){
+    const itemIndex = +event.currentTarget.dataset.itemIndex
+    const template = this.data.templates[itemIndex]
+
+    tyUtils.removeMyTemplate(template._id).then(res=>{
+      const updator = {}
+      updator[`templates[${itemIndex}].signMine`] = false
+      this.setData(updator)
+
+      wx.showToast({
+        title: '已从首页移除',
+        icon: 'none'
+      })
+    })
+  },
+
+  pushMyTemplate(event){
+    const itemIndex = +event.currentTarget.dataset.itemIndex
+    const template = this.data.templates[itemIndex]
+
+    tyUtils.pushMyTemplate(template).then(res=>{
+      const updator = {}
+      updator[`templates[${itemIndex}].signMine`] = true
+      this.setData(updator)
+
+      wx.showToast({
+        title: '已添加到首页',
+        icon: 'none'
+      })
     })
   },
 

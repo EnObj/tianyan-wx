@@ -27,6 +27,29 @@ module.exports = {
       return history.tyChannel._id != tyChannelId
     }))
     return Promise.resolve()
+  },
+  getMyTemplates(){
+    const myTemplates = wx.getStorageSync('myTemplates')
+    // 本地没有记录
+    if(!myTemplates){
+      return wx.cloud.database().collection('ty_channel_template').where({}).limit(5).get().then(res=>{
+        wx.setStorageSync('myTemplates', res.data)
+        return res.data
+      })
+    }
+    return Promise.resolve(myTemplates)
+  },
+  removeMyTemplate(templateId){
+    const myTemplates = wx.getStorageSync('myTemplates') || []
+    wx.setStorageSync('myTemplates', myTemplates.filter(template=>{
+      return template._id != templateId
+    }))
+    return Promise.resolve()
+  },
+  pushMyTemplate(template){
+    const myTemplates = wx.getStorageSync('myTemplates') || []
+    wx.setStorageSync('myTemplates', [...myTemplates, template])
+    return Promise.resolve()
   }
 }
 
