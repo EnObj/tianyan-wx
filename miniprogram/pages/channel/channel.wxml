@@ -15,7 +15,7 @@
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{!channel.disabled ?'dt-refreshing':''}}" style="background:{{channel.channelTemplate.mainColor||'gray'}}"></view>
-      <view class="channel-datas-title">活动数据</view>
+      <view class="channel-datas-title">正在追更</view>
       <view class="help-data-display" wx:if="{{(channel.dataDisplay || channel.channelTemplate.dataDisplay) != 'show'}}" bindtap="tapDataDisplayHelp">
         <mp-icon icon="help" size="20" color="gray"></mp-icon>
       </view>

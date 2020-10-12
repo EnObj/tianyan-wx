@@ -93,7 +93,7 @@ Page({
           attrs: this.selectedSelectors.map((selector, index)=>{
             return {
               path: selector,
-              name: `活动数据${index+1}`
+              name: `追更数据${index+1}`
             }
           })
         },
