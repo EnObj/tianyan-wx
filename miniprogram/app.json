@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/index/explore",
     "pages/channel/templates",
-    "pages/index/index",
     "pages/channel/channel",
     "pages/mine/index",
     "pages/mine/message",
