@@ -21,9 +21,9 @@
       </view>
     </view>
   </view>
-  <view bindtap="showBeforeData">
+  <view>
     <mp-cells wx:if="{{lastChannelData}}">
-      <mp-cell hover="{{lastChannelData.beforeData}}" footer="{{timeUtils.formatPass(lastChannelData.createTime)}}更新">
+      <mp-cell hover link url="/pages/channel/channel-data?channelId={{channel._id}}" footer="{{timeUtils.formatPass(lastChannelData.createTime)}}更新">
         <view class="flex-start channel-data">
           <view class="channel-data-item">
             <view class="channel-attr-items">

@@ -1,0 +1,19 @@
+<wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
+<wxs src="./../../wxs/channel.wxs" module="channelUtils"/>
+<view class="main">
+  <mp-cells wx:if="{{items.length}}" footer="{{items.length>15?'最多展示最近20条记录':''}}">
+    <mp-cell wx:for="{{items}}" wx:key="_id" footer="{{timeUtils.formatPass(item.createTime)}}">
+      <view class="flex-start channel-data">
+        <view class="channel-data-item">
+          <view class="channel-attr-items">
+            <view class="channel-attr-item" wx:for="{{item.channel.attrs||item.channel.channelTemplate.attrs}}" wx:key="name"
+              wx:for-item="attr">
+              <text class="">{{attr.name}}</text>
+              <text class="attr-value not-importent">{{channelUtils.displayAttrValue(item.data[attr.name], item.channel.dataDisplay || item.channel.channelTemplate.dataDisplay)}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-cell>
+  </mp-cells>
+</view>
