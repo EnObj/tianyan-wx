@@ -41,7 +41,7 @@
 </view>
 
 <view wx:if="{{userChannel}}">
-  <mp-cells title="开启后，一旦活动有更新，您将收到一条微信服务通知">
+  <mp-cells title="开启后，一旦有更新，您将收到一条微信服务通知">
     <mp-cell>
       <view>消息通知</view>
       <view slot="footer">
