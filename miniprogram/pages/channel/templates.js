@@ -15,7 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    tyUtils.getAll(db.collection('ty_channel_template').where({})).then(list=>{
+    tyUtils.getAll(db.collection('ty_channel_template').where({
+      sort: db.command.gte(0)
+    }).orderBy('sort', 'desc')).then(list=>{
       tyUtils.getMyTemplates().then(myTemplates=>{
         const myTemplateIds = myTemplates.map(myTemplate=>{
           return myTemplate._id
