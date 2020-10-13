@@ -50,6 +50,10 @@ module.exports = {
     const myTemplates = wx.getStorageSync('myTemplates') || []
     wx.setStorageSync('myTemplates', [...myTemplates, template])
     return Promise.resolve()
+  },
+  updateMyTemplates(myTemplates){
+    wx.setStorageSync('myTemplates', myTemplates)
+    return Promise.resolve()
   }
 }
 

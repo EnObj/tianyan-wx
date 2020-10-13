@@ -26,6 +26,9 @@ Page({
             return template
           })
         })
+        tyUtils.updateMyTemplates(this.data.templates.filter(template=>{
+          return template.signMine
+        }))
       })
     })
   },
