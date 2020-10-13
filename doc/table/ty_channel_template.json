@@ -17,6 +17,7 @@
     "keyName": "up主名字",
     "keyHelp": "打开某某APP-找到你喜欢的用户-选择分享-复制链接",
     "mainColor": "#FF9933",
-    "dataDisplay": "show/hidden"
+    "dataDisplay": "show/hidden",
+    "resourceRestorer": "jsonp"
   }
 }

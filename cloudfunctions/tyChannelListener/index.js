@@ -72,7 +72,15 @@ exports.main = async (event, context) => {
     console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
     try {
       // 请求资源
-      const resource = await request(channel.resourceUrl)
+      let resource = await request(channel.resourceUrl)
+
+      // 修复资源
+      const resourceRestorer = channel.resourceRestorer || channel.channelTemplate.resourceRestorer
+      if(resourceRestorer){
+        const restorer = require(`./restorer/${resourceRestorer}_resourceRestorer.js`)
+        resource = await restorer.restore(resource)
+      }
+
       // 属性值解析器
       valueResolver = valueResolvers[channel.resourceType || channel.channelTemplate.resourceType]
 
