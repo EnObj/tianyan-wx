@@ -19,6 +19,11 @@ module.exports = {
           openResourceUrl: `https://m.weibo.cn/u/${userId}`
         }
       }
+      return {
+        errCode: 405,
+        advices: [user.screen_name],
+        errMsg: '未发现博主，如果你找的是【' + user.screen_name + "】，请输入完整名称重试"
+      }
     }catch(err){
       console.error(err)
     }
