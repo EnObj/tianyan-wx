@@ -1,19 +1,29 @@
 <view class="main">
-  <view class="about">
-    <view class="about-part">
-      本小程序作为第三方通知引擎，对平台型网站或app上的活动信息添加定制通知功能，链接您和您关心的信息，自动追踪更新并通知到您的微信，使您不必再花费时间频繁检查，帮助您节约时间，提高生活工作效率。
+  <view class="flex-start word">
+    <view class="icon">
+      <image src="/image/icon/heart-fill.svg" mode="widthFix"/>
     </view>
-    <view class="about-part not-importent">
-      【声明】小程序内所有项目和活动内容均来源于互联网公开信息，仅供用户学习和浏览使用，如果某些内容侵犯了您的权益，请通过反馈通道及时联系我们。
-    </view>
-    <view class="about-part not-importent">
-      【隐私保护协议】我们非常注重用户隐私保护，在不影响系统核心功能正常运行的情况下绝不要求用户提供包括微信昵称或头像等任何个人信息（在此之前，您以匿名方式访问）。您的订阅和浏览数据仅作为提供系统核心功能正常运行的必要因素而被存储到服务器和在加密网络中传输。我们承诺，在未经您的允许的情况下，这些数据绝不会与任何第三方共享。
-    </view>
-    <view class="about-part not-importent">
-      继续使用此小程序，即代表您同意上述内容。
+    <view class="content">
+      <view class="name">第1章 爱</view>
+      <view class="desc not-importent">你在茫茫网络世界中，发现了真爱，Ta不定期发布动态</view>
     </view>
   </view>
-  <view class="feedback">
-    <button open-type="feedback" type="primary">问题反馈/建议</button>
+  <view class="flex-start word">
+    <view class="icon">
+      <image src="/image/icon/heart-add-fill.svg" mode="widthFix"/>
+    </view>
+    <view class="content">
+      <view class="name">第2章 追</view>
+      <view class="desc not-importent">订阅，小程序帮你实时追踪</view>
+    </view>
+  </view>
+  <view class="flex-start word">
+    <view class="icon">
+      <image src="/image/icon/chat-heart-fill.svg" mode="widthFix"/>
+    </view>
+    <view class="content">
+      <view class="name">第3章 更</view>
+      <view class="desc not-importent">Ta更新动态，你第一时间收到通知，去把爱的首赞及留言放在前排</view>
+    </view>
   </view>
 </view>

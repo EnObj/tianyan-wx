@@ -1,5 +1,5 @@
 .main{
-  padding: 20px;
+  padding: 40px 30px;
 }
 
 .about{
@@ -12,4 +12,22 @@
 
 .thanks{
   margin-bottom: 50px;
+}
+
+.word{
+  padding-bottom: 50px;
+}
+
+.icon{
+  width: 70px;
+  margin-right: 10px;
+  flex: none;
+}
+
+.icon>image{
+  width: 100%;
+}
+
+.name{
+  /* font-size: 20px; */
 }
