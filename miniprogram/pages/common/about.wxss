@@ -27,3 +27,12 @@
 .icon>image{
   width: 100%;
 }
+
+.door{
+  padding: 10px 30px;
+  background: #07c160;
+  border-radius: 20px;
+  margin-top: 20px;
+  color: #fff;
+  text-align: center;
+}

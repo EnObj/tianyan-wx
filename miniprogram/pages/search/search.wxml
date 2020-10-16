@@ -2,7 +2,7 @@
 <view class="search">
   <view class="flex-between inp-area">
     <view class="inp">
-      <input placeholder="搜索或输入网址" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus="{{focus}}" maxlength="500" value="{{keyword}}" bindinput="keywordChange" bindfocus="startFocus"/>
+      <input placeholder="搜索名称或输入网址" bindconfirm="submit" confirm-type="search" cursor-spacing="20" focus="{{focus}}" maxlength="500" value="{{keyword}}" bindinput="keywordChange" bindfocus="startFocus"/>
     </view>
     <view class="clean-icon" bindtap="cleanKeyword" hidden="{{!keyword}}">
 			<mp-icon icon="close2" size="20" type="field" color="gray" />

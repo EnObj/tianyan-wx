@@ -5,7 +5,7 @@
     </view>
     <view class="content">
       <view class="name">第1章 爱</view>
-      <view class="desc not-importent">你在茫茫网络世界中，发现了真爱，Ta不定期发布动态</view>
+      <view class="desc not-importent">在茫茫网络世界中，你发现了真爱，TA不定期发布动态</view>
     </view>
   </view>
   <view class="flex-start word">
@@ -14,7 +14,7 @@
     </view>
     <view class="content">
       <view class="name">第2章 追</view>
-      <view class="desc not-importent">订阅，小程序帮你实时追踪</view>
+      <view class="desc not-importent">订阅TA的频道，小程序帮你实时追踪</view>
     </view>
   </view>
   <view class="flex-start word">
@@ -23,7 +23,10 @@
     </view>
     <view class="content">
       <view class="name">第3章 更</view>
-      <view class="desc not-importent">Ta更新动态，你第一时间收到通知，去把爱的首赞及留言放在前排</view>
+      <view class="desc not-importent">TA更新动态，你第一时间收到通知，把爱的首赞及留言放在前排</view>
     </view>
+  </view>
+  <view style="margin-top:50px;">
+    <navigator class="door" url="/pages/search/search" open-type="redirect">现在就去找到TA</navigator>
   </view>
 </view>
