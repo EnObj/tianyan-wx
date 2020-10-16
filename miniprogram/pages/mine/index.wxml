@@ -1,4 +1,17 @@
 <view>
+  <view class="user-profile">
+    <mp-cells ext-class="no-title-cells">
+      <mp-cell hover>
+        <view slot="icon" style="position:absolute;top:0;left:0;">
+          <view class="user-head">
+            <image src="/image/icon/user-3-fill.svg" mode="widthFix"></image>
+          </view>
+        </view>
+        <view class="user-name not-importent">点击登录</view>
+      </mp-cell>
+    </mp-cells>
+  </view>
+
   <mp-cells ext-class="no-title-cells">
     <mp-cell link url="/pages/mine/message" hover value="站内通知">
       <view slot="footer">
