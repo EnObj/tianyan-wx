@@ -11,7 +11,7 @@
   </view>
 </view>
 
-<view wx:if="{{channel.attrs||channel.channelTemplate.attrs}}">
+<view wx:if="{{channel.attrs||channel.channelTemplate.attrs && userChannel}}">
   <view class="weui-cells__title">
     <view class="flex-start">
       <view class="dt {{!channel.disabled ?'dt-refreshing':''}}" style="background:{{channel.channelTemplate.mainColor||'gray'}}"></view>
