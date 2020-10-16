@@ -14,7 +14,7 @@
     </view>
     <view class="content">
       <view class="name">第2章 追</view>
-      <view class="desc not-importent">订阅TA的频道，小程序帮你实时追踪</view>
+      <view class="desc not-importent">订阅TA的频道，此小程序帮你实时追踪</view>
     </view>
   </view>
   <view class="flex-start word">
