@@ -39,10 +39,14 @@
 }
 
 .attr-value{
-  margin-left: 10px;
+  margin-left: 5px;
   word-break: break-all;
 }
 
 .empty-tip{
   height: 80vh;
+}
+
+.channel-name{
+  font-size: 15px;
 }

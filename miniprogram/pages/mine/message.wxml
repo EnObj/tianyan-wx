@@ -12,8 +12,8 @@
       <view class="create-time not-importent">{{timeUtils.formatPass(item.createTime)}}</view>
       <view class="channel-data">
         <view wx:for="{{item.channelData.channel.attrs || item.channelData.channel.channelTemplate.attrs}}" wx:key="name" wx:for-item="attr">
-          <text class="not-importent">{{attr.name}}</text>
-          <text class="attr-value">{{channelUtils.displayAttrValue(item.channelData.data[attr.name], item.channelData.channel.dataDisplay || item.channelData.channel.channelTemplate.dataDisplay)}}</text>
+          <text>{{attr.name}}</text>
+          <text class="attr-value not-importent">{{channelUtils.displayAttrValue(item.channelData.data[attr.name], item.channelData.channel.dataDisplay || item.channelData.channel.channelTemplate.dataDisplay)}}</text>
         </view>
       </view>
     </view>
