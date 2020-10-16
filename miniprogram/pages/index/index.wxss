@@ -12,18 +12,17 @@
 }
 .user-channels{
   flex-wrap: wrap;
-  padding: 15px;
 }
 .user-channel{
   max-width: 100%;
   box-sizing: border-box;
-  margin: 0px 10px 10px 0px;
   position: relative;
   overflow: hidden;
-  border-left: gray 3px solid;
+  border-left: gray 10px solid;
+  border-radius: 10px;
+  padding:15px 10px;
 }
 .channel-name{
-  font-size: 14px;
   margin-left: 5px;
 }
 .notify{
@@ -47,12 +46,12 @@
 .top{
   /* border-left: 3px #07c160 solid; */
   position: absolute;
-  right: -12px;
-  top: -12px;
+  right: -11px;
+  top: -11px;
   width: 20px;
   height: 20px;
   transform: rotate(45deg);
-  background: gray;
+  background: #aaa;
 }
 
 .empty-tip{
@@ -65,4 +64,8 @@
   border-radius: 20px;
   margin-top: 20px;
   color: #fff;
+}
+
+.last-message-time{
+  flex: none;
 }
