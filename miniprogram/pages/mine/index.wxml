@@ -21,7 +21,7 @@
   </mp-cells>
 
   <mp-cells ext-class="no-title-cells">
-    <mp-cell value="订阅额度" footer="{{userProfile.channelLimit}}">
+    <mp-cell value="订阅额度" footer="{{subCount}}/{{userProfile.channelLimit}}">
     </mp-cell>
   </mp-cells>
 
