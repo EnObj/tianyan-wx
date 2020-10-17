@@ -11,7 +11,7 @@
   font-size: 10px;
 }
 .user-channels{
-  flex-wrap: wrap;
+  padding-bottom: 10px;
 }
 .user-channel{
   max-width: 100%;
