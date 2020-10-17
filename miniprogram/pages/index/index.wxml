@@ -1,3 +1,4 @@
+<wxs src="./../../wxs/time.wxs" module="timeUtils"></wxs>
 <view wx:if="{{showExplore && !userChannels.length}}">
   <view class="empty-tip abs-center">
     <view class="abs-center-content flex-start" style="flex-direction:column">
@@ -9,7 +10,7 @@
     <navigator url="/pages/common/about" class="not-importent ref-content">“爱追更”小程序是什么？</navigator>
   </view>
 </view>
-<view class="user-channels flex-start">
+<view class="user-channels">
   <view class="user-channel padding-box" wx:for="{{userChannels}}" wx:key="_id" bindtap="openChannel" data-item-index="{{index}}" style="border-left-color:{{item.channel.channelTemplate.mainColor||'gray'}}">
     <view class="flex-between">
       <view class="top" wx:if="{{item.top}}"></view>
@@ -21,9 +22,12 @@
         <view class="unreaded" wx:if="{{item.channelDataMessage && !item.channelDataMessage.readed}}" catchtap="tapUnreaded"
           data-item-index="{{index}}" style="background:{{item.channel.channelTemplate.mainColor||'gray'}}">新</view>
       </view>
-      <view catchtap="switchNotify" data-item-index="{{index}}" class="notify">
-        <mp-icon icon="bellring-on" size="20" color="#07c160" wx:if="{{item.notify}}" type="field"></mp-icon>
-        <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
+      <view class="flex-start message">
+        <view class="not-importent last-message-time" wx:if="{{item.channelDataMessage}}">{{timeUtils.formatPass(item.channelDataMessage.createTime)}}</view>
+        <view catchtap="switchNotify" data-item-index="{{index}}" class="notify">
+          <mp-icon icon="bellring-on" size="20" color="#07c160" wx:if="{{item.notify}}" type="field"></mp-icon>
+          <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
+        </view>
       </view>
     </view>
   </view>
