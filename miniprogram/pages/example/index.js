@@ -107,10 +107,18 @@ Page({
     })
   },
 
-  messageTemplateId: '-uC7MFgpZqLROkVO_QILbH23d85gg-ErEM0KavcKP6A',
+  messageTemplateId: 'vjG2tvg4tUarVWeuez4EaUWnAgzXNSsvPCJK6LLK6iU',
 
   subMessage() {
     wxApiUtils.askNotify(this.messageTemplateId).then(res => {
+      this.setData({
+        messageSubed: true
+      })
+    })
+  },
+
+  subMessageSilence() {
+    wxApiUtils.askNotify(this.messageTemplateId, true).then(res => {
       this.setData({
         messageSubed: true
       })
