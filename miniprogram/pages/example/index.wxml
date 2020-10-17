@@ -73,6 +73,11 @@
   <view class="ref-content" wx:else bindtap="sendMessage">发送订阅消息</view>
 </view>
 
+<view class="padding-box">
+  <view class="ref-content" wx:if="{{!messageSubed}}" bindtap="subMessageSilence">订阅消息</view>
+  <view class="ref-content" wx:else bindtap="sendMessage">发送订阅消息</view>
+</view>
+
 <view class="padding-box flex-start">
   <view>web文档</view>
   <view style="flex:auto;margin-left:10px">
