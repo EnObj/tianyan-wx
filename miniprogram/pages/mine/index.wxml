@@ -1,4 +1,21 @@
 <view>
+  <view bindtap="showUserInfo" class="user-profile">
+    <mp-cells>
+      <mp-cell hover>
+        <view slot="icon" class="user-head-container">
+          <view class="user-head">
+            <open-data type="userAvatarUrl" wx:if="{{userProfile.showUserInfo}}"></open-data>
+            <image class="user-head-placeholder" src="/image/icon/user-3-fill.svg" mode="widthFix" wx:else></image>
+          </view>
+        </view>
+        <view class="user-name">
+          <open-data type="userNickName" wx:if="{{userProfile.showUserInfo}}"></open-data>
+          <view class="not-importent" wx:else>点击登录</view>
+        </view>
+      </mp-cell>
+    </mp-cells>
+  </view>
+
   <mp-cells ext-class="no-title-cells">
     <mp-cell link url="/pages/mine/message" hover value="站内通知">
       <view slot="footer">

@@ -1,2 +1,34 @@
 /* miniprogram/pages/mine/index.wxss */
 @import "./../../components/weui-wxss/dist/style/weui.wxss";
+
+.user-profile{
+  margin-top: 20px;
+}
+
+.user-head-container{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.user-head{
+  width: 60px;
+  height: 60px;
+  background: gray;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  top: -16px;
+  left: 16px;
+}
+
+.user-name{
+  padding-left: 70px;
+}
+
+.user-head-placeholder{
+  width: 40px;
+  position: relative;
+  left: 10px;
+  top: 10px;
+}

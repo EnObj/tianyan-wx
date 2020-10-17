@@ -13,6 +13,24 @@ Page({
     userSubCount: 0
   },
 
+  showUserInfo(){
+    wx.showLoading({
+      title: '请稍后',
+    })
+    db.collection('ty_user_profile').doc(this.data.userProfile._id).update({
+      data: {
+        showUserInfo: !this.data.userProfile.showUserInfo
+      }
+    }).then(res=>{
+      wx.hideLoading({
+        success: (res) => {},
+      })
+      this.setData({
+        'userProfile.showUserInfo': !this.data.userProfile.showUserInfo
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
