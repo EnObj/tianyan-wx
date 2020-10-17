@@ -1,7 +1,12 @@
-<view class="empty-tip abs-center" wx:if="{{showExplore && !userChannels.length}}">
-  <view class="abs-center-content flex-start" style="flex-direction:column">
-    <view class="nothing not-importent">还没有任何订阅</view>
-    <navigator class="door" url="/pages/index/explore" open-type="switchTab">探索</navigator>
+<view wx:if="{{showExplore && !userChannels.length}}">
+  <view class="empty-tip abs-center">
+    <view class="abs-center-content flex-start" style="flex-direction:column">
+      <view class="nothing not-importent">还没有任何订阅</view>
+      <navigator class="door" url="/pages/index/explore" open-type="switchTab">探索</navigator>
+    </view>
+  </view>
+  <view class="flex-around">
+    <navigator url="/pages/common/about" class="not-importent ref-content">“爱追更”小程序是什么？</navigator>
   </view>
 </view>
 <view class="user-channels flex-start">
