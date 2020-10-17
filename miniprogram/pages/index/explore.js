@@ -92,6 +92,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '追你所爱',
+      path: '/pages/index/index?fromUser=' + getApp().globalData.userOpenid,
+      imageUrl: '/image/wx-share.png'
+    }
   }
 })
