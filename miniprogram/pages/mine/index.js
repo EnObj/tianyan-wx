@@ -9,7 +9,8 @@ Page({
    */
   data: {
     lastUnreadedMessage: null,
-    userProfile: {} 
+    userProfile: {} ,
+    userSubCount: 0
   },
 
   /**
@@ -41,6 +42,12 @@ Page({
     userProfileUtils.getUserProfile(true).then(userProfile=>{
       this.setData({
         userProfile
+      })
+    })
+    // 加载用户已经订阅的数量
+    db.collection('ty_user_channel').count().then(res=>{
+      this.setData({
+        userSubCount: res.total
       })
     })
   },
