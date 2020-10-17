@@ -1,0 +1,12 @@
+{
+  "name": "搜索关键词表",
+  "desc": "记录用户搜索关键词历史",
+  "auth": "仅创建者可读写",
+  "example": {
+    "_id": "ty_search_keyword_1",
+    "_openid": "user_1",
+    "keyword": "青春",
+    "channelTemplate": "bili_uper",
+    "createTime": 1234567890000
+  }
+}
