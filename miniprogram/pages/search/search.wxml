@@ -14,7 +14,11 @@
 <view class="result">
   <view class="channels" wx:if="{{channels.length}}">
     <mp-cells title="已收录">
-      <mp-cell wx:for="{{channels}}" wx:key="_id" link url="/pages/channel/channel?channelId={{item._id}}" hover value="{{item.name}}">
+      <mp-cell wx:for="{{channels}}" wx:key="_id" link url="/pages/channel/channel?channelId={{item._id}}" hover>
+        <view>
+          <view>{{item.name}}</view>
+          <view class="not-importent">{{item.channelTemplate.name}}</view>
+        </view>
         <view slot="icon" class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
           <image src="{{item.channelTemplate.logo}}" wx:if="{{item.channelTemplate.logo}}"></image>
           <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelTemplate.name)}}</view>
@@ -25,7 +29,10 @@
   <view class="maybe-channels" wx:if="{{maybeChannels.length}}">
     <mp-cells title="建议">
       <mp-cell wx:for="{{maybeChannels}}" wx:key="_id" link hover>
-        <view bindtap="resolveMaybeChannel" data-item-index="{{index}}">{{item.name}}</view>
+        <view bindtap="resolveMaybeChannel" data-item-index="{{index}}">
+          <view>{{item.name}}</view>
+          <view class="not-importent">{{item.channelTemplate.name}}</view>
+        </view>
         <view slot="icon" class="template-logo" style="background:{{item.channelTemplate.mainColor||'gray'}};">
           <image src="{{item.channelTemplate.logo}}" wx:if="{{item.channelTemplate.logo}}"></image>
           <view wx:else class="text-logo">{{textUtils.getFirstChar(item.channelTemplate.name)}}</view>

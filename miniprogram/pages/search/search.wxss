@@ -48,3 +48,7 @@
 .channel-name{
   margin-left: 10px;
 }
+
+.result{
+  padding-bottom: 15px;
+}
