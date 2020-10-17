@@ -82,29 +82,31 @@ module.exports = {
     })
   },
 
-  askNotify(tmplId) {
+  askNotify(tmplId, silence) {
     return new Promise((resolve, reject) => {
       wx.getSetting({
         withSubscriptions: true,
         success(res) {
           console.log(res)
           if (!res.subscriptionsSetting.mainSwitch || (res.subscriptionsSetting.itemSettings || {})[tmplId] == 'reject') {
-            wx.showModal({
-              title: '温馨提示',
-              content: '此操作需要您打开订阅消息开关',
-              success: function (res) {
-                if (res.confirm) {
-                  wx.openSetting({
-                    withSubscriptions: true,
-                    success(res) {
-                      reject()
-                    }
-                  })
-                } else {
-                  reject()
+            if(!silence){
+              wx.showModal({
+                title: '温馨提示',
+                content: '此操作需要您打开订阅消息开关',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      withSubscriptions: true,
+                      success(res) {
+                        reject()
+                      }
+                    })
+                  } else {
+                    reject()
+                  }
                 }
-              }
-            })
+              })
+            }
           } else {
             wx.requestSubscribeMessage({
               tmplIds: [tmplId],
@@ -117,9 +119,11 @@ module.exports = {
                     reject()
                     break
                   default:
-                    wx.showToast({
-                      title: '订阅失败，请稍后重试',
-                    })
+                    if(!silence){
+                      wx.showToast({
+                        title: '订阅失败，请稍后重试',
+                      })
+                    }
                     reject()
                     break
                 }

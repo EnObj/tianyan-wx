@@ -76,6 +76,11 @@ Page({
   },
 
   addUserChannel() {
+    wxApiUtils.askNotify(getApp().globalData.notifyTemplateId, true).then(()=>{
+      this.updateNotify(true)
+    },()=>{
+      this.updateNotify(false)
+    })
     userProfileUtils.getUserProfile().then(userProfile=>{
       const channelLimit = userProfile.channelLimit
       db.collection('ty_user_channel').where({}).count().then(res=>{
