@@ -40,10 +40,10 @@
   </view>
 </view>
 
-<view wx:if="{{userChannel}}">
-  <mp-cells title="开启后，一旦有更新，您将收到一条微信服务通知">
+<view wx:if="{{userChannel}}" class="no-title-cells">
+  <mp-cells>
     <mp-cell>
-      <view>消息通知</view>
+      <view>微信通知</view>
       <view slot="footer">
         <switch checked="{{userChannel.notify}}" bindchange="switchNotify" color="{{channel.channelTemplate.mainColor||'gray'}}"/>
       </view>
