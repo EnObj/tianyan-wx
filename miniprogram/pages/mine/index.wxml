@@ -8,7 +8,7 @@
             <image class="user-head-placeholder" src="/image/icon/user-3-fill.svg" mode="widthFix" wx:else></image>
           </view>
         </view>
-        <view class="user-name">
+        <view class="user-name flex-start">
           <open-data type="userNickName" wx:if="{{userProfile.showUserInfo}}"></open-data>
           <view class="not-importent" wx:else>点击登录</view>
         </view>

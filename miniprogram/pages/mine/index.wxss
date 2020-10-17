@@ -24,6 +24,8 @@
 
 .user-name{
   padding-left: 70px;
+  font-weight: 500;
+  min-height: 24px;
 }
 
 .user-head-placeholder{
