@@ -57,7 +57,15 @@ exports.main = async (event, context) => {
       }
     })
     if(updated){
-      myChannels.push(channel)
+      // 检查是否有人订阅
+      const {total: userCount} = await db.collection('ty_user_channel').where({
+        'channel._id': channel._id
+      }).count()
+      if(userCount){
+        myChannels.push(channel)
+      }else{
+        console.log(`无人订阅的活动，跳过此活动处理：${channel._id}`)
+      }
     }else{
       console.log(`发生并发操作，跳过此活动处理：${channel._id}`)
     }
