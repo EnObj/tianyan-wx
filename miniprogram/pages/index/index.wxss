@@ -10,10 +10,6 @@
   color: white;
   font-size: 10px;
 }
-.user-channels{
-  /* padding: 15px; */
-  padding-bottom: 15px;
-}
 .user-channel{
   max-width: 100%;
   box-sizing: border-box;
