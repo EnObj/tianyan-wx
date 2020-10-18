@@ -85,7 +85,7 @@ exports.main = async (event, context) => {
   // 一个一个channel处理（此处不能使用forEach）
   for (let i = 0; i < myChannels.length; i++) {
     const startTime = Date.now()
-    const channel = channels[i]
+    const channel = myChannels[i]
     console.log(`正在处理：${channel.channelTemplate.name}-${channel.name}`)
     try {
       // 请求资源
