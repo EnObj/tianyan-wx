@@ -57,14 +57,23 @@ exports.main = async (event, context) => {
       }
     })
     if(updated){
-      // 检查是否有人订阅
-      const {total: userCount} = await db.collection('ty_user_channel').where({
+      // 检查是否是首次采集（首次采集直接纳入）
+      const {total: dataCount} = await db.collection('ty_channel_data').where({
         'channel._id': channel._id
       }).count()
-      if(userCount){
+      if(!dataCount){
+        console.log(`首次处理活动：${channel._id}`)
         myChannels.push(channel)
       }else{
-        console.log(`无人订阅的活动，跳过此活动处理：${channel._id}`)
+        // 检查是否有人订阅（非首次采集，当有人订阅了才纳入）
+        const {total: userCount} = await db.collection('ty_user_channel').where({
+          'channel._id': channel._id
+        }).count()
+        if(userCount){
+          myChannels.push(channel)
+        }else{
+          console.log(`无人订阅的活动，跳过此活动处理：${channel._id}`)
+        }
       }
     }else{
       console.log(`发生并发操作，跳过此活动处理：${channel._id}`)
