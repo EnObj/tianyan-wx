@@ -9,3 +9,8 @@
   word-break: break-all;
   margin-left: 5px;
 }
+
+.channel-data{
+  align-items: flex-start;
+  margin-right: 20px;
+}
