@@ -88,7 +88,7 @@ module.exports = {
         withSubscriptions: true,
         success(res) {
           console.log(res)
-          if (!res.subscriptionsSetting.mainSwitch || (res.subscriptionsSetting.itemSettings || {})[tmplId] == 'reject') {
+          if ((res.subscriptionsSetting.itemSettings || {})[tmplId] == 'reject') {
             if(!silence){
               wx.showModal({
                 title: '温馨提示',
@@ -108,9 +108,11 @@ module.exports = {
               })
             }
           } else {
-            wx.requestSubscribeMessage({
+            qq.subscribeAppMsg({
               tmplIds: [tmplId],
+              subscribeAppMsg: true,
               success(res) {
+                console.log(res)
                 switch (res[tmplId]) {
                   case 'accept':
                     resolve()

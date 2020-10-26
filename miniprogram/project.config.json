@@ -1,0 +1,51 @@
+{
+	"projectid": "1110560807_tianyan",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": false,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": true,
+		"nodeModules": true,
+		"uploadWithSourceMap": true,
+		"uglifyFileName": true,
+		"remoteDebugLogEnable": false
+	},
+	"qqLibVersion": "1.20.0",
+	"compileType": "miniprogram",
+	"createTime": 1603694172992,
+	"accessTime": 1603694172992,
+	"packOptions": {
+		"ignore": []
+	},
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"qqappid": "1110560807",
+	"projectname": "tianyan",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "openapi": [
+    ]
+  },
+  "triggers": [
+    {
+      "name": "tyChannelListenerTrigger",
+      "type": "timer",
+      "config": "0/30 * * * * * *"
+    }
+  ]
+}

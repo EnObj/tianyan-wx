@@ -1,5 +1,5 @@
 // miniprogram/pages/mine/index.js
-const db = wx.cloud.database()
+const db = qq.cloud.database()
 const userProfileUtils = require('../../utils/userProfileUtils.js')
 
 Page({

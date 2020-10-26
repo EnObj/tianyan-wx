@@ -3,5 +3,5 @@
   margin-top: 100px;
 }
 .route{
-  margin-top:20px
+  margin:20px 30px;
 }

@@ -3,6 +3,6 @@
     <button type="primary" open-type="feedback">意见反馈</button>
   </view>
   <view class="route contact">
-    <button type="default" open-type="contact">客服</button>
+    <button type="default" open-type="contact">客服QQ：1044770277</button>
   </view>
 </view>

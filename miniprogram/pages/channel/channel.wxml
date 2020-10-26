@@ -43,7 +43,7 @@
 <view wx:if="{{userChannel}}" class="no-title-cells">
   <mp-cells>
     <mp-cell>
-      <view>微信通知</view>
+      <view>QQ通知</view>
       <view slot="footer">
         <switch checked="{{userChannel.notify}}" bindchange="switchNotify" color="{{channel.channelTemplate.mainColor||'gray'}}"/>
       </view>
