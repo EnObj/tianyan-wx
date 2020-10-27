@@ -1,6 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-const notifyTemplateId = '0ce344d85ecc9e0bf717b94ba29719b8''
+const notifyTemplateId = '0ce344d85ecc9e0bf717b94ba29719b8'
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV

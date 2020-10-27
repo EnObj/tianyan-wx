@@ -24,10 +24,10 @@
       </view>
       <view class="flex-start message">
         <view class="not-importent last-message-time" wx:if="{{item.channelDataMessage}}">{{timeUtils.formatPass(item.channelDataMessage.createTime)}}</view>
-        <view catchtap="switchNotify" data-item-index="{{index}}" class="notify">
+        <!-- <view catchtap="switchNotify" data-item-index="{{index}}" class="notify">
           <mp-icon icon="bellring-on" size="20" color="#07c160" wx:if="{{item.notify}}" type="field"></mp-icon>
           <mp-icon icon="bellring-on" size="20" color="#ddd" wx:else></mp-icon>
-        </view>
+        </view> -->
       </view>
     </view>
   </view>

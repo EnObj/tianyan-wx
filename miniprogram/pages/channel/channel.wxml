@@ -42,12 +42,12 @@
 
 <view wx:if="{{userChannel}}" class="no-title-cells">
   <mp-cells>
-    <mp-cell>
+    <!-- <mp-cell>
       <view>QQ通知</view>
       <view slot="footer">
         <switch checked="{{userChannel.notify}}" bindchange="switchNotify" color="{{channel.channelTemplate.mainColor||'gray'}}"/>
       </view>
-    </mp-cell>
+    </mp-cell> -->
     <mp-cell>
       <view>置顶</view>
       <view slot="footer">
